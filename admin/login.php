@@ -6,8 +6,8 @@
     if ($_SERVER['REQUEST_METHOD']=='POST') {
         $email = $_POST['email'];
         $pass = $_POST['pass'];
-        $logincheck = $login->adminlogin($email,$pass);
-    }          	
+        $logincheck = $login->adminlogin($email, $pass);
+    }        	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +20,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Tailor Admin - Login</title>
+  <title>Admin - Login</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@
                   <?php 
                   if (isset($logincheck)) {
                     echo $logincheck;
-                  } 
+                  }
                   ?>
                   <form class="user" method="POST">
                     <div class="form-group">
@@ -54,7 +54,7 @@
                       <input name="pass" type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary btn-block">Login</button>
+                      <button type="submit" name="login" class="btn btn-primary btn-block">Login</button>
                     </div>
                     <hr>
                   </form>
