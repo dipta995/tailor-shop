@@ -23,9 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Add New Package</h6>
         </div>
-        <?php if (isset($createPackage)){
-                    echo $createPackage;
-        }  ?>
+        <?php 
+        if (isset($createPackage)){
+            echo $createPackage;
+        }  
+        ?>
         <div class="card-body">
           <form method="POST">
             <div class="form-group">

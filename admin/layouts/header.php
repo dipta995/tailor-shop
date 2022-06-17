@@ -10,9 +10,9 @@ session_start();
     header("Location:login.php");
   }
 
-  include '../Classes/PacageClass.php';
-  $pack = new PacageClass();
-  include '../Classes/FoodClass.php';
+include '../Classes/PacageClass.php';
+$pack = new PacageClass();
+include '../Classes/FoodClass.php';
 $food = new FoodClass();
 include '../Classes/EmployeeClass.php';
 $emp = new EmployeeClass();
@@ -20,8 +20,8 @@ include '../Classes/ContactClass.php';
 $cont = new ContactClass();
 include '../Classes/LoginClass.php';
 $create = new LoginClass();
-$status = $_SESSION['admin_status'];
-$adminid = $_SESSION['admin_id'];
+$role = $_SESSION['role'];
+$id = $_SESSION['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,7 @@ $adminid = $_SESSION['admin_id'];
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>GYM - Admin</title>
+  <title>Tailor - Admin</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -51,7 +51,7 @@ $adminid = $_SESSION['admin_id'];
         <div class="sidebar-brand-icon">
           <img src="img/logo/logo2.png">
         </div>
-        <div class="sidebar-brand-text mx-3">GYM</div>
+        <div class="sidebar-brand-text mx-3">TAILOR</div>
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
@@ -72,8 +72,10 @@ $adminid = $_SESSION['admin_id'];
         <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Package</h6>
-            if ($status==0) {
-            <a class="collapse-item" href="create_package.php">Create Package</a> } 
+            <div>
+              <?php if ($role==0) { ?>
+              <a class="collapse-item" href="create_package.php">Create Package</a> 
+              <?php } ?>      
             <a class="collapse-item" href="all_package.php">All Package</a>
           </div>
         </div>
@@ -106,9 +108,11 @@ $adminid = $_SESSION['admin_id'];
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Employee </h6>
-            if ($status==0) {
-              <a class="collapse-item" href="create_employee.php">Employee Create</a>
-            }
+            <?php
+              if ($role==0) { ?>
+                <a class="collapse-item" href="create_employee.php"> Employee Create </a>
+             <?php } ?>
+            
             <a class="collapse-item" href="employee_list.php">Employee list</a>
             <a class="collapse-item" href="salary_list.php">Salary list</a>
           </div>

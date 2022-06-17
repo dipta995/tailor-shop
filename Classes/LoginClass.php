@@ -28,6 +28,6 @@ class LoginClass extends DB
     }
         
     // User registration 
-    
+   
 }
 ?>
