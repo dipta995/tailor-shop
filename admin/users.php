@@ -52,16 +52,11 @@
                     ?>
                     <tr>
                         <td><?php echo $i; ?></td>
-                        <td><?php echo $value['user_id']; ?></td>
-                         
+                        <td><?php echo $value['user_id']; ?></td>                
                         <td><?php echo $value['first_name']. " ".$value['last_name']; ?></td>
-                        <td><?php echo $value['mobile']; ?></td>
-                        
-                <td><?php echo $value['email']; ?></td>
-                        
-
-                        <td><img style="height: 100px;width: 100px;" src="../<?php echo $value['image']; ?>"></td>
-                         
+                        <td><?php echo $value['mobile']; ?></td>                      
+                        <td><?php echo $value['email']; ?></td>
+                        <td><img style="height: 100px;width: 100px;" src="../<?php echo $value['image']; ?>"></td>                     
                     </tr>
                     <?php } ?>
                     </tbody>

@@ -1,17 +1,23 @@
 <?php include 'layouts/header.php';
  
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $addCloth = $cloth->insertCloth($_POST);
+$clothid = "";
+if($_GET['clothid']==NULL || !isset($_GET['clothid'])){
+	"<script>window.location = 'all_cloth.php'; </script>"; 
+}else{
+	$clothid = $_GET['clothid'];
+}
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $updateCloth = $cloth->updateCloth($_POST, $clothid);
 }
 ?>
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Add New Cloth</h1>
+    <h1 class="h3 mb-0 text-gray-800">Update Cloth</h1>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.php">Home</a></li>
       <li class="breadcrumb-item">Cloth Type</li>
-      <li class="breadcrumb-item active" aria-current="page">Add Cloth</li>
+      <li class="breadcrumb-item active" aria-current="page">Update Cloth</li>
     </ol>
   </div>
 
@@ -21,38 +27,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <!-- Form Basic -->
       <div class="card mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6 class="m-0 font-weight-bold text-primary">Add New Cloth</h6>
+          <h6 class="m-0 font-weight-bold text-primary">Update Cloth</h6>
         </div>
-        <?php 
-        if (isset($addCloth)){
-            echo $addCloth;
-        }  
+        <?php
+            if(isset($updateCloth)){
+                echo $updateCloth;
+            }
         ?>
         <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
+            <?php 
+                $view = $cloth->viewSingleCloth($clothid);
+                if($view){
+                    while($value = $view->fetch_assoc()){
+            ?>
             <div class="form-group">
               <label>Cloth Name</label>
-              <input name="name" type="text" class="form-control" placeholder="Enter Cloth Name">
+              <input name="name" type="text" class="form-control" value="<?php echo $value['name'];?>">
             </div>
             <div class="form-group">
               <label>Details</label>
-              <textarea class="ckeditor form-control" id="myEditor" name="details" cols="" rows="3"></textarea>
+              <textarea name="details" class="form-control" id="exampleFormControlTextarea1" rows="3"><?php echo $value['details'];?></textarea>
             </div>
             <div class="form-group">
               <label>Upload Image</label>
+              <br>
               <td>
+                <img src="<?php echo $value['image'];?>" height="80px" width="150px"/></br>
                 <input type="file" name="image" class="form-control" placeholder="Enter Image" min="0" />
               </td>
             </div>
             <div class="form-group">
-              <label>Price (tk) Per Yard (1 Yard = 3 Feet)</label>
-              <input name="price" type="number" class="form-control" placeholder="Enter price" min="0">
+              <label>Price (tk)</label>
+              <input name="price" type="number" class="form-control" value="<?php echo $value['price'];?>" min="0">
             </div>
             <div class="form-group">
               <label>Discount (%)</label>
-              <input name="discount" type="number" min="0" step="1" value="0" class="form-control" placeholder="Enter discount">
+              <input name="discount" type="number" min="0" step="1"  class="form-control" value="<?php echo $value['discount'];?>">
             </div>
-          
+ 
+            <?php }} ?>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
@@ -60,5 +74,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
   </div>
 </div>
-
+<!---Container Fluid-->
 <?php include 'layouts/footer.php';?>

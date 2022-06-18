@@ -3,11 +3,11 @@
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">All Cloths</h1>
+    <h1 class="h3 mb-0 text-gray-800">All Cloth Type</h1>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="./">Home</a></li>
-        <li class="breadcrumb-item">Cloth Type</li>
-        <li class="breadcrumb-item active" aria-current="page">All Cloths</li>
+        <li class="breadcrumb-item">All Cloth Type</li>
+        <li class="breadcrumb-item active" aria-current="page">All Cloth Type</li>
     </ol>
     </div>
 
@@ -16,18 +16,25 @@
             <!-- Simple Tables -->
             <div class="card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">All Cloths</h6>
+                <h6 class="m-0 font-weight-bold text-primary">All Cloth Type</h6>
+                <?php
+                    if(isset($_GET['deltype'])){
+                        $deltype = $_GET['deltype'];
+                        $delquery = "delete from cloth_type where id = $deltype";
+                        $deldata = $cloth -> delete($delquery);
+                        if($deldata){
+                             echo "<script>window.location='typelist.php';</script>";                    
+                        } 
+                        
+                    }
+                ?>
             </div>
             <div class="table-responsive">
                 <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                     <tr>
                         <th width="5%">#</th>
-                        <th width="15%">Cloth Name</th>
-                        <th width="30%">Details</th> 
-                        <th width="10%">Image</th>                    
-                        <th width="10%">Price</th>
-                        <th width="10%">Discount <br></th>
+                        <th width="15%">Cloth Type</th>
                         <th width="20%">Action</th>
                         <th></th>
                     </tr>
@@ -36,23 +43,20 @@
                 <tbody>
                     <?php
                         $i = 0;
-                        $view = $cloth->viewCloth();
+                        $view = $cloth->viewType();
                         foreach($view as $value){
                     ?>
                     <tr>
                         <td><?php echo $i+=1; ?></td>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $fm->textShorten($value['details'], 100); ?></td>
-                        <td><img src="<?php echo $value['image']; ?>" height="40px" width="60px"/></td>
-                        <td><?php echo $value['price']; ?> Taka</td>
-                        <td><?php echo $value['discount']; ?> % <br> <?php echo $value['price']-(($value['price']*$value['discount'])/100) ?>  Taka</td>
+                        
                         <?php  if ($role==0) { ?>
                         <td>
-                            <a href="edit_cloth.php?clothid=<?php echo $value['id'] ;?>" class="btn btn-sm btn-info">Edit</a>
-                            <a onclick="return confirm('Are you sure to Delete?');" href="deleteCloth.php?delCloth=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="edit_type.php?typeid=<?php echo $value['id'] ;?>" class="btn btn-sm btn-info">Edit</a>
+                            <a onclick="return confirm('Are you sure to Delete?');" href="?deltype=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                         <?php } ?>
-                        <!-- <td><a href="customeradmit.php?packid=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Sell</a></td> -->
+                       
                     </tr>
                     <?php } ?>
                 </tbody>

@@ -20,6 +20,8 @@ include '../Classes/ContactClass.php';
 $cont = new ContactClass();
 include '../Classes/LoginClass.php';
 $create = new LoginClass();
+include '../Classes/FormatClass.php';
+$fm = new Format();
 $role = $_SESSION['role'];
 $id = $_SESSION['id'];
 ?>
@@ -36,10 +38,7 @@ $id = $_SESSION['id'];
   <title>Tailor - Admin</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="css/ruang-admin.min.css" rel="stylesheet">
-   
-  
-   
+  <link href="css/ruang-admin.min.css" rel="stylesheet"> 
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
@@ -63,6 +62,7 @@ $id = $_SESSION['id'];
       <div class="sidebar-heading">
         Features
       </div>
+      <div>
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
           aria-controls="collapseForm">
@@ -72,6 +72,25 @@ $id = $_SESSION['id'];
         <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Cloth Type</h6>
+            <div>
+              <?php if ($role==0) { ?>
+              <a class="collapse-item" href="addtype.php">Cloth Type</a> 
+              <?php } ?>      
+            <a class="collapse-item" href="typelist.php">All Cloth Type</a>
+          </div>
+        </div>
+      </li>
+      <li>
+              </div>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
+          aria-controls="collapseForm">
+          <i class="fab fa-fw fa-wpforms"></i>
+          <span>Cloth Details</span>
+        </a>
+        <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Cloth Details</h6>
             <div>
               <?php if ($role==0) { ?>
               <a class="collapse-item" href="add_cloth.php">Add Cloth</a> 
