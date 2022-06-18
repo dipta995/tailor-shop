@@ -10,8 +10,8 @@ session_start();
     header("Location:login.php");
   }
 
-include '../Classes/PacageClass.php';
-$pack = new PacageClass();
+include '../Classes/ClothClass.php';
+$cloth = new ClothClass();
 include '../Classes/FoodClass.php';
 $food = new FoodClass();
 include '../Classes/EmployeeClass.php';
@@ -67,16 +67,16 @@ $id = $_SESSION['id'];
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
           aria-controls="collapseForm">
           <i class="fab fa-fw fa-wpforms"></i>
-          <span>Package</span>
+          <span>Cloth Type</span>
         </a>
         <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Package</h6>
+            <h6 class="collapse-header">Cloth Type</h6>
             <div>
               <?php if ($role==0) { ?>
-              <a class="collapse-item" href="create_package.php">Create Package</a> 
+              <a class="collapse-item" href="add_cloth.php">Add Cloth</a> 
               <?php } ?>      
-            <a class="collapse-item" href="all_package.php">All Package</a>
+            <a class="collapse-item" href="all_cloth.php">All Cloth</a>
           </div>
         </div>
       </li>
@@ -198,12 +198,12 @@ $id = $_SESSION['id'];
                 aria-haspopup="true" aria-expanded="false">
                 <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
                 <?php
-                            if(isset($_GET['logout']) && isset($_GET['logout']) == 'logout'){
-                                session_destroy();
-                                header('Location:index.php');
-                            }
-                                 ?>
-                <span class="ml-2 d-none d-lg-inline text-white small"><?php echo  $_SESSION['admin_email']; ?></span>
+                  if(isset($_GET['logout']) && isset($_GET['logout']) == 'logout'){
+                      session_destroy();
+                      header('Location:index.php');
+                  }
+                ?>
+                <span class="ml-2 d-none d-lg-inline text-white small"><?php echo  $_SESSION['email']; ?></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <!-- <a class="dropdown-item" href="#">
