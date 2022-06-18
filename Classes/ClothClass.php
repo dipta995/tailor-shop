@@ -37,7 +37,7 @@ class ClothClass extends DB
             return $txt;
         } else{
             move_uploaded_file($file_temp, $uploaded_image);
-            $query = "INSERT into tbl_cloth(name, details, image, price, discount) values('$name','$details', '$file_name', '$price','$discount')";
+            $query = "INSERT into tbl_cloth(name, details, image, price, discount) values('$name','$details', '$uploaded_image', '$price','$discount')";
             $result = $this->conn->query($query);
             if($result){
                 $txt = "<div class='alert alert-success'>Successfully inserted</div>";

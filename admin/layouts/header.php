@@ -72,10 +72,8 @@ $id = $_SESSION['id'];
         <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Cloth Type</h6>
-            <div>
-              <?php if ($role==0) { ?>
-              <a class="collapse-item" href="addtype.php">Cloth Type</a> 
-              <?php } ?>      
+            <div>          
+              <a class="collapse-item" href="addtype.php">Cloth Type</a>      
             <a class="collapse-item" href="typelist.php">All Cloth Type</a>
           </div>
         </div>
@@ -83,18 +81,16 @@ $id = $_SESSION['id'];
       <li>
               </div>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm1" aria-expanded="true"
           aria-controls="collapseForm">
           <i class="fab fa-fw fa-wpforms"></i>
           <span>Cloth Details</span>
         </a>
-        <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div id="collapseForm1" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Cloth Details</h6>
             <div>
-              <?php if ($role==0) { ?>
-              <a class="collapse-item" href="add_cloth.php">Add Cloth</a> 
-              <?php } ?>      
+              <a class="collapse-item" href="add_cloth.php">Add Cloth</a>     
             <a class="collapse-item" href="all_cloth.php">All Cloth</a>
           </div>
         </div>
