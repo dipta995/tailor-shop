@@ -10,10 +10,15 @@ class ClothClass extends DB
     }
     
     public function insertCloth($data){
-        $name     = mysqli_real_escape_string($this->conn, $data['name']);
-        $details  = mysqli_real_escape_string($this->conn, $data['details']);
-        $price    = mysqli_real_escape_string($this->conn, $data['price']);
-        $discount = mysqli_real_escape_string($this->conn, $data['discount']);
+        $name          = mysqli_real_escape_string($this->conn, $data['name']);
+        $type          = mysqli_real_escape_string($this->conn, $data['type']);
+        $details       = mysqli_real_escape_string($this->conn, $data['details']);
+        $stock         = mysqli_real_escape_string($this->conn, $data['stock']);
+        $color         = mysqli_real_escape_string($this->conn, $data['color']);
+        $brand         = mysqli_real_escape_string($this->conn, $data['brand']);
+        $buying_price  = mysqli_real_escape_string($this->conn, $data['buying_price']);
+        $selling_price = mysqli_real_escape_string($this->conn, $data['selling_price']);
+        $discount      = mysqli_real_escape_string($this->conn, $data['discount']);
 
         $permited  = array('jpg', 'jpeg', 'png', 'gif');
         $file_name = $_FILES['image']['name'];
@@ -26,7 +31,7 @@ class ClothClass extends DB
         $uploaded_image = "upload/".$unique_image;
         
 
-        if (empty($name) || empty($details) || empty($file_name) || empty($price) ) {
+        if (empty($name) || empty($type) || empty($details) || empty($file_name) || empty($stock) || empty($color) || empty($brand)|| empty($buying_price) || empty($selling_price)) {
             $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
             return $txt;
         } elseif ($file_size >1048567) {
@@ -37,7 +42,7 @@ class ClothClass extends DB
             return $txt;
         } else{
             move_uploaded_file($file_temp, $uploaded_image);
-            $query = "INSERT into tbl_cloth(name, details, image, price, discount) values('$name','$details', '$uploaded_image', '$price','$discount')";
+            $query = "INSERT into tbl_cloth(name, type, details, image, stock, color, brand, buying_price, selling_price, discount) values('$name', '$type', '$details', '$uploaded_image', '$stock', '$color', '$brand', '$buying_price', '$selling_price', '$discount')";
             $result = $this->conn->query($query);
             if($result){
                 $txt = "<div class='alert alert-success'>Successfully inserted</div>";
@@ -53,7 +58,8 @@ class ClothClass extends DB
     }
 
     public function viewCloth(){
-        $query  = "SELECT * FROM tbl_cloth order by id desc";
+        $query  = "SELECT tbl_cloth.*, cloth_type.name FROM tbl_cloth INNER JOIN cloth_type ON 
+        tbl_cloth.type = cloth_type.id ORDER By tbl_cloth.name DESC";
         $result = $this->conn->query($query);
         return $result;
     }
@@ -90,10 +96,15 @@ class ClothClass extends DB
     }
 
     public function updateCloth($data, $clothid){
-        $name     = mysqli_real_escape_string($this->conn, $data['name']);
-        $details  = mysqli_real_escape_string($this->conn, $data['details']);
-        $price    = mysqli_real_escape_string($this->conn, $data['price']);
-        $discount = mysqli_real_escape_string($this->conn, $data['discount']);
+        $name          = mysqli_real_escape_string($this->conn, $data['name']);
+        $type          = mysqli_real_escape_string($this->conn, $data['type']);
+        $details       = mysqli_real_escape_string($this->conn, $data['details']);
+        $stock         = mysqli_real_escape_string($this->conn, $data['stock']);
+        $color         = mysqli_real_escape_string($this->conn, $data['color']);
+        $brand         = mysqli_real_escape_string($this->conn, $data['brand']);
+        $buying_price  = mysqli_real_escape_string($this->conn, $data['buying_price']);
+        $selling_price = mysqli_real_escape_string($this->conn, $data['selling_price']);
+        $discount      = mysqli_real_escape_string($this->conn, $data['discount']);
        
         $permited  = array('jpg', 'jpeg', 'png', 'gif');
         $file_name = $_FILES['image']['name'];
@@ -105,7 +116,7 @@ class ClothClass extends DB
         $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
         $uploaded_image = "upload/".$unique_image;
         
-        if (empty($name) || empty($details) || empty($price)) {
+        if (empty($name) || empty($type) || empty($details) || empty($stock) || empty($color) || empty($brand)|| empty($buying_price) || empty($selling_price)) {
             $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
             return $txt;
         } else {
@@ -118,12 +129,17 @@ class ClothClass extends DB
                     move_uploaded_file($file_temp, $uploaded_image);
                     $query = "UPDATE tbl_cloth
                               SET 
-                              name     = '$name',
-                              details  = '$details',
-                              image    = '$uploaded_image',
-                              price    = '$price',
-                              discount = '$discount'
-                              WHERE id = '$clothid'";
+                              name            = '$name',
+                              type            = '$type',
+                              details         = '$details',
+                              image           = '$uploaded_image',
+                              stock           = '$stock',
+                              color           = '$color',
+                              brand           = '$brand',
+                              buying_price    = '$buying_price',
+                              selling_price   = '$selling_price',
+                              discount        = '$discount'
+                              WHERE id        = '$clothid'";
 
                     $result = $this->conn->query($query);
                     if ($result) {
@@ -134,11 +150,16 @@ class ClothClass extends DB
             } else {
                 $query = "UPDATE tbl_cloth
                           SET 
-                          name     = '$name',
-                          details  = '$details',
-                          price    = '$price',
-                          discount = '$discount'
-                          WHERE id = '$clothid' ";
+                          name            = '$name',
+                          type            = '$type',
+                          details         = '$details',
+                          stock           = '$stock',
+                          color           = '$color',
+                          brand           = '$brand',
+                          buying_price    = '$buying_price',
+                          selling_price   = '$selling_price',
+                          discount        = '$discount'
+                          WHERE id        = '$clothid' ";
                 $result = $this->conn->query($query);
                 if ($result) {
                     $txt = "<div class='alert alert-success'>Successfully updated</div>";

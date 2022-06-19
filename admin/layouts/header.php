@@ -73,13 +73,13 @@ $id = $_SESSION['id'];
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Cloth Type</h6>
             <div>          
-              <a class="collapse-item" href="addtype.php">Cloth Type</a>      
-            <a class="collapse-item" href="typelist.php">All Cloth Type</a>
+              <a class="collapse-item" href="addtype.php">Add Cloth Type</a>      
+              <a class="collapse-item" href="typelist.php">All Cloth Type</a>
+            </div>
           </div>
         </div>
       </li>
-      <li>
-              </div>
+ 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm1" aria-expanded="true"
           aria-controls="collapseForm">
@@ -91,10 +91,12 @@ $id = $_SESSION['id'];
             <h6 class="collapse-header">Cloth Details</h6>
             <div>
               <a class="collapse-item" href="add_cloth.php">Add Cloth</a>     
-            <a class="collapse-item" href="all_cloth.php">All Cloth</a>
+              <a class="collapse-item" href="all_cloth.php">All Cloth</a>
+            </div>
           </div>
         </div>
       </li>
+  
       <li class="nav-item">
         <a class="nav-link" href="order.php">
           <i class="fas fa-fw fa-chart-area"></i>

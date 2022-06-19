@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2022 at 10:00 PM
+-- Generation Time: Jun 19, 2022 at 09:06 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -40,7 +40,8 @@ INSERT INTO `cloth_type` (`id`, `name`) VALUES
 (1, 'Chiffon'),
 (2, 'Crepe'),
 (3, 'Cotton'),
-(4, 'Denim');
+(4, 'Denim'),
+(5, 'Satin');
 
 -- --------------------------------------------------------
 
@@ -76,24 +77,30 @@ INSERT INTO `tbl_admin` (`id`, `name`, `email`, `phone`, `password`, `role`, `sa
 CREATE TABLE `tbl_cloth` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `type` int(11) NOT NULL,
   `details` text NOT NULL,
   `image` varchar(255) NOT NULL,
-  `price` int(11) NOT NULL,
-  `discount` int(11) NOT NULL
+  `stock` varchar(255) NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `brand` varchar(255) NOT NULL,
+  `buying_price` int(11) NOT NULL,
+  `selling_price` int(11) NOT NULL,
+  `discount` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `soft_delete` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_cloth`
 --
 
-INSERT INTO `tbl_cloth` (`id`, `name`, `details`, `image`, `price`, `discount`) VALUES
-(1, 'Charity Blanchard', 'Magna et rerum venia', 'upload/7b03f53b0c.jpg', 518, 67),
-(2, 'Ruth Chapman', 'Vel dignissimos aper', 'upload/b328f219e7.jpg', 125, 56),
-(3, 'Mark Marshall', 'Accusantium voluptas', 'upload/4cfe5c2415.jpg', 446, 63),
-(4, 'Ferdinand Bean', 'Dolore eiusmod conse', 'upload/bcf58a9562.jpg', 386, 38),
-(5, 'Virginia Pena', 'Et pariatur Incidun', 'upload/25d4aa673d.jpg', 712, 32),
-(6, 'Armando Dunn', 'Cum laboris officiis', 'upload/7acce0a02a.jpg', 634, 9),
-(8, 'Claire Erickson', 'Magna aspernatur et ', 'upload/e6152a3bf2.jpg', 361, 61);
+INSERT INTO `tbl_cloth` (`id`, `name`, `type`, `details`, `image`, `stock`, `color`, `brand`, `buying_price`, `selling_price`, `discount`, `created_at`, `soft_delete`) VALUES
+(10, 'Kessie Howell', 1, 'Assumenda recusandae', 'upload/579346dbb2.jpg', 'Atque fugiat vitae e', 'Maiores vero est ev', 'Cupidatat sunt sint', 983, 564, 38, '2022-06-19 06:54:23', 0),
+(11, 'Debra Santana', 3, 'Eum soluta accusanti', 'upload/99ee2c3ebf.jpg', 'Sed molestiae labore', 'Harum ullam quibusda', 'Ut in qui quis in as', 626, 535, 90, '2022-06-19 06:55:02', 0),
+(12, 'Cora Finley', 3, 'Rerum omnis enim tot', 'upload/8610a06cb3.jpg', 'Quae eu rerum sit au', 'Sint aspernatur repu', 'Ad et dolor est aut ', 422, 984, 44, '2022-06-19 06:55:34', 0),
+(13, 'Alexander Clayton', 4, 'Ipsum voluptatum fa', 'upload/8e32339aa7.jpg', 'Optio sint cupidit', 'Mollit accusamus off', 'Quos sint quibusdam ', 611, 490, 60, '2022-06-19 06:55:52', 0),
+(14, 'Channing Gray', 5, 'Aliqua Laboriosam ', 'upload/24dd67d30d.jpg', 'Cumque eos accusamus', 'Quis atque saepe in ', 'Velit aspernatur lab', 167, 99, 66, '2022-06-19 06:57:42', 0),
+(15, 'Lucian Hewitt', 2, 'Cumque beatae ut ut ', 'upload/c59dbcb80a.jpg', 'Rerum repudiandae et', 'Cillum dolore alias ', 'Enim et temporibus q', 99, 884, 20, '2022-06-19 06:59:40', 0);
 
 --
 -- Indexes for dumped tables
@@ -125,7 +132,7 @@ ALTER TABLE `tbl_cloth`
 -- AUTO_INCREMENT for table `cloth_type`
 --
 ALTER TABLE `cloth_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
@@ -137,7 +144,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_cloth`
 --
 ALTER TABLE `tbl_cloth`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

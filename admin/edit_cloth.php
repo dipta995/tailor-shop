@@ -46,7 +46,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
               <input name="name" type="text" class="form-control" value="<?php echo $value['name'];?>">
             </div>
             <div class="form-group">
-              <label>Details</label>
+              <label>Cloth Type</label><br>
+              <select id="select" name="type">
+                <option>Select Type</option>
+                <?php
+                    $query = "select * from cloth_type";
+                    $type = $cloth -> select($query);
+                    if($type){
+                        while($result = $type->fetch_assoc()){                             
+                ?>
+                <option 
+                <?php
+                    if($value['type'] == $result['id']){ ?>
+                        selected = "selected"
+                <?php } ?>
+                  value="<?php echo $result['id'];?>"><?php echo $result['name'];?></option>
+                <?php } } ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Cloth Details</label>
               <textarea name="details" class="form-control" id="exampleFormControlTextarea1" rows="3"><?php echo $value['details'];?></textarea>
             </div>
             <div class="form-group">
@@ -58,8 +77,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
               </td>
             </div>
             <div class="form-group">
-              <label>Price (tk)</label>
-              <input name="price" type="number" class="form-control" value="<?php echo $value['price'];?>" min="0">
+              <label>Stock</label>
+              <input name="stock" type="text" class="form-control" value="<?php echo $value['stock'];?>">
+            </div>
+            <div class="form-group">
+              <label>Color</label>
+              <input name="color" type="text" class="form-control" value="<?php echo $value['color'];?>">
+            </div>
+            <div class="form-group">
+              <label>Brand</label>
+              <input name="brand" type="text" class="form-control" value="<?php echo $value['brand'];?>">
+            </div>
+            <div class="form-group">
+              <label>Buying Price (BDT) Per Yard (1 Yard = 3 Feet)</label>
+              <input name="buying_price" type="number" class="form-control" value="<?php echo $value['buying_price'];?>" min="0">
+            </div>
+            <div class="form-group">
+              <label>Selling Price (BDT) Per Yard (1 Yard = 3 Feet)</label>
+              <input name="selling_price" type="number" class="form-control" value="<?php echo $value['selling_price'];?>" min="0">
             </div>
             <div class="form-group">
               <label>Discount (%)</label>

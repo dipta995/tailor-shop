@@ -35,7 +35,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               <input name="name" type="text" class="form-control" placeholder="Enter Cloth Name">
             </div>
             <div class="form-group">
-              <label>Details</label>
+              <label>Cloth Type</label><br>
+              <select id="select" name="type">
+                <option>Select Type</option>
+                <?php
+                    $query = "select * from cloth_type";
+                    $type = $cloth -> select($query);
+                    if($type){
+                        while($result = $type->fetch_assoc()){                             
+                ?>
+                <option value="<?php echo $result['id'];?>"><?php echo $result['name'];?></option>
+                <?php } } ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Cloth Details</label>
               <textarea class="ckeditor form-control" id="myEditor" name="details" cols="" rows="3"></textarea>
             </div>
             <div class="form-group">
@@ -45,8 +59,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               </td>
             </div>
             <div class="form-group">
-              <label>Price (tk) Per Yard (1 Yard = 3 Feet)</label>
-              <input name="price" type="number" class="form-control" placeholder="Enter price" min="0">
+              <label>Stock</label>
+              <input name="stock" type="text" class="form-control" placeholder="Cloth in Stock">
+            </div>
+            <div class="form-group">
+              <label>Color</label>
+              <input name="color" type="text" class="form-control" placeholder="Enter Cloth Color">
+            </div>
+            <div class="form-group">
+              <label>Brand</label>
+              <input name="brand" type="text" class="form-control" placeholder="Enter Cloth Brand">
+            </div>
+            <div class="form-group">
+              <label>Buying Price (BDT) Per Yard (1 Yard = 3 Feet)</label>
+              <input name="buying_price" type="number" class="form-control" placeholder="Enter price" min="0">
+            </div>
+            <div class="form-group">
+              <label>Selling Price (BDT) Per Yard (1 Yard = 3 Feet)</label>
+              <input name="selling_price" type="number" class="form-control" placeholder="Enter price" min="0">
             </div>
             <div class="form-group">
               <label>Discount (%)</label>

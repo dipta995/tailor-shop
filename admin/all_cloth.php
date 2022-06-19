@@ -22,13 +22,18 @@
                 <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                     <tr>
-                        <th width="5%">#</th>
-                        <th width="15%">Cloth Name</th>
-                        <th width="30%">Details</th> 
-                        <th width="10%">Image</th>                    
-                        <th width="10%">Price</th>
-                        <th width="10%">Discount <br></th>
-                        <th width="20%">Action</th>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Details</th> 
+                        <th>Image</th>
+                        <th>Type</th>  
+                        <th>Stock</th> 
+                        <th>Color</th> 
+                        <th>Brand</th>
+                        <th>Buying</th>
+                        <th>Selling</th>
+                        <th>Discount <br></th>
+                        <th>Action</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -44,14 +49,20 @@
                         <td><?php echo $value['name']; ?></td>
                         <td><?php echo $fm->textShorten($value['details'], 100); ?></td>
                         <td><img src="<?php echo $value['image']; ?>" height="40px" width="60px"/></td>
-                        <td><?php echo $value['price']; ?> Taka</td>
-                        <td><?php echo $value['discount']; ?> % <br> <?php echo $value['price']-(($value['price']*$value['discount'])/100) ?>  Taka</td>
-                        <?php  if ($role==0) { ?>
+                        <td><?php echo $value['type']; ?></td>
+                        <td><?php echo $value['stock']; ?></td>
+                        <td><?php echo $value['color']; ?></td>
+                        <td><?php echo $value['brand']; ?></td>
+                        <td><?php echo $value['buying_price']; ?> BDT</td>
+                        <td><?php echo $value['selling_price']; ?> BDT</td>
+                        <td><?php echo $value['discount']; ?> % <br> <?php echo $value['selling_price']-(($value['selling_price']*$value['discount'])/100) ?>  BDT
+                        </td>
+                        
                         <td>
                             <a href="edit_cloth.php?clothid=<?php echo $value['id'] ;?>" class="btn btn-sm btn-info">Edit</a>
                             <a onclick="return confirm('Are you sure to Delete?');" href="deleteCloth.php?delCloth=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
                         </td>
-                        <?php } ?>
+                       
                         <!-- <td><a href="customeradmit.php?packid=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Sell</a></td> -->
                     </tr>
                     <?php } ?>
