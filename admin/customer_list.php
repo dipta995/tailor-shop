@@ -1,8 +1,8 @@
 <?php include 'layouts/header.php'; 
 
-if(isset($_GET['deltype'])){
-    $deltype = $_GET['deltype'];
-    $delete = $cloth->deleteType($deltype);
+if(isset($_GET['delCustomer'])){
+    $delCustomer = $_GET['delCustomer'];
+    $delete = $customer->deleteCustomer($delCustomer);
 	echo $delete;
 	
 }
@@ -12,11 +12,11 @@ if(isset($_GET['deltype'])){
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">All Cloth Type</h1>
+    <h1 class="h3 mb-0 text-gray-800">Customer</h1>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="./">Home</a></li>
-        <li class="breadcrumb-item">All Cloth Type</li>
-        <li class="breadcrumb-item active" aria-current="page">All Cloth Type</li>
+        <li class="breadcrumb-item">Customer Details</li>
+        <li class="breadcrumb-item active" aria-current="page">All Customers</li>
     </ol>
     </div>
 
@@ -25,7 +25,7 @@ if(isset($_GET['deltype'])){
             <!-- Simple Tables -->
             <div class="card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">All Cloth Type</h6>
+                <h6 class="m-0 font-weight-bold text-primary">All Customers</h6>
             </div>
             <div class="table-responsive">
                 <div>
@@ -38,9 +38,12 @@ if(isset($_GET['deltype'])){
                 <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                     <tr>
-                        <th width="5%">#</th>
-                        <th width="15%">Cloth Type</th>
-                        <th width="20%">Action</th>
+                        <th>#</th>
+                        <th>Customer Name</th>
+                        <th>Email</th> 
+                        <th>Phone</th>
+                        <th>Address</th>  
+                        <th>Action</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -48,18 +51,20 @@ if(isset($_GET['deltype'])){
                 <tbody>
                     <?php
                         $i = 0;
-                        $view = $cloth->viewType();
+                        $view = $customer->viewCustomer();
                         foreach($view as $value){
                     ?>
                     <tr>
                         <td><?php echo $i+=1; ?></td>
-                        <td><?php echo $value['name']; ?></td>
-        
+                        <td><?php echo $value['cus_name']; ?></td>
+                        <td><?php echo $value['cus_email']; ?></td>
+                        <td><?php echo $value['cus_phone']; ?></td>
+                        <td><?php echo $value['cus_address']; ?></td>
+                        
                         <td>
-                            <a href="edit_type.php?typeid=<?php echo $value['id'] ;?>" class="btn btn-sm btn-info">Edit</a>
-                            <a onclick="return confirm('Are you sure to Delete?');" href="?deltype=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="edit_customer.php?customerid=<?php echo $value['cus_id'] ;?>" class="btn btn-sm btn-info">Edit</a>
+                            <a onclick="return confirm('Are you sure to Delete?');" href="?delCustomer=<?php echo $value['cus_id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
                         </td>
-                       
                     </tr>
                     <?php } ?>
                 </tbody>

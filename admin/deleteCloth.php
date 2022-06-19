@@ -18,6 +18,8 @@
         $delData = $cloth->delete($delquery);
         if($delData === TRUE){
             echo "<script>window.location='all_cloth.php';</script>";
+            $txt = "<div class='alert alert-success'>Successfully Deleted</div>";
+            echo $txt;
         } 
     }
 ?>

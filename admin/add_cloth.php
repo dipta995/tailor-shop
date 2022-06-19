@@ -32,14 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label>Cloth Name</label>
-              <input name="name" type="text" class="form-control" placeholder="Enter Cloth Name">
+              <input name="cloth_name" type="text" class="form-control" placeholder="Enter Cloth Name">
             </div>
             <div class="form-group">
               <label>Cloth Type</label><br>
               <select id="select" name="type">
                 <option>Select Type</option>
                 <?php
-                    $query = "select * from cloth_type";
+                    $query = "select * from cloth_type where soft_delete=0";
                     $type = $cloth -> select($query);
                     if($type){
                         while($result = $type->fetch_assoc()){                             

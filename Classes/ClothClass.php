@@ -52,14 +52,14 @@ class ClothClass extends DB
     }
 
     public function viewType(){
-        $query = "SELECT * FROM cloth_type order by id desc";
+        $query = "SELECT * FROM cloth_type where soft_delete=0";
         $result = $this->conn->query($query);
         return $result;
     }
 
     public function viewCloth(){
         $query  = "SELECT tbl_cloth.*, cloth_type.name FROM tbl_cloth INNER JOIN cloth_type ON 
-        tbl_cloth.type = cloth_type.id ORDER By tbl_cloth.cloth_name DESC";
+        tbl_cloth.type = cloth_type.id ORDER By tbl_cloth.cloth_name";
         $result = $this->conn->query($query);
         return $result;
     }
@@ -207,19 +207,16 @@ class ClothClass extends DB
 
     }
 
-
-
-    // public function deleteCloth($id){        
-    //     $query = "UPDATE tbl_cloth
-    //             SET
-    //             del_cloth  = '1'
-    //             WHERE id   = $id";
-    //     $result = $this->conn->query($query);
-    //     if($result === TRUE){
-    //         $txt = "<div class='alert alert-success'>Successfully Deleted</div>";
-    //         return $txt;
-    //     }
-    // }
+    public function deleteType($id){        
+        $query = "UPDATE cloth_type
+                SET
+                soft_delete  = '1'
+                WHERE id     = $id";
+        $result = $this->conn->query($query);
+        if($result === TRUE){
+            echo $txt = "<div class='alert alert-success'>Successfully Deleted</div>";
+        }
+    }
 
     
 }

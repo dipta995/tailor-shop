@@ -10,6 +10,8 @@ session_start();
     header("Location:login.php");
   }
 
+include '../Classes/CustomerClass.php';
+$customer = new CustomerClass();
 include '../Classes/ClothClass.php';
 $cloth = new ClothClass();
 include '../Classes/FoodClass.php';
@@ -96,7 +98,20 @@ $id = $_SESSION['id'];
           </div>
         </div>
       </li>
-  
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable1" aria-expanded="true"
+          aria-controls="collapseTable">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Customer Details</span>
+        </a>
+        <div id="collapseTable1" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Employee </h6>
+              <a class="collapse-item" href="create_customer.php">Create Customer</a>
+              <a class="collapse-item" href="customer_list.php">Customer list</a>
+          </div>
+        </div>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="order.php">
           <i class="fas fa-fw fa-chart-area"></i>
@@ -125,13 +140,9 @@ $id = $_SESSION['id'];
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Employee </h6>
-            <?php
-              if ($role==0) { ?>
-                <a class="collapse-item" href="create_employee.php"> Employee Create </a>
-             <?php } ?>
-            
-            <a class="collapse-item" href="employee_list.php">Employee list</a>
-            <a class="collapse-item" href="salary_list.php">Salary list</a>
+              <a class="collapse-item" href="create_employee.php"> Employee Create </a>
+              <a class="collapse-item" href="employee_list.php">Employee list</a>
+              <a class="collapse-item" href="salary_list.php">Salary list</a>
           </div>
         </div>
       </li>

@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }  
         ?>
         <div class="card-body">
-          <form method="POST" enctype="multipart/form-data">
+          <form action="" method="POST">
             <div class="form-group">
               <label>Cloth Type</label>
               <input name="name" type="text" class="form-control" placeholder="Enter Cloth Type">

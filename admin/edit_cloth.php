@@ -50,7 +50,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
               <select id="select" name="type">
                 <option>Select Type</option>
                 <?php
-                    $query = "select * from cloth_type";
+                    $query = "select * from cloth_type where soft_delete=0";
                     $type = $cloth -> select($query);
                     if($type){
                         while($result = $type->fetch_assoc()){                             
@@ -101,7 +101,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
               <input name="discount" type="number" min="0" step="1"  class="form-control" value="<?php echo $value['discount'];?>">
             </div>
  
-            <?php }} ?>
+            <?php } } ?>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
