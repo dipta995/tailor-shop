@@ -10,7 +10,7 @@ class ClothClass extends DB
     }
     
     public function insertCloth($data){
-        $name          = mysqli_real_escape_string($this->conn, $data['name']);
+        $cloth_name    = mysqli_real_escape_string($this->conn, $data['cloth_name']);
         $type          = mysqli_real_escape_string($this->conn, $data['type']);
         $details       = mysqli_real_escape_string($this->conn, $data['details']);
         $stock         = mysqli_real_escape_string($this->conn, $data['stock']);
@@ -31,7 +31,7 @@ class ClothClass extends DB
         $uploaded_image = "upload/".$unique_image;
         
 
-        if (empty($name) || empty($type) || empty($details) || empty($file_name) || empty($stock) || empty($color) || empty($brand)|| empty($buying_price) || empty($selling_price)) {
+        if (empty($cloth_name) || empty($type) || empty($details) || empty($file_name) || empty($stock) || empty($color) || empty($brand)|| empty($buying_price) || empty($selling_price)) {
             $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
             return $txt;
         } elseif ($file_size >1048567) {
@@ -42,7 +42,7 @@ class ClothClass extends DB
             return $txt;
         } else{
             move_uploaded_file($file_temp, $uploaded_image);
-            $query = "INSERT into tbl_cloth(name, type, details, image, stock, color, brand, buying_price, selling_price, discount) values('$name', '$type', '$details', '$uploaded_image', '$stock', '$color', '$brand', '$buying_price', '$selling_price', '$discount')";
+            $query = "INSERT into tbl_cloth(cloth_name, type, details, image, stock, color, brand, buying_price, selling_price, discount) values('$cloth_name', '$type', '$details', '$uploaded_image', '$stock', '$color', '$brand', '$buying_price', '$selling_price', '$discount')";
             $result = $this->conn->query($query);
             if($result){
                 $txt = "<div class='alert alert-success'>Successfully inserted</div>";
@@ -59,7 +59,7 @@ class ClothClass extends DB
 
     public function viewCloth(){
         $query  = "SELECT tbl_cloth.*, cloth_type.name FROM tbl_cloth INNER JOIN cloth_type ON 
-        tbl_cloth.type = cloth_type.id ORDER By tbl_cloth.name DESC";
+        tbl_cloth.type = cloth_type.id ORDER By tbl_cloth.cloth_name DESC";
         $result = $this->conn->query($query);
         return $result;
     }
@@ -96,7 +96,7 @@ class ClothClass extends DB
     }
 
     public function updateCloth($data, $clothid){
-        $name          = mysqli_real_escape_string($this->conn, $data['name']);
+        $cloth_name    = mysqli_real_escape_string($this->conn, $data['cloth_name']);
         $type          = mysqli_real_escape_string($this->conn, $data['type']);
         $details       = mysqli_real_escape_string($this->conn, $data['details']);
         $stock         = mysqli_real_escape_string($this->conn, $data['stock']);
@@ -116,7 +116,7 @@ class ClothClass extends DB
         $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
         $uploaded_image = "upload/".$unique_image;
         
-        if (empty($name) || empty($type) || empty($details) || empty($stock) || empty($color) || empty($brand)|| empty($buying_price) || empty($selling_price)) {
+        if (empty($cloth_name) || empty($type) || empty($details) || empty($stock) || empty($color) || empty($brand)|| empty($buying_price) || empty($selling_price)) {
             $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
             return $txt;
         } else {
@@ -129,7 +129,7 @@ class ClothClass extends DB
                     move_uploaded_file($file_temp, $uploaded_image);
                     $query = "UPDATE tbl_cloth
                               SET 
-                              name            = '$name',
+                              cloth_name      = '$cloth_name',
                               type            = '$type',
                               details         = '$details',
                               image           = '$uploaded_image',
@@ -150,7 +150,7 @@ class ClothClass extends DB
             } else {
                 $query = "UPDATE tbl_cloth
                           SET 
-                          name            = '$name',
+                          cloth_name      = '$cloth_name',
                           type            = '$type',
                           details         = '$details',
                           stock           = '$stock',

@@ -46,10 +46,10 @@
                     ?>
                     <tr>
                         <td><?php echo $i+=1; ?></td>
-                        <td><?php echo $value['name']; ?></td>
+                        <td><?php echo $value['cloth_name']; ?></td>
                         <td><?php echo $fm->textShorten($value['details'], 100); ?></td>
                         <td><img src="<?php echo $value['image']; ?>" height="40px" width="60px"/></td>
-                        <td><?php echo $value['type']; ?></td>
+                        <td><?php echo $value['name']; ?></td>
                         <td><?php echo $value['stock']; ?></td>
                         <td><?php echo $value['color']; ?></td>
                         <td><?php echo $value['brand']; ?></td>

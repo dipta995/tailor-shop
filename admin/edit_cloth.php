@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             ?>
             <div class="form-group">
               <label>Cloth Name</label>
-              <input name="name" type="text" class="form-control" value="<?php echo $value['name'];?>">
+              <input name="cloth_name" type="text" class="form-control" value="<?php echo $value['cloth_name'];?>">
             </div>
             <div class="form-group">
               <label>Cloth Type</label><br>
