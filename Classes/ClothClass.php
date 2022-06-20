@@ -59,9 +59,20 @@ class ClothClass extends DB
 
     public function viewCloth(){
         $query  = "SELECT tbl_cloth.*, cloth_type.name FROM tbl_cloth INNER JOIN cloth_type ON 
-        tbl_cloth.type = cloth_type.id ORDER By tbl_cloth.cloth_name";
+        tbl_cloth.type = cloth_type.id WHERE tbl_cloth.soft_delete = 0 ORDER BY tbl_cloth.cloth_name";
         $result = $this->conn->query($query);
         return $result;
+    }
+
+    public function deleteCloth($id){        
+        $query = "UPDATE tbl_cloth
+                SET
+                soft_delete  = '1'
+                WHERE id     = $id";
+        $result = $this->conn->query($query);
+        if($result === TRUE){
+            echo $txt = "<div class='alert alert-success'>Successfully Deleted</div>";
+        }
     }
 
     public function viewSingleCloth($clothid){
@@ -122,9 +133,9 @@ class ClothClass extends DB
         } else {
             if(!empty($file_name)){ 
                 if ($file_size >1048567) {
-                    echo "<span class='error'>Image Size should be less then 1MB!</span>";
+                    echo "<div class='error'>Image Size should be less then 1MB!</div ";
                 } elseif (in_array($file_ext, $permited) === false) {
-                    echo "<span class='error'>You can upload only: " .implode(', ', $permited)."</span>";
+                    echo "<div class='error'>You can upload only: " .implode(', ', $permited)."</div>";
                 } else {
                     move_uploaded_file($file_temp, $uploaded_image);
                     $query = "UPDATE tbl_cloth

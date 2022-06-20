@@ -23,23 +23,22 @@ class CustomerClass extends DB
             $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
             return $txt;
         } elseif (!preg_match ("/^[a-zA-z ]*$/", $cus_name) ){
-            $txt = "<span style='color:red; font-size: 15px;'>Only alphabets and whitespace are allowed For First name</span>";
+            $txt = "<div style='color:red; font-size: 15px;'>Only alphabets and whitespace are allowed For First name</div>";
             return $txt;
         } elseif (mysqli_num_rows($res)>0){
-            $txt = "<span style='color:red; font-size: 15px;'>This Email Already been Registered </span>";
+            $txt = "<div style='color:red; font-size: 15px;'>This Email Already been Registered </div>";
             return $txt;
         } elseif (strlen ($cus_phone) != 9) {  
-            $txt = "<span style='color:red; font-size: 15px;'>Mobile no. must have 9 digits. </span>";
+            $txt = "<div style='color:red; font-size: 15px;'>Mobile no. must have 9 digits. </div>";
             return $txt;
         } elseif (strlen ($cus_address) > 200) {  
-            $txt = "<span style='color:red; font-size: 15px;'>200 characters limitation!</span>";
+            $txt = "<div style='color:red; font-size: 15px;'>200 characters limitation!</div>";
             return $txt;
         } else {
             $query = "INSERT into tbl_customer(cus_name, cus_email, cus_phone, cus_address) values('$cus_name', '$cus_email', '$mobileno', '$cus_address')";
             $result = $this->conn->query($query);
             if($result){
-                $txt = "<div class='alert alert-success'>Successfully inserted</div>";
-                return $txt;
+               echo $txt = "<div class='alert alert-success'>Successfully inserted</div>";
             }
         }
     }
@@ -64,14 +63,14 @@ class CustomerClass extends DB
         if (empty($cus_name) || empty($cus_phone) || empty($cus_address)) {
             $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
             return $txt;
-        } elseif (!preg_match ("/^[a-zA-z ]*$/", $cus_name) ){
-            $txt = "<span style='color:red; font-size: 15px;'>Only alphabets and whitespace are allowed For First name</span>";
+        } elseif (!preg_match ("/^[a-zA-Z ]*$/", $cus_name) ){
+            $txt = "<div style='color:red; font-size: 15px;'>Only alphabets and whitespace are allowed For First name</div>";
             return $txt;
         } elseif (strlen ($cus_phone) != 9) {  
-            $txt = "<span style='color:red; font-size: 15px;'>Mobile no. must have 9 digits. </span>";
+            $txt = "<div style='color:red; font-size: 15px;'>Mobile no. must have 9 digits. </div>";
             return $txt;
         } elseif (strlen ($cus_address) > 200) {  
-            $txt = "<span style='color:red; font-size: 15px;'>200 characters limitation!</span>";
+            $txt = "<div style='color:red; font-size: 15px;'>200 characters limitation!</div>";
             return $txt;
         } else {
             $query = "UPDATE tbl_customer
@@ -83,8 +82,7 @@ class CustomerClass extends DB
 
             $result = $this->conn->query($query);
             if ($result) {
-                $txt = "<div class='alert alert-success'>Successfully updated</div>";
-                return $txt;
+                echo $txt = "<div class='alert alert-success'>Successfully updated</div>";
             }
         }        
     }
