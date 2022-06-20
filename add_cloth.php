@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="form-group">
               <label>Color</label>
-              <input name="color" type="text" class="form-control" placeholder="Enter Cloth Color">
+              <input name="color" type="color" class="form-control" placeholder="Enter Cloth Color">
             </div>
             <div class="form-group">
               <label>Brand</label>

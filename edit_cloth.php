@@ -82,7 +82,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
             <div class="form-group">
               <label>Color</label>
-              <input name="color" type="text" class="form-control" value="<?php echo $value['color'];?>">
+              <input name="color" type="color" class="form-control" value="<?php echo $value['color'];?>">
             </div>
             <div class="form-group">
               <label>Brand</label>
