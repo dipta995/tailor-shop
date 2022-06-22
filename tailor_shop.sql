@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2022 at 04:31 PM
+-- Generation Time: Jun 22, 2022 at 05:23 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -73,6 +73,33 @@ INSERT INTO `tbl_admin` (`id`, `name`, `email`, `phone`, `password`, `role`, `sa
 (2, 'Madonna Marquez', 'mypaxij@mailinator.com', '+8801815687984', 'Pa$$w0rd!', 2, NULL, '2022-06-20 06:06:06', 1),
 (3, 'Hayes Castro', 'vejuja@mailinator.com', '+8801345678985', 'Pa$$w0rd!', 1, NULL, '2022-06-20 06:10:05', 0),
 (4, 'Neve Phillips', 'dusenib@mailinator.com', '+8801644576879', 'Pa$$w0rd!', 2, NULL, '2022-06-20 08:52:37', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_cart`
+--
+
+CREATE TABLE `tbl_cart` (
+  `id` int(11) NOT NULL,
+  `cus_id` int(11) NOT NULL,
+  `mes_id` int(11) NOT NULL,
+  `cloth_id` int(11) NOT NULL,
+  `buying_price` int(11) NOT NULL,
+  `selling_price` int(11) NOT NULL,
+  `charge` int(11) NOT NULL,
+  `quantity` float(10,2) NOT NULL,
+  `soft_delete` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_cart`
+--
+
+INSERT INTO `tbl_cart` (`id`, `cus_id`, `mes_id`, `cloth_id`, `buying_price`, `selling_price`, `charge`, `quantity`, `soft_delete`) VALUES
+(13, 9, 15, 20, 965, 688, 36, 239.00, 0),
+(14, 8, 15, 20, 37, 774, 59, 857.00, 0),
+(15, 5, 11, 20, 221, 914, 44, 957.00, 0);
 
 -- --------------------------------------------------------
 
@@ -166,6 +193,78 @@ INSERT INTO `tbl_measurement` (`id`, `cus_id`, `measurement_for`, `measurement_d
 (14, 6, 'Ea et accusamus aspe', 'Consectetur architec', 0),
 (15, 7, 'Dolor velit porro a', 'Aute nulla exercitat', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_order`
+--
+
+CREATE TABLE `tbl_order` (
+  `id` int(11) NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `cus_id` int(11) NOT NULL,
+  `mes_id` int(11) NOT NULL,
+  `cloth_id` int(11) NOT NULL,
+  `buying_price` int(11) NOT NULL,
+  `selling_price` int(11) NOT NULL,
+  `charge` int(11) NOT NULL,
+  `quantity` float(10,2) NOT NULL,
+  `slip_no` varchar(255) DEFAULT NULL,
+  `soft_delete` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_order`
+--
+
+INSERT INTO `tbl_order` (`id`, `owner_id`, `cus_id`, `mes_id`, `cloth_id`, `buying_price`, `selling_price`, `charge`, `quantity`, `slip_no`, `soft_delete`) VALUES
+(8, 5, 9, 15, 20, 965, 688, 36, 239.00, '1655910818', 0),
+(9, 5, 8, 15, 20, 37, 774, 59, 857.00, '1655910818', 0),
+(10, 5, 5, 11, 20, 221, 914, 44, 957.00, '1655910818', 0),
+(11, 0, 9, 15, 20, 965, 688, 36, 239.00, '1655910824', 0),
+(12, 0, 8, 15, 20, 37, 774, 59, 857.00, '1655910824', 0),
+(13, 0, 5, 11, 20, 221, 914, 44, 957.00, '1655910824', 0),
+(14, 0, 9, 15, 20, 965, 688, 36, 239.00, '1655910835', 0),
+(15, 0, 8, 15, 20, 37, 774, 59, 857.00, '1655910835', 0),
+(16, 0, 5, 11, 20, 221, 914, 44, 957.00, '1655910835', 0),
+(17, 0, 9, 15, 20, 965, 688, 36, 239.00, '1655910994', 0),
+(18, 0, 8, 15, 20, 37, 774, 59, 857.00, '1655910994', 0),
+(19, 0, 5, 11, 20, 221, 914, 44, 957.00, '1655910994', 0),
+(20, 0, 9, 15, 20, 965, 688, 36, 239.00, '1655911028', 0),
+(21, 0, 8, 15, 20, 37, 774, 59, 857.00, '1655911028', 0),
+(22, 0, 5, 11, 20, 221, 914, 44, 957.00, '1655911028', 0),
+(23, 0, 9, 15, 20, 965, 688, 36, 239.00, '1655911042', 0),
+(24, 0, 8, 15, 20, 37, 774, 59, 857.00, '1655911042', 0),
+(25, 0, 5, 11, 20, 221, 914, 44, 957.00, '1655911042', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_slip`
+--
+
+CREATE TABLE `tbl_slip` (
+  `id` int(11) NOT NULL,
+  `slip_no` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `order_at` varchar(50) NOT NULL,
+  `delivery_at` varchar(50) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `soft_delete` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_slip`
+--
+
+INSERT INTO `tbl_slip` (`id`, `slip_no`, `customer_id`, `order_at`, `delivery_at`, `status`, `soft_delete`) VALUES
+(1, 1655910818, 5, '06-22-2022', '', 0, 0),
+(2, 1655910824, 0, '06-22-2022', '', 0, 0),
+(3, 1655910835, 0, '06-22-2022', '', 0, 0),
+(4, 1655910994, 0, '06-22-2022', '', 0, 0),
+(5, 1655911028, 0, '06-22-2022', '', 0, 0),
+(6, 1655911042, 0, '06-22-2022', '', 0, 0);
+
 --
 -- Indexes for dumped tables
 --
@@ -180,6 +279,12 @@ ALTER TABLE `cloth_type`
 -- Indexes for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -201,6 +306,18 @@ ALTER TABLE `tbl_measurement`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_slip`
+--
+ALTER TABLE `tbl_slip`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -215,6 +332,12 @@ ALTER TABLE `cloth_type`
 --
 ALTER TABLE `tbl_admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbl_cloth`
@@ -233,6 +356,18 @@ ALTER TABLE `tbl_customer`
 --
 ALTER TABLE `tbl_measurement`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `tbl_slip`
+--
+ALTER TABLE `tbl_slip`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -79,8 +79,7 @@ class LoginClass extends DB
             
     }
     
-    public function updatePassword($data, $id)
-    {
+    public function updatePassword($data, $id) {
         $password = mysqli_real_escape_string($this->conn, $data['password']);
         $password1 = mysqli_real_escape_string($this->conn, $data['password1']);
         if (empty($password) || empty($password1)) {

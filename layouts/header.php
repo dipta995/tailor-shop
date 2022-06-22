@@ -16,6 +16,8 @@ include 'Classes/ClothClass.php';
 $cloth = new ClothClass();
 include 'Classes/MeasurementClass.php';
 $measure = new MeasurementClass();
+include 'Classes/CartClass.php';
+$cart = new CartClass();
 include 'Classes/EmployeeClass.php';
 $emp = new EmployeeClass();
 include 'Classes/ContactClass.php';
@@ -24,8 +26,8 @@ include 'Classes/LoginClass.php';
 $create = new LoginClass();
 include 'Classes/FormatClass.php';
 $fm = new Format();
-$role = $_SESSION['role'];
-$id = $_SESSION['id'];
+// $role = $_SESSION['role'];
+// $id = $_SESSION['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,9 +149,9 @@ $id = $_SESSION['id'];
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="order.php">
+        <a class="nav-link" href="cart.php">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Orders</span>
+          <span>Cart</span>
         </a>
       </li>
 
