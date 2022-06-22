@@ -1,10 +1,10 @@
 <?php include 'layouts/header.php';
  
-if (($_SERVER['REQUEST_METHOD'] == 'POST') && $_POST['add_to_cart']) {
+if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['add_to_cart'])) {
     $addCart = $cart->insertCart($_POST);
 }
 
-if (($_SERVER['REQUEST_METHOD'] == 'POST') && $_POST['send_to_order']) {
+if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['send_to_order'])) {
   $addOrder = $cart->insertOrder($_POST);
 }
 ?>
@@ -158,6 +158,20 @@ if(isset($_GET['delCart'])){
                 ?>
                 </div>
               <div class="form-group">
+              <div class="form-group">
+            <label>Customer ID</label><br>
+            <select id="select" name="cus_id">
+              <option>-------- Select Customer ID --------</option>
+              <?php
+                  $query = "select * from tbl_customer where soft_delete=0";
+                  $cusid = $cart -> select($query);
+                  if($cusid){
+                      while($result = $cusid->fetch_assoc()){                             
+              ?>
+              <option value="<?php echo $result['cus_id'];?>"><?php echo $result['cus_name'];?></option>
+              <?php } } ?>
+            </select>
+          </div>
                 <label>Delivery Date</label>
                 <input name="delivery_at" type="date" class="form-control">     
               </div>

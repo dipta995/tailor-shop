@@ -37,11 +37,10 @@ class CartClass extends DB
             $customer_id    = mysqli_real_escape_string($this->conn, $data['cus_id']); 
             $delivery_at    = mysqli_real_escape_string($this->conn, $data['delivery_at']); 
             $time = time();
-            $order_at= date('m-d-Y');
+            $order_at= date('Y-m-d');
             $query = "SELECT * FROM tbl_cart";
             $result = $this->conn->query($query);
             foreach($result as $value){
-                	$owner_id = $customer_id;
                     $cus_id = $value['cus_id'];
                     $mes_id = $value['mes_id'];
                     $cloth_id = $value['cloth_id'];
@@ -49,10 +48,8 @@ class CartClass extends DB
                     $selling_price = $value['selling_price'];
                     $charge = $value['charge'];
                     $quantity = $value['quantity'];
-                    $slip_no = $time;
 
-
-                    $query = "INSERT into tbl_order(owner_id, cus_id, mes_id, cloth_id, buying_price, selling_price, charge, quantity,slip_no) values('$customer_id','$cus_id', '$mes_id', '$cloth_id', '$buying_price', '$selling_price', '$charge', '$quantity', '$slip_no')";
+                    $query = "INSERT into tbl_order(owner_id, cus_id, mes_id, cloth_id, buying_price, selling_price, charge, quantity,slip_no) values('$customer_id','$cus_id', '$mes_id', '$cloth_id', '$buying_price', '$selling_price', '$charge', '$quantity', '$time')";
                     $result = $this->conn->query($query);
 
                     if($result){
@@ -63,11 +60,15 @@ class CartClass extends DB
                     
             }
 
-            $query = "INSERT into tbl_slip(slip_no, customer_id, order_at, delivery_at) values('$slip_no','$customer_id', '$order_at', '$delivery_at')";
+            $query = "INSERT into tbl_slip(slip_no, customer_id, order_at, delivery_at) values('$time','$customer_id', '$order_at', '$delivery_at')";
             $result = $this->conn->query($query);
             if($result){
-                $txt = "<div class='alert alert-success'>Data Inserted Successfully!</div>";
-                return $txt;
+                $delque = "DELETE FROM tbl_cart ";
+                $delete = $this->conn->query($delque);
+                if($delete)
+                {
+                    echo "<script>window.location='order.php';</script>";
+                }
             }
         }
     
