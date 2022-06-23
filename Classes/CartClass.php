@@ -41,22 +41,20 @@ class CartClass extends DB
             $query = "SELECT * FROM tbl_cart";
             $result = $this->conn->query($query);
             foreach($result as $value){
-                    $cus_id = $value['cus_id'];
-                    $mes_id = $value['mes_id'];
-                    $cloth_id = $value['cloth_id'];
-                    $buying_price = $value['buying_price'];
-                    $selling_price = $value['selling_price'];
-                    $charge = $value['charge'];
-                    $quantity = $value['quantity'];
+                $cus_id = $value['cus_id'];
+                $mes_id = $value['mes_id'];
+                $cloth_id = $value['cloth_id'];
+                $buying_price = $value['buying_price'];
+                $selling_price = $value['selling_price'];
+                $charge = $value['charge'];
+                $quantity = $value['quantity'];
 
-                    $query = "INSERT into tbl_order(owner_id, cus_id, mes_id, cloth_id, buying_price, selling_price, charge, quantity,slip_no) values('$customer_id','$cus_id', '$mes_id', '$cloth_id', '$buying_price', '$selling_price', '$charge', '$quantity', '$time')";
-                    $result = $this->conn->query($query);
-
-                    if($result){
-                        
-                    }
-
-
+                $query = "INSERT into tbl_order(owner_id, cus_id, mes_id, cloth_id, buying_price, selling_price, charge, quantity,slip_no) values('$customer_id','$cus_id', '$mes_id', '$cloth_id', '$buying_price', '$selling_price', '$charge', '$quantity', '$time')";
+                $result = $this->conn->query($query);
+                if($result){
+                    $txt = "<div class='alert alert-success'>Data Inserted Successfully!</div>";
+                    return $txt;
+                }
                     
             }
 
@@ -66,8 +64,9 @@ class CartClass extends DB
                 $delque = "DELETE FROM tbl_cart ";
                 $delete = $this->conn->query($delque);
                 if($delete)
-                {
-                    echo "<script>window.location='order.php';</script>";
+                if($result){
+                    $txt = "<div class='alert alert-success'>Data Inserted Successfully!</div>";
+                    return $txt;
                 }
             }
         }
@@ -107,7 +106,11 @@ class CartClass extends DB
             }
         }
 
-        
+        public function selectAllMeasurement($id){
+            $query = "SELECT * FROM tbl_measurement WHERE cus_id = '$id'";
+            $result = $this->conn->query($query);
+            return $result;
+        }
         
             
 }

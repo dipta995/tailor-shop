@@ -1,0 +1,25 @@
+<?php
+   include_once 'Classes/CartClass.php';
+   $cart = new CartClass();
+
+
+    $cus_id = $_POST["cus_id"];
+    
+    //fetch measurement data based on the specific customer
+    $result = $cart->selectAllMeasurement($cus_id);
+
+    //Generate HTML of state options list
+    if($result->num_rows > 0){
+        echo '<option value="">Select Measurement</option>';
+        while ($row = $result->fetch_assoc()) {
+            echo '<option value='.$row['id'].'>'.$row['id'].'</option>';
+        }
+    } else{
+        echo '<option value="">Measurement not available</option>';
+    }
+
+?>
+
+    
+
+
