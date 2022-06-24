@@ -6,9 +6,10 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['add_to_cart'])) {
 }
 
 if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['send_to_order'])) {
-  $addOrder = $cart->insertOrder($_POST);
+    $addOrder = $cart->insertOrder($_POST);
 }
 ?>
+
 
 <?php
 if(isset($_GET['delCart'])){
@@ -40,6 +41,7 @@ if(isset($_GET['delCart'])){
           });
       });
   </script>
+
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -54,8 +56,10 @@ if(isset($_GET['delCart'])){
               echo $addCart;
           }  
         ?>
+      
   <div class="row">
     <div class="col-md-3">
+    <div class="card-body">
       <form action="" method="POST">
         <div class="form-group">
           
@@ -66,9 +70,8 @@ if(isset($_GET['delCart'])){
             $result = $cart->select($query);
           ?>
             <!-- Customer Drop-Down -->
-
-            <select id="cus_id">
-                <option value="">Customer Name</option>
+            <select id="cus_id" name="cus_id">
+                <option value="">Select Customer</option>
                 <?php
                 if($result->num_rows > 0){
                     while($row = $result->fetch_assoc()){
@@ -83,28 +86,26 @@ if(isset($_GET['delCart'])){
         </div>
 
         <div class="form-group">
-        <label> Customer Measurement </label><br>
-          
-            <!-- Measurement Drop-Down -->
+        <label>Measurement For</label><br> 
 
-            <select id="mes_id">
-                <option value="">Select Customer Name</option>
-            
+            <!-- Measurement Drop-Down -->
+            <select id="mes_id" name="mes_id">
+                <option value="">Select Customer Name</option>          
             </select>
         </div>
 
 
         <div class="form-group">
-          <label>Cloth ID</label><br>
-          <select id="select" name="cloth_id" >
-            <option> Select Cloth Id</option>
+          <label for="standard-select">Cloth Name</label><br>
+          <select id="standard-select" name="cloth_id" >
+            <option>Select Cloth</option>
             <?php
                 $query = "select * from tbl_cloth where soft_delete=0";
                 $clothid = $cart -> select($query);
                 if($clothid){
                     while($result = $clothid->fetch_assoc()){                             
             ?>
-            <option value="<?php echo $result['id'];?>"><?php echo $result['id'];?></option>
+            <option value="<?php echo $result['id'];?>"><?php echo $result['cloth_name'];?></option>
             <?php } } ?>
           </select>
         </div>
@@ -123,27 +124,28 @@ if(isset($_GET['delCart'])){
         </div>
         <div class="form-group">
           <label>Quantity</label>
-          <input name="quantity" type="number" class="form-control" placeholder="Enter Quantity">
+          <input name="quantity" type="text" class="form-control" placeholder="Enter Quantity">
         </div>
 
           <button name="add_to_cart" type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
+    </div>
 
 
     <div class="col-md-9">
-      <div class="card">
+      <div class="card-body">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Order List</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Cart Items</h6>
         </div>
         <div class="table-responsive">
-          <table class="table align-items-center table-flush">
+          <table class="table align-items-center table-flush">           
             <thead class="thead-light">
               <tr>
-                <th>#</th>
-                <th>Customer ID</th>
-                <th>Measurement ID</th> 
-                <th>Cloth ID</th>
+                <th>SL No.</th>
+                <th>Customer Name</th>
+                <th>Measurement For</th> 
+                <th>Cloth Name</th>
                 <th>Buying Price</th>  
                 <th>Selling Price</th> 
                 <th>Charge</th> 
@@ -153,16 +155,18 @@ if(isset($_GET['delCart'])){
             </thead>
    
             <tbody>
+                  
               <?php
                   $i = 0;
                   $view = $cart->viewCart();
+                  if($view->num_rows > 0){
                   foreach($view as $value){
               ?>
               <tr>
-                  <td><?php echo $i+=1; ?></td>
-                  <td><?php echo $value['cus_id']; ?></td>
-                  <td><?php echo $value['id']; ?></td>
-                  <td><?php echo $value['id']; ?></td>
+                  <td><?php echo $i+=1; ?></td>  
+                  <td><?php echo $value['cus_name']; ?></td>
+                  <td><?php echo $value['measurement_for']; ?></td>          
+                  <td><?php echo $value['cloth_name']; ?></td>
                   <td><?php echo $value['buying_price']; ?> BDT</td>
                   <td><?php echo $value['selling_price']; ?> BDT</td>
                   <td><?php echo $value['charge']; ?> BDT</td>
@@ -172,9 +176,10 @@ if(isset($_GET['delCart'])){
                     <a onclick="return confirm('Are you sure to Delete?');" href="?delCart=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
                   </td>
               </tr>
-              <?php } ?>
+              <?php } } ?>
             </tbody>
           </table>
+          <hr>  
 
           <table class="table align-items-center table-flush">
             <tbody>
@@ -193,18 +198,40 @@ if(isset($_GET['delCart'])){
                     <?php } } ?>
                   </select>
                 </div>
+
                   <label>Delivery Date</label>
                   <input name="delivery_at" type="date" class="form-control">     
-          </div>
-            <button name="send_to_order" type="submit" class="btn btn-primary">Order</button>
+              <hr>
+                  <button name="send_to_order" type="submit" class="btn btn-primary">Order</button>
               </form>
             </tbody>
           </table>
         </div>
+      </div>
         <div class="card-footer"></div>
     </div>
   </div>
 </div>
 
+<style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --select-arrow: var(--select-border);
+}
+
+select {
+  border: 2px;
+  width: 100%;
+  background-color: #EAECF4;
+  font-family: inherit;
+  font-size: 18px;
+  cursor: inherit;
+}
+</style>
 
 <?php include 'layouts/footer.php';?>

@@ -12,7 +12,7 @@
     if($result->num_rows > 0){
         echo '<option value="">Select Measurement</option>';
         while ($row = $result->fetch_assoc()) {
-            echo '<option value='.$row['id'].'>'.$row['id'].'</option>';
+            echo '<option value='.$row['id'].'>'.$row['measurement_for'].'</option>';
         }
     } else{
         echo '<option value="">Measurement not available</option>';

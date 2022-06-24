@@ -44,7 +44,7 @@ if(isset($_GET['deltype'])){
                         <th></th>
                     </tr>
                 </thead>
-                </thead>
+            
                 <tbody>
                     <?php
                         $i = 0;

@@ -154,6 +154,13 @@ $fm = new Format();
           <span>Cart</span>
         </a>
       </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="order.php">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Order</span>
+        </a>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
@@ -276,4 +283,5 @@ $fm = new Format();
             </li>
           </ul>
         </nav>
+
         <!-- Topbar -->
