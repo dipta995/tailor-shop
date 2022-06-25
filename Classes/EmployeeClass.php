@@ -334,12 +334,6 @@ class EmployeeClass extends DB
         }
     }
 
-    public function trainer(){
-        $qry = "SELECT * from employee_table where emp_job_status = 'Instructor'";
-        $result = $this->conn->query($qry);
-        return $result;
-    }
-
     public function viewimage(){
         $qry = "SELECT * from image_table";
         $result = $this->conn->query($qry);

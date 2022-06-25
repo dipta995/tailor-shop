@@ -59,7 +59,7 @@
               <label>Job Status</label>
               <select name="emp_job_status" class="form-control">
                 <option value="<?php echo $value['emp_job_status']?>"><?php echo $value['emp_job_status']?></option>
-                <option value="Instructor">Instructor</option>
+                <option value="Instructor">Tailor</option>
                 <option value="Manager">Manager</option>
                 <option value="Cleaner">Cleaner</option>
               </select>
