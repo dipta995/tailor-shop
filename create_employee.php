@@ -50,7 +50,7 @@
             <div class="form-group">
               <label>Job Status</label>
               <select name="emp_job_status" class="form-control">
-                  <option value="Instructor">Tailor</option>
+                  <option value="Tailor">Tailor</option>
                   <option value="Manager">Manager</option>
                   <option value="Cleaner">Cleaner</option>
               </select>
