@@ -1,8 +1,7 @@
 <?php 
 include_once 'db.php';
 class ClothClass extends DB
-{
-   
+{ 
     public $db;
     public function __construct()
     {
@@ -32,7 +31,7 @@ class ClothClass extends DB
         
 
         if (empty($cloth_name) || empty($type) || empty($details) || empty($file_name) || empty($stock) || empty($color) || empty($brand)|| empty($buying_price) || empty($selling_price)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
         } elseif ($file_size >1048567) {
             $txt = "<div class='alert alert-danger'>Image Size should be less then 1MB!</div>";
@@ -45,7 +44,7 @@ class ClothClass extends DB
             $query = "INSERT into tbl_cloth(cloth_name, type, details, image, stock, color, brand, buying_price, selling_price, discount) values('$cloth_name', '$type', '$details', '$uploaded_image', '$stock', '$color', '$brand', '$buying_price', '$selling_price', '$discount')";
             $result = $this->conn->query($query);
             if($result){
-                $txt = "<div class='alert alert-success'>Successfully inserted</div>";
+                $txt = "<div class='alert alert-success'>Successfully Inserted!</div>";
                 return $txt;
             }
         }
@@ -71,7 +70,7 @@ class ClothClass extends DB
                 WHERE id     = $id";
         $result = $this->conn->query($query);
         if($result === TRUE){
-            echo $txt = "<div class='alert alert-success'>Successfully Deleted</div>";
+            echo $txt = "<div class='alert alert-success'>Successfully Deleted!</div>";
         }
     }
 
@@ -84,7 +83,7 @@ class ClothClass extends DB
     public function updateType($data, $typeid){
         $name = mysqli_real_escape_string($this->conn, $data['name']);
         if (empty($name)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
         } else {
             $query = "UPDATE cloth_type
@@ -94,7 +93,7 @@ class ClothClass extends DB
 
                     $result = $this->conn->query($query);
                     if ($result) {
-                        $txt = "<div class='alert alert-success'>Successfully updated</div>";
+                        $txt = "<div class='alert alert-success'>Successfully updated!</div>";
                         return $txt;
                     }
         }
@@ -128,7 +127,7 @@ class ClothClass extends DB
         $uploaded_image = "upload/".$unique_image;
         
         if (empty($cloth_name) || empty($type) || empty($details) || empty($stock) || empty($color) || empty($brand)|| empty($buying_price) || empty($selling_price)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
         } else {
             if(!empty($file_name)){ 
@@ -154,29 +153,29 @@ class ClothClass extends DB
 
                     $result = $this->conn->query($query);
                     if ($result) {
-                        $txt = "<div class='alert alert-success'>Successfully updated</div>";
+                        $txt = "<div class='alert alert-success'>Successfully updated!</div>";
                         return $txt;
                     }
                 }
             } else {
                 $query = "UPDATE tbl_cloth
-                          SET 
-                          cloth_name      = '$cloth_name',
-                          type            = '$type',
-                          details         = '$details',
-                          stock           = '$stock',
-                          color           = '$color',
-                          brand           = '$brand',
-                          buying_price    = '$buying_price',
-                          selling_price   = '$selling_price',
-                          discount        = '$discount'
-                          WHERE id        = '$clothid' ";
-                $result = $this->conn->query($query);
-                if ($result) {
-                    $txt = "<div class='alert alert-success'>Successfully updated</div>";
-                    return $txt;
+                    SET 
+                    cloth_name      = '$cloth_name',
+                    type            = '$type',
+                    details         = '$details',
+                    stock           = '$stock',
+                    color           = '$color',
+                    brand           = '$brand',
+                    buying_price    = '$buying_price',
+                    selling_price   = '$selling_price',
+                    discount        = '$discount'
+                    WHERE id        = '$clothid' ";
+                    $result = $this->conn->query($query);
+                    if ($result) {
+                        $txt = "<div class='alert alert-success'>Successfully updated!</div>";
+                        return $txt;
+                    }
                 }
-            }
         }
     }
 
@@ -189,7 +188,6 @@ class ClothClass extends DB
 			return false;
 		}
 	}
-
 
     // Delete data
     public function delete($query){
@@ -205,17 +203,16 @@ class ClothClass extends DB
         $name = mysqli_real_escape_string($this->conn, $data['name']);
 
         if (empty($name)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
-        } else{
+        } else {
             $query = "INSERT into cloth_type(name) values('$name')";
             $result = $this->conn->query($query);
             if($result){
-                $txt = "<div class='alert alert-success'>Successfully inserted!</div>";
+                $txt = "<div class='alert alert-success'>Successfully Inserted!</div>";
                 return $txt;
             }
         }
-
     }
 
     public function deleteType($id){        
@@ -225,7 +222,7 @@ class ClothClass extends DB
                 WHERE id     = $id";
         $result = $this->conn->query($query);
         if($result === TRUE){
-            echo $txt = "<div class='alert alert-success'>Successfully Deleted</div>";
+            echo $txt = "<div class='alert alert-success'>Successfully Deleted!</div>";
         }
     }
 

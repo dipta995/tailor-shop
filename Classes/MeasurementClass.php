@@ -14,13 +14,13 @@ class MeasurementClass extends DB
         $measurement_details   = mysqli_real_escape_string($this->conn, $data['measurement_details']);
 
         if (empty($cus_id) || empty($measurement_for) || empty($measurement_details)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
         } else{
             $query = "INSERT into tbl_measurement(cus_id, measurement_for, measurement_details) values('$cus_id', '$measurement_for', '$measurement_details')";
             $result = $this->conn->query($query);
             if($result){
-                $txt = "<div class='alert alert-success'>Successfully inserted</div>";
+                $txt = "<div class='alert alert-success'>Successfully Inserted!</div>";
                 return $txt;
             }
         }
@@ -49,7 +49,7 @@ class MeasurementClass extends DB
         $measurement_details   = mysqli_real_escape_string($this->conn, $data['measurement_details']);
 
         if (empty($cus_id) || empty($measurement_for) || empty($measurement_details)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
         } else {
             $query = "UPDATE tbl_measurement
@@ -61,7 +61,7 @@ class MeasurementClass extends DB
 
             $result = $this->conn->query($query);
             if ($result) {
-                echo $txt = "<div class='alert alert-success'>Successfully updated</div>";
+                echo $txt = "<div class='alert alert-success'>Successfully updated!</div>";
             }
         }        
     }
@@ -79,10 +79,8 @@ class MeasurementClass extends DB
                 WHERE id     = $id";
         $result = $this->conn->query($query);
         if($result === TRUE){
-            echo $txt = "<div class='alert alert-success'>Successfully Deleted</div>";
+            echo $txt = "<div class='alert alert-success'>Successfully Deleted!</div>";
         }
     }
-    
-
 }
 

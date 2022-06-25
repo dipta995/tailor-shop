@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   </div>
 
   <div class="row">
-      <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
     <div class="col-lg-8">
       <!-- Form Basic -->
       <div class="card mb-4">
@@ -30,12 +30,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           <h6 class="m-0 font-weight-bold text-primary">Update Customer</h6>
         </div>
         <?php
-            if(isset($updateMeasurement)){
-                echo $updateMeasurement;
-            }
+          if(isset($updateMeasurement)){
+              echo $updateMeasurement;
+          }
         ?>
         <div class="card-body">
-        <form method="POST" enctype="multipart/form-data">
+          <form method="POST" enctype="multipart/form-data">
             <?php 
                 $view = $measure->viewSingleMeasurement($mesid);
                 if($view){
@@ -57,6 +57,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
 
             <?php } } ?>
+            
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>

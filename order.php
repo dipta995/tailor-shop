@@ -1,16 +1,4 @@
-<?php include 'layouts/header.php';?>
-
-<!-- jQuery Library -->
-<script src="js\jquery.min.js"></script>
-  <script type="text/javascript"> 
-    $(document).ready(function(){
-        $("#flip").click(function(){
-            $("#panel").toggle(1000);
-        });
-        
-    });
-
-  </script>
+<?php include 'layouts/header.php'; ?>
 
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
@@ -21,53 +9,120 @@
         <li class="breadcrumb-item">Order</li>
     </ol>
     </div>
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Buying Price</th>
+                        <th>Selling Price</th>            
+                        <th>Charge</th>
+                        <th>Total Profit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $i = 0;
+                            $view = $cart->viewProfit();           
+                            foreach($view as $value){
+                            
+                        ?>
+                        <tr>
+                            <td><?php echo $value['sum_buyingprice']; ?> BDT</td>
+                            <td><?php echo $value['sum_sellingprice']; ?> BDT</td>
+                            <td><?php echo $value['sum_charge']; ?> BDT</td>
+                            <td><?php echo (($value['sum_sellingprice'] + $value['sum_charge'])) -  $value['sum_buyingprice']?>  BDT
+                            </td>              
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
       <div class="col-lg-12 mb-4">
         <!-- Simple Tables -->
         <div class="card">
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Order List</h6>
-        </div>
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Order List</h6>
+            </div>
 
-        <div class="table-responsive">
-            <table class="table align-items-center table-flush">
-            
-            <thead id="flip" class="thead-light">
-                <tr>
-                    <th>SL No.</th>
-                    <th>Slip No</th> 
-                    <th>Customer Name</th>
-                    <th>Order at</th>
-                    <th>Delivery at</th>  
-                </tr>
-            </thead>
-            
-            <tbody id="panel">
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                    
                     <?php
                         $i = 0;
                         $view = $cart->viewSlip();
                         if($view->num_rows > 0){
-                        foreach($view as $value){
+                            foreach($view as $value){
+                            $i++;
+                            $slip_no = $value['slip_no'];
+                            $calculate = $cart->slipOrder($slip_no);
+                            $selling_price = 0;
+                            $charge = 0;
+                            foreach($calculate as $data){
+                                $selling_price += $data['sellingprice'];
+                                $charge += $data['charge'];
+                            }
+                            $total_price = $selling_price + $charge;
                     ?>
-             
-                    <tr>
-                        <td><?php echo $i+=1; ?></td>                    
-                        <td><?php echo $value['slip_no']; ?></td>
-                        <td><?php echo $value['cus_name']; ?></td>
-                        <td><?php echo $value['order_at']; ?></td>
-                        <td><?php echo $value['delivery_at']; ?></td>
-                    </tr>
-                    <?php } } ?>
-                </tbody>
-            </table>
-        </div>
-        <div class="card-footer"></div>
+
+                    <thead id="<?php echo $i; ?>" class="thead-light">
+                        <tr>
+                            <td><?php echo $i; ?></td>                    
+                            <td><strong>Slip No: <?php echo $slip_no; ?></strong></td>
+                            <td><strong>Order at: </strong><?php echo $value['order_at']; ?></td>
+                            <td><strong>Delivery at: </strong><?php echo $value['delivery_at']; ?></td>
+                            <td><strong>Total Payment: </strong><?= $total_price; ?> BDT</td>
+                        </tr>    
+                        
+                    </thead>
+
+                    <tbody id="panel<?php echo $i; ?>">
+                        <tr>
+                            <th width="5%">Order No.</th>
+                            <th width="20%">Customer Name</th>
+                            <th width="20%">Measurement Details</th>
+                            <th width="20%">Cloth Name</th>  
+                            <th width="20%">Quantity</th>  
+                        </tr>
+                            <?php
+                                $orders = $cart->slipOrder($slip_no);
+                                foreach($orders as $order){                     
+                            ?>
+                        <tr>
+                            <td><?php echo $order['orderid']; ?></td>
+                            <td><?php echo $order['cus_name']; ?></td>
+                            <td><?php echo $order['measurement_details']; ?></td>
+                            <td><?php echo $order['cloth_name']; ?></td>
+                            <td><?php echo $order['quantity']; ?></td>
+                        </tr>
+                            <?php } ?>
+                    </tbody>
+
+    <!-- jQuery Library -->
+    <script src="js\jquery.min.js"></script>
+        <script type="text/javascript"> 
+            $(document).ready(function(){
+                $("#panel<?php echo $i; ?>").hide();
+                $("#<?php echo $i; ?>").click(function(){
+                    $("#panel<?php echo $i; ?>").fadeToggle("slow");
+                    $("#panel<?php echo $i-1; ?>").hide();
+                });
+            });
+        </script>
+    <!-- jQuery Library -->
+    
+                <?php } } ?>
+                </table>
+            </div>
+            <div class="card-footer"></div>
         </div>
       </div>   
-    </div>  
-           
-    </div>
+    </div>         
 </div>
 <!---Container Fluid-->
 <?php include 'layouts/footer.php';?>

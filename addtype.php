@@ -1,8 +1,8 @@
 <?php include 'layouts/header.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $addType = $cloth->insertType($_POST);
-}
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $addType = $cloth->insertType($_POST);
+  }
 
 ?>
 <!-- Container Fluid-->
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </div>
 
   <div class="row">
-      <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
     <div class="col-lg-8">
       <!-- Form Basic -->
       <div class="card mb-4">
@@ -25,18 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <h6 class="m-0 font-weight-bold text-primary">Add Cloth Type</h6>
         </div>
         <?php 
-        if (isset($addType)){
-            echo $addType;
-        }  
+          if (isset($addType)){
+              echo $addType;
+          }  
         ?>
         <div class="card-body">
           <form action="" method="POST">
+            
             <div class="form-group">
               <label>Cloth Type</label>
               <input name="name" type="text" class="form-control" placeholder="Enter Cloth Type">
             </div>
           
             <button type="submit" class="btn btn-primary">Submit</button>
+
           </form>
         </div>
       </div>
@@ -45,5 +47,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <!---Container Fluid-->
-
 <?php include 'layouts/footer.php';?>

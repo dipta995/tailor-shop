@@ -1,8 +1,9 @@
 <?php include 'layouts/header.php';
  
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $adduser = $create->insertUser($_POST);
-}
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $adduser = $create->insertUser($_POST);
+  }
+
 ?>
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
@@ -16,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </div>
 
   <div class="row">
-      <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
     <div class="col-lg-8">
       <!-- Form Basic -->
       <div class="card mb-4">
@@ -24,16 +25,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <h6 class="m-0 font-weight-bold text-primary">Create Admin</h6>
         </div>
         <?php 
-        if (isset($adduser)){
-            echo $adduser;
-        }  
+          if (isset($adduser)){
+              echo $adduser;
+          }  
         ?>
         <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
+
             <div class="form-group">
               <label>Name</label>
               <input name="name" type="text" class="form-control" placeholder="Enter admin name">
             </div>
+
             <div class="form-group">
               <label>Email</label>
               <input name="email" type="email" class="form-control" placeholder="Enter email address" >
@@ -62,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
           
             <button type="submit" class="btn btn-primary">Submit</button>
+            
           </form>
         </div>
       </div>

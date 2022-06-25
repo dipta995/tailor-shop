@@ -2,7 +2,7 @@
  
 if(isset($_GET['delemp'])){
     $delemp = $_GET['delemp'];
-    $delete = $pack->removeEmp($delemp);
+    $delete = $emp->removeEmp($delemp);
 	echo $delete;
 	
 }
@@ -26,30 +26,23 @@ if(isset($_GET['delemp'])){
                 <h6 class="m-0 font-weight-bold text-primary">All Employee</h6>
             </div>
             <div class="table-responsive">
-                <div>
-                    <?php 
-                        // if(isset($delete)){
-                        //     echo $delete;
-                        // }
-                    ?>
-                </div>
                 <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                     <tr>
                         <th>ID</th>
-                        <th>Employee Name</th>
-                        <th>Ratting</th>
+                        <th>Employee</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Position||Joning Date</th>
-                        <th>Salary <br></th>
+                        <th>Position</th>
+                        <th>Joined</th>
+                        <th>Salary</th>
                         <th>Address</th>
                         <th>Image</th>
-                        <th></th>
-                        <th></th>
+                        <th>Action</th>
+                        <th>Pay</th>
                     </tr>
                 </thead>
-                </thead>
+               
                 <tbody>
                     <?php
                         $i = 0;
@@ -59,41 +52,25 @@ if(isset($_GET['delemp'])){
                     <tr>
                         <td><?php echo $value['emp_id']; ?></td>
                         <td><?php echo $value['emp_name']; ?></td>
-                        <td><?php 
-               
-                
-               if ($value['total_rat'] ==NULL || $value['hit'] ==NULL) {
-                  for ($i=0; $i < 5; $i++) { 
-                      echo '<span style="color:#444;" class="fa fa-star"></span>';
-                      }
-              }else{ $count = round($value['total_rat']/$value['hit']);
-                  for ($i=0; $i < $count; $i++) { 
-                      echo '<span style="color: orange;" class="fa fa-star checked"></span>';
-                      }
-                      for ($i=0; $i < 5- $count; $i++) { 
-                       echo '<span style="color:#444;" class="fa fa-star"></span>';
-                      }
-              }?>
-              <style>
-              .checked {
-                color: orange;
-              }
-              </style></td>
+
                         <td><?php echo $value['emp_email']; ?></td>
                         <td><?php echo $value['emp_phone']; ?></td>
-                        <td><?php echo $value['emp_job_status']."||". date("F j, Y, g:i a", strtotime($value['create_emp'])); ?> </td>
+                        <td><?php echo $value['emp_job_status']; ?> </td>
+                        <td><?php echo $fm->formatDate($value['create_emp']); ?></td>
                         <td><?php echo $value['emp_salary']; ?> Taka</td>
                         <td><?php echo $value['emp_address']; ?> </td>
                         <td><img style="height: 60px; width: 60px;" src="<?php echo $value['emp_image']; ?>" alt=""> </td>
-                        <?php  if ($status==0) { ?>
+                       
                         <td>
                             <a href="edit_employee.php?empid=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-info">Edit</a>
-                            <a href="?delemp=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
+                            <a onclick="return confirm('Are you sure to Delete?');" href="?delemp=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
                         </td>
-                        <?php } ?>
+                       
                         <?php
                         $s = $emp->salaraycheck( $value['emp_id']);
-                        if ($s>0) { echo "<td><p style='color:green;'>Paid</p> </td>"; }else{
+                        if ($s>0){
+                             echo "<td><p class='btn btn-sm btn-success'>Paid</p></td>"; 
+                        }else{
                       ?>
                         <td><a href="payemployee.php?salid=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-danger">Pay</a></td> <?php } ?>
                     </tr>

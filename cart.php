@@ -1,23 +1,21 @@
 <?php 
 include 'layouts/header.php';
  
-if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['add_to_cart'])) {
-    $addCart = $cart->insertCart($_POST);
-}
+  if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['add_to_cart'])) {
+      $addCart = $cart->insertCart($_POST);
+  }
 
-if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['send_to_order'])) {
-    $addOrder = $cart->insertOrder($_POST);
-}
+  if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['send_to_order'])) {
+      $addOrder = $cart->insertOrder($_POST);
+  }
 ?>
 
-
 <?php
-if(isset($_GET['delCart'])){
-  $delCart = $_GET['delCart'];
-  $delete = $cart->deleteCart($delCart);
-  echo $delete;
-
-}
+  if(isset($_GET['delCart'])){
+    $delCart = $_GET['delCart'];
+    $delete = $cart->deleteCart($delCart);
+    echo $delete;
+  }
 ?>
 
 <!-- jQuery Library -->
@@ -157,24 +155,24 @@ if(isset($_GET['delCart'])){
             <tbody>
                   
               <?php
-                  $i = 0;
-                  $view = $cart->viewCart();
-                  if($view->num_rows > 0){
-                  foreach($view as $value){
+                $i = 0;
+                $view = $cart->viewCart();
+                if($view->num_rows > 0){
+                foreach($view as $value){
               ?>
               <tr>
-                  <td><?php echo $i+=1; ?></td>  
-                  <td><?php echo $value['cus_name']; ?></td>
-                  <td><?php echo $value['measurement_for']; ?></td>          
-                  <td><?php echo $value['cloth_name']; ?></td>
-                  <td><?php echo $value['buying_price']; ?> BDT</td>
-                  <td><?php echo $value['selling_price']; ?> BDT</td>
-                  <td><?php echo $value['charge']; ?> BDT</td>
-                  <td><?php echo $value['quantity']; ?></td>
-                  </td>                    
-                  <td>
-                    <a onclick="return confirm('Are you sure to Delete?');" href="?delCart=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
-                  </td>
+                <td><?php echo $i+=1; ?></td>  
+                <td><?php echo $value['cus_name']; ?></td>
+                <td><?php echo $value['measurement_for']; ?></td>          
+                <td><?php echo $value['cloth_name']; ?></td>
+                <td><?php echo $value['buying_price']; ?> BDT</td>
+                <td><?php echo $value['selling_price']; ?> BDT</td>
+                <td><?php echo $value['charge']; ?> BDT</td>
+                <td><?php echo $value['quantity']; ?></td>
+                </td>                    
+                <td>
+                  <a onclick="return confirm('Are you sure to Delete?');" href="?delCart=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
+                </td>
               </tr>
               <?php } } ?>
             </tbody>
@@ -208,7 +206,7 @@ if(isset($_GET['delCart'])){
           </table>
         </div>
       </div>
-        <div class="card-footer"></div>
+      <div class="card-footer"></div>
     </div>
   </div>
 </div>

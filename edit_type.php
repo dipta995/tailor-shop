@@ -1,14 +1,14 @@
 <?php include 'layouts/header.php';
  
-$typeid = "";
-if($_GET['typeid']==NULL || !isset($_GET['typeid'])){
-	"<script>window.location = 'typelist.php'; </script>"; 
-}else{
-	$typeid = $_GET['typeid'];
-}
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $updateType = $cloth->updateType($_POST, $typeid);
-}
+  $typeid = "";
+  if($_GET['typeid']==NULL || !isset($_GET['typeid'])){
+    "<script>window.location = 'typelist.php'; </script>"; 
+  }else{
+    $typeid = $_GET['typeid'];
+  }
+  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $updateType = $cloth->updateType($_POST, $typeid);
+  }
 ?>
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   </div>
 
   <div class="row">
-      <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
     <div class="col-lg-8">
       <!-- Form Basic -->
       <div class="card mb-4">
@@ -30,9 +30,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           <h6 class="m-0 font-weight-bold text-primary">Update Cloth Type</h6>
         </div>
         <?php
-            if(isset($updateType)){
-                echo $updateType;
-            }
+          if(isset($updateType)){
+              echo $updateType;
+          }
         ?>
         <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
@@ -47,6 +47,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
  
             <?php } } ?>
+            
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>

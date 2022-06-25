@@ -1,11 +1,11 @@
 <?php include 'layouts/header.php';
  
-$userid = "";
-if($_GET['userid']==NULL || !isset($_GET['userid'])){
-	"<script>window.location = 'users.php'; </script>"; 
-}else{
-	$userid = $_GET['userid'];
-}
+  $userid = "";
+  if($_GET['userid']==NULL || !isset($_GET['userid'])){
+    "<script>window.location = 'users.php'; </script>"; 
+  }else{
+    $userid = $_GET['userid'];
+  }
 ?>
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
@@ -19,7 +19,7 @@ if($_GET['userid']==NULL || !isset($_GET['userid'])){
   </div>
 
   <div class="row">
-      <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
     <div class="col-lg-8">
       <!-- Form Basic -->
       <div class="card mb-4">
@@ -44,10 +44,12 @@ if($_GET['userid']==NULL || !isset($_GET['userid'])){
               <label>Name</label>
               <input readonly name="name" type="text" class="form-control" value="<?php echo $value['name'];?>">
             </div>
+
             <div class="form-group">
               <label>Email</label>
               <input readonly name="email" type="email" class="form-control" value="<?php echo $value['email'];?>">
             </div>
+
             <div class="form-group">
               <label>Phone</label>
               <input readonly name="phone" type="text" class="form-control" value="<?php echo $value['phone'];?>">
@@ -69,7 +71,6 @@ if($_GET['userid']==NULL || !isset($_GET['userid'])){
               ?> 
               </div>              
             </div>
-
             <?php } } ?>
             <button type="submit" class="btn btn-primary">OK</button>
           </form>

@@ -5,7 +5,6 @@ if(isset($_GET['deluser'])){
     $delete = $create->deleteUser($deluser);
 	  echo $delete;	
 }
-
 ?>
 
 <!-- Container Fluid-->
@@ -23,64 +22,64 @@ if(isset($_GET['deluser'])){
         <div class="col-lg-12 mb-4">
             <!-- Simple Tables -->
             <div class="card">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Admin Details</h6>
-            </div>
-            <div class="table-responsive">
-                <div>
-                    <?php 
-                        if(isset($delete)){
-                            echo $delete;
-                        }
-                    ?>
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Admin Details</h6>
                 </div>
-                <table class="table align-items-center table-flush">
-                <thead class="thead-light">
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th> 
-                        <th>Phone</th>
-                        <th>Role</th>  
-                        <th width="20%">Action</th>
-                    </tr>
-                </thead>
-                </thead>
-                <tbody>
-                    <?php
-                        $i = 0;
-                        $view = $create->userList();
-                        foreach($view as $value){
-                    ?>
-                    <tr>
-                        <td><?php echo $i+=1; ?></td>
-                        <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['email']; ?></td>
-                        <td><?php echo $value['phone']; ?></td>
-                        <td>
+                <div class="table-responsive">
+                    <div>
                         <?php 
-                            if($value['role'] == '0'){
-                                echo "Super Admin";
-                            } elseif($value['role'] == '1'){
-                                echo "Admin";
-                            } elseif($value['role'] == '2'){
-                                echo "Employee";
-                            } else{
-                                echo "Role Not found!";
+                            if(isset($delete)){
+                                echo $delete;
                             }
                         ?>
-                        </td>
-                        
-                        <td>
-                            <a href="viewuser.php?userid=<?php echo $value['id'] ;?>" class="btn btn-sm btn-info">View</a>
-                            <a onclick="return confirm('Are you sure to Delete?');" href="?deluser=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                    <?php } ?>
-                </tbody>
-                </table>
-            </div>
-            <div class="card-footer"></div>
+                    </div>
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th> 
+                                <th>Phone</th>
+                                <th>Role</th>  
+                                <th width="20%">Action</th>
+                            </tr>
+                        </thead>
+                   
+                        <tbody>
+                            <?php
+                                $i = 0;
+                                $view = $create->userList();
+                                foreach($view as $value){
+                            ?>
+                            <tr>
+                                <td><?php echo $i+=1; ?></td>
+                                <td><?php echo $value['name']; ?></td>
+                                <td><?php echo $value['email']; ?></td>
+                                <td><?php echo $value['phone']; ?></td>
+                                <td>
+                                <?php 
+                                    if($value['role'] == '0'){
+                                        echo "Super Admin";
+                                    } elseif($value['role'] == '1'){
+                                        echo "Admin";
+                                    } elseif($value['role'] == '2'){
+                                        echo "Employee";
+                                    } else{
+                                        echo "Role Not found!";
+                                    }
+                                ?>
+                                </td>
+                                
+                                <td>
+                                    <a href="viewuser.php?userid=<?php echo $value['id'] ;?>" class="btn btn-sm btn-info">View</a>
+                                    <a onclick="return confirm('Are you sure to Delete?');" href="?deluser=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer"></div>
             </div>
         </div>
     </div>

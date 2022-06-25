@@ -1,8 +1,6 @@
 <?php
-   include_once 'Classes/CartClass.php';
-   $cart = new CartClass();
-
-
+    include_once 'Classes/CartClass.php';
+    $cart = new CartClass();
     $cus_id = $_POST["cus_id"];
     
     //fetch measurement data based on the specific customer
@@ -14,10 +12,9 @@
         while ($row = $result->fetch_assoc()) {
             echo '<option value='.$row['id'].'>'.$row['measurement_for'].'</option>';
         }
-    } else{
+    } else {
         echo '<option value="">Measurement not available</option>';
     }
-
 ?>
 
     
