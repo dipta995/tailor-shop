@@ -70,9 +70,12 @@ if(isset($_GET['delemp'])){
                         $s = $emp->salaraycheck( $value['emp_id']);
                         if ($s>0){
                              echo "<td><p class='btn btn-sm btn-success'>Paid</p></td>"; 
-                        }else{
-                      ?>
-                        <td><a href="payemployee.php?salid=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-danger">Pay</a></td> <?php } ?>
+                        } else {
+                        ?>
+                        <td>
+                            <a href="payemployee.php?salid=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-danger">Pay</a>
+                        </td> 
+                        <?php } ?>
                     </tr>
                     <?php } ?>
                 </tbody>

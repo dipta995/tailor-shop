@@ -1,4 +1,10 @@
-<?php include 'layouts/header.php'; ?>
+<?php include 'layouts/header.php'; 
+if(isset($_GET['delorder'])){
+    $delorder = $_GET['delorder'];
+    $delete = $cart->deleteOrder($delorder);
+	echo $delete;	
+}
+?>
 
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
@@ -51,8 +57,7 @@
             </div>
 
             <div class="table-responsive">
-                <table class="table align-items-center table-flush">
-                    
+                <table class="table align-items-center table-flush">                
                     <?php
                         $i = 0;
                         $view = $cart->viewSlip();
@@ -77,13 +82,22 @@
                             <td><strong>Order at: </strong><?php echo $value['order_at']; ?></td>
                             <td><strong>Delivery at: </strong><?php echo $value['delivery_at']; ?></td>
                             <td><strong>Total Payment: </strong><?= $total_price; ?> BDT</td>
+                            <?php
+                            $s = $cart->orderCheck($value['slip_no']);
+                            if ($s>0) { echo "<td><p style='color:green;'>Confirmed</p></td>"; } else{
+                            ?>
+                            
+                            <td>
+                                <a href="?delorder=<?php echo $value['slip_no'] ;?>" class="btn btn-sm btn-danger">Confirm</a>
+                            </td> 
+                            <?php } ?>
                         </tr>    
                         
                     </thead>
 
                     <tbody id="panel<?php echo $i; ?>">
                         <tr>
-                            <th width="5%">Order No.</th>
+                            <th width="10%">Order No.</th>
                             <th width="20%">Customer Name</th>
                             <th width="20%">Measurement Details</th>
                             <th width="20%">Cloth Name</th>  

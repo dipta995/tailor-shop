@@ -74,7 +74,7 @@ class CartClass extends DB
         LEFT JOIN tbl_customer ON tbl_cart.cus_id = tbl_customer.cus_id
         LEFT JOIN tbl_measurement ON tbl_cart.mes_id =  tbl_measurement.id
         LEFT JOIN tbl_cloth ON tbl_cart.cloth_id = tbl_cloth.id
-        where tbl_cart.soft_delete=0";
+        WHERE tbl_cart.soft_delete=0";
         $result = $this->conn->query($query);
         return $result;
     }
@@ -92,7 +92,7 @@ class CartClass extends DB
         LEFT JOIN tbl_customer ON tbl_order.cus_id = tbl_customer.cus_id
         LEFT JOIN tbl_measurement ON tbl_order.mes_id = tbl_measurement.id
         LEFT JOIN tbl_cloth ON tbl_order.cloth_id = tbl_cloth.id
-        WHERE slip_no = $slip_no";    
+        WHERE slip_no = $slip_no AND tbl_order.soft_delete=0";    
         $result = $this->conn->query($query);
         return $result;
     }
@@ -137,5 +137,21 @@ class CartClass extends DB
         return $result;
     }
     
+    public function deleteOrder($id){        
+        $query = "UPDATE tbl_order
+                SET
+                soft_delete      = '1'
+                WHERE slip_no    = $id";
+        $result = $this->conn->query($query);
+        if($result === TRUE){
+            $txt = "<div class='alert alert-success'>Delivery Successful !</div>";
+            return $txt;
+        }
+    }
+
+    public function orderCheck($slip_no){
+        $result = $this->conn->query("SELECT * FROM tbl_order WHERE slip_no = '$slip_no' && soft_delete = 1");
+        return mysqli_num_rows($result);
+    }
             
 }

@@ -170,7 +170,8 @@ class EmployeeClass extends DB
             WHERE emp_id           = '$empid'";
             $result = $this->conn->query($qry);
             if($result){              
-                return "<script>window.location='employee_list.php';</script>";
+                $txt = "<div class='alert alert-success'>Updated Successfully!</div>";  
+                return $txt;  
             }
         } else {
             $qry = "UPDATE employee_table 
@@ -187,7 +188,8 @@ class EmployeeClass extends DB
             
             if($result){
                 move_uploaded_file($file_temp, $move_image);
-                return "<script>window.location='employee_list.php';</script>";
+                $txt = "<div class='alert alert-success'>Updated Successfully!</div>";  
+                return $txt; 
             }
         }
     }
