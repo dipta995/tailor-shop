@@ -40,7 +40,7 @@
 
             <div class="form-group">
               <label>Cloth Type</label><br>
-              <select id="select" name="type">
+              <select id="select" name="type" class="form-control">
                 <option>Select Type</option>
                 <?php
                   $query = "select * from cloth_type where soft_delete=0";

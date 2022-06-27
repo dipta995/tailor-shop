@@ -1,8 +1,15 @@
-<?php include 'layouts/header.php'; 
+<?php include 'layouts/header.php';
+ 
+  $userid = "";
+  if($_GET['userid']==NULL || !isset($_GET['userid'])){
+    "<script>window.location = 'users.php'; </script>"; 
+  }else{
+    $userid = $_GET['userid'];
+  }
 
-if (isset($_POST['submit'])) {
-    echo "<script> window.location='users.php'; </script>";
-}
+  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $updateAdmin = $create->updateAdmin($_POST, $userid);
+  }
 ?>
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
@@ -24,11 +31,16 @@ if (isset($_POST['submit'])) {
           <h6 class="m-0 font-weight-bold text-primary">Admin Profile</h6>
           </div>
           <div>
-
+          <?php
+            if(isset($updateAdmin)){
+                echo $updateAdmin;
+            }
+          ?>
+        </div>
         <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
             <?php
-                $query = "select * from tbl_admin where id='$id'";
+                $query = "select * from tbl_admin where id = '$userid'";
                 $view = $create->select($query);
                 if ($view) {
                     while($value = $view->fetch_assoc()){
@@ -36,12 +48,12 @@ if (isset($_POST['submit'])) {
             
             <div class="form-group">
               <label>First Name</label>
-              <input readonly name="first_name" type="text" class="form-control" value="<?php echo $value['first_name'];?>">
+              <input name="first_name" type="text" class="form-control" value="<?php echo $value['first_name'];?>">
             </div>
 
             <div class="form-group">
               <label>Last Name</label>
-              <input readonly name="last_name" type="text" class="form-control" value="<?php echo $value['last_name'];?>">
+              <input name="last_name" type="text" class="form-control" value="<?php echo $value['last_name'];?>">
             </div>
 
             <div class="form-group">
@@ -53,7 +65,7 @@ if (isset($_POST['submit'])) {
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">+8801</span>
               </div>
-              <input readonly value="<?php echo substr($value['phone'],5); ?>" type="number" min=0 class="form-control" placeholder="" name="phone" aria-label="Username" aria-describedby="basic-addon1">
+              <input value="<?php echo substr($value['phone'],5); ?>" type="number" min=0 class="form-control" placeholder="" name="phone" aria-label="Username" aria-describedby="basic-addon1">
             </div>
 
             <div class="form-group">
@@ -73,7 +85,7 @@ if (isset($_POST['submit'])) {
               </div>              
             </div>
             <?php } } ?>
-            <button type="submit" name="submit" class="btn btn-primary">OK</button>
+            <button type="submit" class="btn btn-primary">Update</button>
           </form>
         </div>
       </div>

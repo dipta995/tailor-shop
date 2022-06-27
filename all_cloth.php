@@ -26,11 +26,11 @@
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Existing Cloth</h6>
             </div>
-            <div class="table-responsive">
-                <table class="table align-items-center table-flush">
+            <div class="table-responsive p-3">
+                <table class="table align-items-center table-flush" id="dataTable">
                     <thead class="thead-light">
                         <tr>
-                            <th>#</th>
+                            <th>SL No.</th>
                             <th>Name</th>
                             <th>Details</th> 
                             <th>Image</th>
@@ -40,7 +40,7 @@
                             <th>Brand</th>
                             <th>Buying</th>
                             <th>Selling</th>
-                            <th>Discount <br></th>
+                            <th>Discount</th>
                             <th>Action</th>
                         </tr>
                     </thead>

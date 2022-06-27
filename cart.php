@@ -68,7 +68,7 @@ include 'layouts/header.php';
             $result = $cart->select($query);
           ?>
             <!-- Customer Drop-Down -->
-            <select id="cus_id" name="cus_id">
+            <select id="cus_id" name="cus_id" class="form-control">
                 <option value="">Select Customer</option>
                 <?php
                 if($result->num_rows > 0){
@@ -87,15 +87,15 @@ include 'layouts/header.php';
         <label>Measurement For</label><br> 
 
             <!-- Measurement Drop-Down -->
-            <select id="mes_id" name="mes_id">
+            <select id="mes_id" name="mes_id" class="form-control">
                 <option value="">Select Customer Name</option>          
             </select>
         </div>
 
 
         <div class="form-group">
-          <label for="standard-select">Cloth Name</label><br>
-          <select id="standard-select" name="cloth_id" >
+          <label>Cloth Name</label><br>
+          <select id="select" name="cloth_id" class="form-control">
             <option>Select Cloth</option>
             <?php
                 $query = "select * from tbl_cloth where soft_delete=0";
@@ -136,7 +136,7 @@ include 'layouts/header.php';
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Cart Items</h6>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive p-3">
           <table class="table align-items-center table-flush">           
             <thead class="thead-light">
               <tr>
@@ -184,7 +184,7 @@ include 'layouts/header.php';
               <form action="" method="post">
                 <div class="form-group">
                   <label>Customer Name</label><br>
-                  <select id="select" name="cus_id">
+                  <select id="select" name="cus_id" class="form-control">
                     <option>Select Customer</option>
                     <?php
                         $query = "select * from tbl_customer where soft_delete=0";
@@ -199,7 +199,7 @@ include 'layouts/header.php';
 
                   <label>Delivery Date</label>
                   <input name="delivery_at" type="date" class="form-control">     
-              <hr>
+                  <hr>
                   <button name="send_to_order" type="submit" class="btn btn-primary">Order</button>
               </form>
             </tbody>
@@ -210,26 +210,5 @@ include 'layouts/header.php';
     </div>
   </div>
 </div>
-
-<style>
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-:root {
-  --select-arrow: var(--select-border);
-}
-
-select {
-  border: 2px;
-  width: 100%;
-  background-color: #EAECF4;
-  font-family: inherit;
-  font-size: 18px;
-  cursor: inherit;
-}
-</style>
 
 <?php include 'layouts/footer.php';?>

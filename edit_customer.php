@@ -42,7 +42,7 @@
                     while($value = $view->fetch_assoc()){
             ?>
             <div class="form-group">
-              <label>Customer Name</label>
+              <label>Name</label>
               <input name="cus_name" value="<?php echo $value['cus_name']?>" type="text" class="form-control" >
             </div>
 

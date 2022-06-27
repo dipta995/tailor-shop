@@ -1,4 +1,6 @@
-<?php include 'layouts/header.php'; 
+<?php 
+include 'layouts/header.php'; 
+
 if(isset($_GET['delorder'])){
     $delorder = $_GET['delorder'];
     $delete = $cart->deleteOrder($delorder);
@@ -16,8 +18,8 @@ if(isset($_GET['delorder'])){
     </ol>
     </div>
     <div class="row">
-        <div class="col-lg-6 mb-4">
-            <div class="table-responsive">
+        <div class="col-lg-12 mb-4">
+            <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                     <tr>
@@ -48,6 +50,14 @@ if(isset($_GET['delorder'])){
         </div>
     </div>
 
+    <!-- Search box. -->
+    <form action="order.php" method="GET">
+        <input type="text" name="search" required>
+        <input type="submit" value="Search">
+    </form>
+
+
+<hr>
     <div class="row">
       <div class="col-lg-12 mb-4">
         <!-- Simple Tables -->
@@ -56,11 +66,18 @@ if(isset($_GET['delorder'])){
                 <h6 class="m-0 font-weight-bold text-primary">Order List</h6>
             </div>
 
-            <div class="table-responsive">
-                <table class="table align-items-center table-flush">                
+            <div class="table-responsive p-3">
+                <table class="table align-items-center table-flush" id="dataTable">                
                     <?php
                         $i = 0;
-                        $view = $cart->viewSlip();
+                        if(isset($_GET['search'])){
+                            $view = $cart->searchSlipResult($_GET['search']);
+                            
+                        }else{
+
+                            $view = $cart->viewSlip();
+                        }
+
                         if($view->num_rows > 0){
                             foreach($view as $value){
                             $i++;

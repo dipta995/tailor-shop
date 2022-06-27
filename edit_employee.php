@@ -8,7 +8,7 @@
   $value = mysqli_fetch_array($view);
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $createPackage = $emp->updateEmployee($_POST,$_FILES);
+      $updateEmployee = $emp->updateEmployee($_POST,$_FILES);
   }
 ?>
 <!-- Container Fluid-->
@@ -31,14 +31,14 @@
           <h6 class="m-0 font-weight-bold text-primary">Update Employee</h6>
         </div>
         <?php 
-          if (isset($createPackage)){
-            echo $createPackage;
+          if (isset($updateEmployee)){
+            echo $updateEmployee;
           }  
         ?>
         <div class="card-body" >
           <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
-              <label>Employee Name</label>
+              <label>Name</label>
               <input name="emp_name" value="<?php echo $value['emp_name']?>" type="text" class="form-control" >
               <input name="emp_id" value="<?php echo $empid; ?>" type="hidden" class="form-control" >
             </div>
@@ -67,7 +67,7 @@
 
             <div class="form-group">
               <label>Salary</label>
-              <input name="emp_salary" value="<?php echo $value['emp_salary']?>" type="text" class="form-control" placeholder="Enter Salary">
+              <input name="emp_salary" value="<?php echo $value['emp_salary']?>" type="number" min="10000" class="form-control" placeholder="Enter Salary">
             </div>
 
             <div class="form-group">

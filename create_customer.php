@@ -21,7 +21,7 @@
       <!-- Form Basic -->
       <div class="card mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6 class="m-0 font-weight-bold text-primary">Create Customer</h6>
+          <h6 class="m-0 font-weight-bold text-primary">Add New Customer</h6>
         </div>
         <?php 
           if (isset($addCustomer)){
@@ -31,8 +31,8 @@
         <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
               <div class="form-group">
-                <label>Customer Name</label>
-                <input name="cus_name" type="text" class="form-control" >
+                <label>Name</label>
+                <input name="cus_name" type="text" class="form-control" placeholder="Enter name" >
               </div>
 
               <div class="form-group">

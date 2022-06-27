@@ -1,7 +1,7 @@
 <?php include 'layouts/header.php';
  
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $adduser = $create->insertUser($_POST);
+      $adduser = $create->insertAdmin($_POST);
   }
 
 ?>
@@ -33,8 +33,13 @@
           <form method="POST" enctype="multipart/form-data">
 
             <div class="form-group">
-              <label>Name</label>
-              <input name="name" type="text" class="form-control" placeholder="Enter admin name">
+              <label>First Name</label>
+              <input name="first_name" type="text" class="form-control" placeholder="Enter first name">
+            </div>
+            
+            <div class="form-group">
+              <label>Last Name</label>
+              <input name="last_name" type="text" class="form-control" placeholder="Enter last name">
             </div>
 
             <div class="form-group">
@@ -44,7 +49,7 @@
 
             <div class="form-group">
               <label>Password</label>
-              <input name="password" type="text" class="form-control" placeholder="Enter admin password" >
+              <input name="password" type="text" class="form-control" placeholder="Enter password" >
             </div>
 
             <div class="input-group mb-3">
@@ -56,7 +61,7 @@
 
             <div class="form-group">
               <label>Admin Role</label><br>
-              <select id="select" name="role">
+              <select id="select" name="role" class="form-control">
                 <option>Select Admin Role</option>
                 <option value="0">Super Admin</option>
                 <option value="1">Admin</option>

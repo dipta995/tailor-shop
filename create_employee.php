@@ -7,7 +7,7 @@
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Add New Employee</h1>
+    <h1 class="h3 mb-0 text-gray-800">Create Employee</h1>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.php">Home</a></li>
       <li class="breadcrumb-item">Employee</li>
@@ -31,7 +31,7 @@
         <div class="card-body" >
           <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
-              <label>Employee Name</label>
+              <label>Name</label>
               <input name="emp_name" type="text" class="form-control" >
             </div>
 
@@ -58,7 +58,7 @@
 
             <div class="form-group">
               <label>Salary</label>
-              <input name="emp_salary" type="text" class="form-control" placeholder="Enter Salary">
+              <input name="emp_salary" type="number" min="10000" class="form-control" placeholder="Enter Salary">
             </div>
 
             <div class="form-group">

@@ -22,7 +22,7 @@
       <!-- Form Basic -->
       <div class="card mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6 class="m-0 font-weight-bold text-primary">Add Cloth Type</h6>
+          <h6 class="m-0 font-weight-bold text-primary">New Cloth Type</h6>
         </div>
         <?php 
           if (isset($addType)){

@@ -23,14 +23,14 @@ if(isset($_GET['delemp'])){
             <!-- Simple Tables -->
             <div class="card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">All Employee</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
             </div>
-            <div class="table-responsive">
-                <table class="table align-items-center table-flush">
+            <div class="table-responsive p-3">
+                <table class="table align-items-center table-flush" id="dataTable">
                 <thead class="thead-light">
                     <tr>
                         <th>ID</th>
-                        <th>Employee</th>
+                        <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Position</th>
@@ -38,8 +38,8 @@ if(isset($_GET['delemp'])){
                         <th>Salary</th>
                         <th>Address</th>
                         <th>Image</th>
-                        <th>Action</th>
                         <th>Pay</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                
@@ -52,30 +52,30 @@ if(isset($_GET['delemp'])){
                     <tr>
                         <td><?php echo $value['emp_id']; ?></td>
                         <td><?php echo $value['emp_name']; ?></td>
-
                         <td><?php echo $value['emp_email']; ?></td>
                         <td><?php echo $value['emp_phone']; ?></td>
                         <td><?php echo $value['emp_job_status']; ?> </td>
                         <td><?php echo $fm->formatDate($value['create_emp']); ?></td>
-                        <td><?php echo $value['emp_salary']; ?> Taka</td>
-                        <td><?php echo $value['emp_address']; ?> </td>
+                        <td><?php echo $value['emp_salary']; ?> BDT</td>
+                        <td><?php echo $fm->textShorten($value['emp_address'], 30); ?> </td>
                         <td><img style="height: 60px; width: 60px;" src="<?php echo $value['emp_image']; ?>" alt=""> </td>
                        
                         <td>
-                            <a href="edit_employee.php?empid=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-info">Edit</a>
-                            <a onclick="return confirm('Are you sure to Delete?');" href="?delemp=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
-                        </td>
-                       
-                        <?php
-                        $s = $emp->salaraycheck( $value['emp_id']);
-                        if ($s>0){
-                             echo "<td><p class='btn btn-sm btn-success'>Paid</p></td>"; 
-                        } else {
-                        ?>
-                        <td>
-                            <a href="payemployee.php?salid=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-danger">Pay</a>
+                            <?php
+                            $s = $emp->salaraycheck( $value['emp_id']);
+                            if ($s>0){
+                                echo "<p class='btn btn-sm btn-success'>Paid</p>"; 
+                            } else {
+                            ?>
+                            
+                            <a href="payemployee.php?salid=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-warning">Pay</a>                     
+                            <?php } ?>
                         </td> 
-                        <?php } ?>
+                        <td>
+                            <a href="edit_employee.php?empid=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-info">Edit</a>
+                            
+                            <a onclick="return confirm('Are you sure to Delete?');" href="?delemp=<?php echo $value['emp_id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
+                        </td>                       
                     </tr>
                     <?php } ?>
                 </tbody>

@@ -8,6 +8,7 @@ class CartClass extends DB
         $conn = $this->connect();
     }
 
+    // Insert Cart
     public function insertCart($data){
         $cus_id        = mysqli_real_escape_string($this->conn, $data['cus_id']);
         $mes_id        = mysqli_real_escape_string($this->conn, $data['mes_id']);
@@ -30,6 +31,7 @@ class CartClass extends DB
         }
     }
 
+    // Insert Order
     public function insertOrder($data){
         $customer_id = mysqli_real_escape_string($this->conn, $data['cus_id']); 
         $delivery_at = mysqli_real_escape_string($this->conn, $data['delivery_at']); 
@@ -69,6 +71,7 @@ class CartClass extends DB
         }
     }
 
+    // View Cart
     public function viewCart(){  
         $query = "SELECT * FROM tbl_cart 
         LEFT JOIN tbl_customer ON tbl_cart.cus_id = tbl_customer.cus_id
@@ -79,6 +82,7 @@ class CartClass extends DB
         return $result;
     }
 
+    // View Slip
     public function viewSlip(){  
         $query = "SELECT * FROM tbl_slip
         LEFT JOIN tbl_customer ON tbl_slip.customer_id = tbl_customer.cus_id
@@ -86,6 +90,15 @@ class CartClass extends DB
         $result = $this->conn->query($query);
         return $result;
     }    
+
+    public function searchSlipResult($search){
+        $str = mysqli_real_escape_string($this->conn, $search);
+        $query = "SELECT * FROM tbl_slip
+        LEFT JOIN tbl_customer ON tbl_slip.customer_id = tbl_customer.cus_id
+        WHERE tbl_slip.soft_delete=0 AND tbl_slip.slip_no LIKE '%$str%'";   
+        $result = $this->conn->query($query);
+        return $result;
+    }
 
     public function slipOrder($slip_no){
         $query = "SELECT tbl_order.*, tbl_customer.*, tbl_measurement.*, tbl_cloth.*, tbl_order.id AS orderid, tbl_order.selling_price AS sellingprice FROM tbl_order 

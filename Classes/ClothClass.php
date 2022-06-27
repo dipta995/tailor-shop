@@ -8,6 +8,7 @@ class ClothClass extends DB
         $conn = $this->connect();
     }
     
+    // Insert Cloth
     public function insertCloth($data){
         $cloth_name    = mysqli_real_escape_string($this->conn, $data['cloth_name']);
         $type          = mysqli_real_escape_string($this->conn, $data['type']);
@@ -50,12 +51,14 @@ class ClothClass extends DB
         }
     }
 
+    // View Type
     public function viewType(){
         $query = "SELECT * FROM cloth_type where soft_delete=0";
         $result = $this->conn->query($query);
         return $result;
     }
 
+    // View Cloth
     public function viewCloth(){
         $query  = "SELECT tbl_cloth.*, cloth_type.name FROM tbl_cloth INNER JOIN cloth_type ON 
         tbl_cloth.type = cloth_type.id WHERE tbl_cloth.soft_delete = 0 ORDER BY tbl_cloth.cloth_name";
@@ -63,6 +66,7 @@ class ClothClass extends DB
         return $result;
     }
 
+    // Delete Cloth
     public function deleteCloth($id){        
         $query = "UPDATE tbl_cloth
                 SET
@@ -70,16 +74,19 @@ class ClothClass extends DB
                 WHERE id     = $id";
         $result = $this->conn->query($query);
         if($result === TRUE){
-            echo $txt = "<div class='alert alert-success'>Successfully Deleted!</div>";
+            $txt = "<div class='alert alert-success'>Successfully Deleted!</div>";
+            return $txt;
         }
     }
 
+    // View Single Cloth
     public function viewSingleCloth($clothid){
         $query  = "SELECT * FROM tbl_cloth WHERE id='$clothid'";
         $result = $this->conn->query($query);
         return $result;
     }
 
+    // Update Type
     public function updateType($data, $typeid){
         $name = mysqli_real_escape_string($this->conn, $data['name']);
         if (empty($name)) {
@@ -87,24 +94,26 @@ class ClothClass extends DB
             return $txt;
         } else {
             $query = "UPDATE cloth_type
-                    SET 
-                    name     = '$name'          
-                    WHERE id = '$typeid'";
+            SET 
+            name     = '$name'          
+            WHERE id = '$typeid'";
 
-                    $result = $this->conn->query($query);
-                    if ($result) {
-                        $txt = "<div class='alert alert-success'>Successfully updated!</div>";
-                        return $txt;
-                    }
+            $result = $this->conn->query($query);
+            if ($result) {
+                $txt = "<div class='alert alert-success'>Successfully updated!</div>";
+                return $txt;
+            }
         }
     }
 
+    // View Single Type
     public function viewSingleType($typeid){
         $query  = "SELECT * FROM cloth_type WHERE id='$typeid'";
         $result = $this->conn->query($query);
         return $result;
     }
 
+    // Update Cloth
     public function updateCloth($data, $clothid){
         $cloth_name    = mysqli_real_escape_string($this->conn, $data['cloth_name']);
         $type          = mysqli_real_escape_string($this->conn, $data['type']);
@@ -159,23 +168,23 @@ class ClothClass extends DB
                 }
             } else {
                 $query = "UPDATE tbl_cloth
-                    SET 
-                    cloth_name      = '$cloth_name',
-                    type            = '$type',
-                    details         = '$details',
-                    stock           = '$stock',
-                    color           = '$color',
-                    brand           = '$brand',
-                    buying_price    = '$buying_price',
-                    selling_price   = '$selling_price',
-                    discount        = '$discount'
-                    WHERE id        = '$clothid' ";
-                    $result = $this->conn->query($query);
-                    if ($result) {
-                        $txt = "<div class='alert alert-success'>Successfully updated!</div>";
-                        return $txt;
-                    }
+                SET 
+                cloth_name      = '$cloth_name',
+                type            = '$type',
+                details         = '$details',
+                stock           = '$stock',
+                color           = '$color',
+                brand           = '$brand',
+                buying_price    = '$buying_price',
+                selling_price   = '$selling_price',
+                discount        = '$discount'
+                WHERE id        = '$clothid' ";
+                $result = $this->conn->query($query);
+                if ($result) {
+                    $txt = "<div class='alert alert-success'>Successfully updated!</div>";
+                    return $txt;
                 }
+            }
         }
     }
 
@@ -199,6 +208,7 @@ class ClothClass extends DB
         }
     } 
 
+    // Insert Cloth Type
     public function insertType($data){
         $name = mysqli_real_escape_string($this->conn, $data['name']);
 
@@ -215,6 +225,7 @@ class ClothClass extends DB
         }
     }
 
+    // Delete Cloth Type
     public function deleteType($id){        
         $query = "UPDATE cloth_type
                 SET
@@ -224,8 +235,6 @@ class ClothClass extends DB
         if($result === TRUE){
             echo $txt = "<div class='alert alert-success'>Successfully Deleted!</div>";
         }
-    }
-
-    
+    }    
 }
 ?>
