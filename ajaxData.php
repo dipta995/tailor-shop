@@ -3,10 +3,10 @@
     $cart = new CartClass();
     $cus_id = $_POST["cus_id"];
     
-    //fetch measurement data based on the specific customer
+    //fetch measurement data based on specific customer
     $result = $cart->selectAllMeasurement($cus_id);
 
-    //Generate HTML of state options list
+    //Generate HTML of measurement options list
     if($result->num_rows > 0){
         echo '<option value="">Select Measurement</option>';
         while ($row = $result->fetch_assoc()) {
