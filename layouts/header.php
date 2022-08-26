@@ -179,7 +179,6 @@
           <span>Order</span>
         </a>
       </li>
-<<<<<<< HEAD
 
       <!-- <li class="nav-item">
         <a class="nav-link" href="images.php">
@@ -194,8 +193,7 @@
           <span>Contact</span>
         </a>
       </li> -->
-=======
->>>>>>> cdb4b2e256810c43b4a84624c20790e51790276d
+
      
       <hr class="sidebar-divider">
       <div class="version" id="version-ruangadmin"></div>
