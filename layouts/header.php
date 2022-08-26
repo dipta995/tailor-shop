@@ -178,19 +178,19 @@ $fm = new Format();
         </a>
       </li>
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="images.php">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Image Galary</span>
         </a>
-      </li>
+      </li> -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="contact.php">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Contact</span>
         </a>
-      </li>
+      </li> -->
      
       <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"

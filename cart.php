@@ -15,6 +15,7 @@ include 'layouts/header.php';
     $delCart = $_GET['delCart'];
     $delete = $cart->deleteCart($delCart);
     echo $delete;
+    echo "<script>window.location='cart.php'</script>";
   }
 ?>
 
@@ -98,24 +99,18 @@ include 'layouts/header.php';
           <select id="standard-select" name="cloth_id" >
             <option>Select Cloth</option>
             <?php
-                $query = "select * from tbl_cloth where soft_delete=0";
+                $query = "select * from tbl_cloth where stock > 0 and soft_delete=0";
                 $clothid = $cart -> select($query);
                 if($clothid){
                     while($result = $clothid->fetch_assoc()){                             
             ?>
+            
             <option value="<?php echo $result['id'];?>"><?php echo $result['cloth_name'];?></option>
             <?php } } ?>
           </select>
         </div>
         
-        <div class="form-group">
-          <label>Buying Price</label>
-          <input name="buying_price" type="number" class="form-control" placeholder="Enter Buying Price">
-        </div>
-        <div class="form-group">
-          <label>Selling Price</label>
-          <input name="selling_price" type="number" class="form-control" placeholder="Enter Selling Price">
-        </div>
+       
         <div class="form-group">
           <label>Charge</label>
           <input name="charge" type="number" class="form-control" placeholder="Enter Charge">
@@ -148,6 +143,7 @@ include 'layouts/header.php';
                 <th>Selling Price</th> 
                 <th>Charge</th> 
                 <th>Quantity</th>
+                <th>Total</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -159,6 +155,7 @@ include 'layouts/header.php';
                 $view = $cart->viewCart();
                 if($view->num_rows > 0){
                 foreach($view as $value){
+                  $subtotal = ($value['selling_price'] * $value['quantity'])+ $value['charge'];
               ?>
               <tr>
                 <td><?php echo $i+=1; ?></td>  
@@ -169,9 +166,10 @@ include 'layouts/header.php';
                 <td><?php echo $value['selling_price']; ?> BDT</td>
                 <td><?php echo $value['charge']; ?> BDT</td>
                 <td><?php echo $value['quantity']; ?></td>
+                <td><?php echo $subtotal - (($subtotal*100)/$subtotal); ?> Taka</td>
                 </td>                    
                 <td>
-                  <a onclick="return confirm('Are you sure to Delete?');" href="?delCart=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
+                  <a onclick="return confirm('Are you sure to Delete?');" href="?delCart=<?php echo $value['cartid'] ;?>" class="btn btn-sm btn-danger">Delete</a>
                 </td>
               </tr>
               <?php } } ?>

@@ -12,17 +12,38 @@ class CartClass extends DB
         $cus_id        = mysqli_real_escape_string($this->conn, $data['cus_id']);
         $mes_id        = mysqli_real_escape_string($this->conn, $data['mes_id']);
         $cloth_id      = mysqli_real_escape_string($this->conn, $data['cloth_id']);
-        $buying_price  = mysqli_real_escape_string($this->conn, $data['buying_price']);
-        $selling_price = mysqli_real_escape_string($this->conn, $data['selling_price']);
+        $query  = "SELECT * FROM tbl_cloth WHERE id = $cloth_id";
+        $result = $this->conn->query($query);
+        $value = mysqli_fetch_array($result);
+        $buying_price  = $value['buying_price'];
+        $selling_price = $value['selling_price'];
+        $stock = $value['stock'];
+        $discount        =  $value['discount'];
         $charge        = mysqli_real_escape_string($this->conn, $data['charge']);
         $quantity      = mysqli_real_escape_string($this->conn, $data['quantity']);   
+
+       
+        
         
         if (empty($cus_id) || empty($mes_id) || empty($cloth_id) || empty($buying_price) || empty($selling_price) || empty($charge) || empty($quantity)) {
             $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
-        } else {
-            $query = "INSERT into tbl_cart(cus_id, mes_id, cloth_id, buying_price, selling_price, charge, quantity) values('$cus_id', '$mes_id', '$cloth_id', '$buying_price', '$selling_price', '$charge', '$quantity')";
+        } 
+
+        elseif (($stock-$quantity)<0) {
+            $txt = "<div class='alert alert-danger'>Out of Stock</div>";
+            return $txt;
+        }
+        
+        else {
+            $query = "INSERT into tbl_cart(cus_id, mes_id, cloth_id, buying_price, selling_price, charge, quantity,discount) values('$cus_id', '$mes_id', '$cloth_id', '$buying_price', '$selling_price', '$charge', '$quantity', '$discount')";
             $result = $this->conn->query($query);
+            $updatQquery = "UPDATE tbl_cloth
+            SET
+            stock  = $stock-$quantity
+            WHERE id     = $cloth_id";
+             $this->conn->query($updatQquery);
+
             if($result) {
                 $txt = "<div class='alert alert-success'>Data Inserted Successfully!</div>";
                 return $txt;
@@ -51,8 +72,9 @@ class CartClass extends DB
                 $selling_price = $value['selling_price'];
                 $charge        = $value['charge'];
                 $quantity      = $value['quantity'];
+                $discount      = $value['discount'];
 
-                $query = "INSERT into tbl_order(owner_id, cus_id, mes_id, cloth_id, buying_price, selling_price, charge, quantity, slip_no) values('$customer_id','$cus_id', '$mes_id', '$cloth_id', '$buying_price', '$selling_price', '$charge', '$quantity', '$time')";
+                $query = "INSERT into tbl_order(owner_id, cus_id, mes_id, cloth_id, buying_price, selling_price, charge, quantity, discount, slip_no) values('$customer_id','$cus_id', '$mes_id', '$cloth_id', '$buying_price', '$selling_price', '$charge', '$quantity', '$discount', '$time')";
                 $result = $this->conn->query($query);                 
             }     
         }
@@ -70,11 +92,10 @@ class CartClass extends DB
     }
 
     public function viewCart(){  
-        $query = "SELECT * FROM tbl_cart 
+        $query = "SELECT tbl_cart.*, tbl_customer.*, tbl_measurement.*, tbl_cloth.*, tbl_cart.buying_price AS buying_price, tbl_cart.selling_price AS selling_price, tbl_cart.id AS cartid FROM tbl_cart 
         LEFT JOIN tbl_customer ON tbl_cart.cus_id = tbl_customer.cus_id
         LEFT JOIN tbl_measurement ON tbl_cart.mes_id =  tbl_measurement.id
-        LEFT JOIN tbl_cloth ON tbl_cart.cloth_id = tbl_cloth.id
-        where tbl_cart.soft_delete=0";
+        LEFT JOIN tbl_cloth ON tbl_cart.cloth_id = tbl_cloth.id";
         $result = $this->conn->query($query);
         return $result;
     }
@@ -98,7 +119,7 @@ class CartClass extends DB
     }
     
     public function viewProfit(){
-        $query = "SELECT SUM(buying_price) AS sum_buyingprice, SUM(selling_price) AS sum_sellingprice, SUM(charge) AS sum_charge FROM tbl_order";    
+        $query = "SELECT SUM(buying_price) AS sum_buyingprice, SUM(selling_price) AS sum_sellingprice, SUM(charge) AS sum_charge FROM tbl_order order by tbl_order.id desc";    
         $result = $this->conn->query($query);
         return $result;
     }
@@ -119,13 +140,25 @@ class CartClass extends DB
         }
     }
 
-    public function deleteCart($id){        
-        $query = "UPDATE tbl_cart
-                SET
-                soft_delete  = '1'
-                WHERE id     = $id";
-        $result = $this->conn->query($query);
-        if($result === TRUE){
+    public function deleteCart($id){     
+        $cartQuery  = "SELECT * FROM tbl_cart WHERE id = $id";
+        $cartdata = $this->conn->query($cartQuery);
+        $value = mysqli_fetch_array($cartdata);   
+        $cloth_id = $value['cloth_id'];
+        $quantity = $value['quantity'];
+        $cartQuery  = "SELECT * FROM tbl_cloth WHERE id = $cloth_id";
+        $cartdata = $this->conn->query($cartQuery);
+        $valueCloth = mysqli_fetch_array($cartdata);
+        $stock = $valueCloth['stock'];
+        $query = "Delete from tbl_cart  WHERE id = $id";
+        $cartdata = $this->conn->query($query);
+        $updatQquery = "UPDATE tbl_cloth
+        SET
+        stock  = $stock+$quantity
+        WHERE id     = $cloth_id";
+         $this->conn->query($updatQquery);
+
+        if($updatQquery === TRUE){
             $txt = "<div class='alert alert-success'>Successfully Deleted</div>";
             return $txt;
         }

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2022 at 05:23 PM
+-- Generation Time: Aug 26, 2022 at 07:57 PM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -72,7 +72,8 @@ INSERT INTO `tbl_admin` (`id`, `name`, `email`, `phone`, `password`, `role`, `sa
 (1, 'Ayrin Supty', 'admin@gmail.com', '+8801300813663', '123456', 0, NULL, '2022-06-18 19:42:30', 0),
 (2, 'Madonna Marquez', 'mypaxij@mailinator.com', '+8801815687984', 'Pa$$w0rd!', 2, NULL, '2022-06-20 06:06:06', 1),
 (3, 'Hayes Castro', 'vejuja@mailinator.com', '+8801345678985', 'Pa$$w0rd!', 1, NULL, '2022-06-20 06:10:05', 0),
-(4, 'Neve Phillips', 'dusenib@mailinator.com', '+8801644576879', 'Pa$$w0rd!', 2, NULL, '2022-06-20 08:52:37', 0);
+(4, 'Neve Phillips', 'dusenib@mailinator.com', '+8801644576879', 'Pa$$w0rd!', 2, NULL, '2022-06-20 08:52:37', 0),
+(5, 'Vance Bernard', 'qobisecyxa@mailinator.com', '+8801892345678', 'Eos qui impedit ex', 2, NULL, '2022-08-20 07:27:01', 0);
 
 -- --------------------------------------------------------
 
@@ -88,18 +89,10 @@ CREATE TABLE `tbl_cart` (
   `buying_price` int(11) NOT NULL,
   `selling_price` int(11) NOT NULL,
   `charge` int(11) NOT NULL,
+  `discount` int(11) NOT NULL,
   `quantity` float(10,2) NOT NULL,
   `soft_delete` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_cart`
---
-
-INSERT INTO `tbl_cart` (`id`, `cus_id`, `mes_id`, `cloth_id`, `buying_price`, `selling_price`, `charge`, `quantity`, `soft_delete`) VALUES
-(13, 9, 15, 20, 965, 688, 36, 239.00, 0),
-(14, 8, 15, 20, 37, 774, 59, 857.00, 0),
-(15, 5, 11, 20, 221, 914, 44, 957.00, 0);
 
 -- --------------------------------------------------------
 
@@ -128,11 +121,11 @@ CREATE TABLE `tbl_cloth` (
 --
 
 INSERT INTO `tbl_cloth` (`id`, `cloth_name`, `type`, `details`, `image`, `stock`, `color`, `brand`, `buying_price`, `selling_price`, `discount`, `created_at`, `soft_delete`) VALUES
-(16, 'Dacey Reyes', 3, 'Enim cupiditate ad e', 'upload/383b714895.jpg', 'Voluptatum maxime ut', 'Nihil est pariatur ', 'Cupiditate molestiae', 289, 924, 49, '2022-06-19 13:16:04', 1),
-(17, 'Zephr Wilder', 6, 'Et officiis non recu', 'upload/f4864369fa.jpg', 'Doloremque et qui do', 'Ut enim voluptatem ', 'Expedita aliquid lab', 355, 225, 77, '2022-06-19 13:19:43', 0),
-(18, 'Melvin Ellis', 4, 'Magna sit ut nisi fa', 'upload/e9755f27c2.jpg', 'Voluptatibus officii', 'Dolorum a iure recus', 'Molestias aut odio e', 331, 85, 69, '2022-06-19 13:19:55', 0),
-(20, 'Xenos Nunez', 3, 'Sed mollitia unde su', 'upload/dde4857335.jpg', 'Doloribus asperiores', 'Veniam voluptas exc', 'Fugiat aperiam reic', 829, 762, 26, '2022-06-19 13:20:26', 0),
-(21, 'Julie Sanders', 2, 'Laboriosam ad in qu', 'upload/4bf22a3c41.jpg', 'Soluta impedit mole', 'Non duis et a saepe', 'Ullamco magna commod', 964, 452, 73, '2022-06-19 14:20:03', 0);
+(16, 'Dacey Reyes', 3, 'Enim cupiditate ad e', 'upload/383b714895.jpg', '100', 'Nihil est pariatur ', 'Cupiditate molestiae', 289, 924, 10, '2022-06-19 13:16:04', 1),
+(17, 'Zephr Wilder', 6, 'Et officiis non recu', 'upload/f4864369fa.jpg', '118.88', 'Ut enim voluptatem ', 'Expedita aliquid lab', 355, 500, 15, '2022-06-19 13:19:43', 0),
+(18, 'Melvin Ellis', 4, 'Magna sit ut nisi fa', 'upload/e9755f27c2.jpg', '100.00', 'Dolorum a iure recus', 'Molestias aut odio e', 331, 850, 10, '2022-06-19 13:19:55', 0),
+(20, 'Xenos Nunez', 3, 'Sed mollitia unde su', 'upload/dde4857335.jpg', '110', 'Veniam voluptas exc', 'Fugiat aperiam reic', 829, 1000, 5, '2022-06-19 13:20:26', 0),
+(21, 'Julie Sanders', 2, 'Laboriosam ad in qu', 'upload/4bf22a3c41.jpg', '0', 'Non duis et a saepe', 'Ullamco magna commod', 300, 452, 10, '2022-06-19 14:20:03', 0);
 
 -- --------------------------------------------------------
 
@@ -191,7 +184,8 @@ INSERT INTO `tbl_measurement` (`id`, `cus_id`, `measurement_for`, `measurement_d
 (12, 8, 'Quasi alias nihil vo', 'Quibusdam et quidem ', 1),
 (13, 8, 'Ab fugiat corrupti ', 'Laudantium distinct', 0),
 (14, 6, 'Ea et accusamus aspe', 'Consectetur architec', 0),
-(15, 7, 'Dolor velit porro a', 'Aute nulla exercitat', 0);
+(15, 7, 'Dolor velit porro a', 'Aute nulla exercitat', 0),
+(16, 6, 'Pant', 'long:32 ft ', 0);
 
 -- --------------------------------------------------------
 
@@ -208,6 +202,7 @@ CREATE TABLE `tbl_order` (
   `buying_price` int(11) NOT NULL,
   `selling_price` int(11) NOT NULL,
   `charge` int(11) NOT NULL,
+  `discount` int(11) NOT NULL,
   `quantity` float(10,2) NOT NULL,
   `slip_no` varchar(255) DEFAULT NULL,
   `soft_delete` tinyint(4) NOT NULL DEFAULT 0
@@ -217,25 +212,20 @@ CREATE TABLE `tbl_order` (
 -- Dumping data for table `tbl_order`
 --
 
-INSERT INTO `tbl_order` (`id`, `owner_id`, `cus_id`, `mes_id`, `cloth_id`, `buying_price`, `selling_price`, `charge`, `quantity`, `slip_no`, `soft_delete`) VALUES
-(8, 5, 9, 15, 20, 965, 688, 36, 239.00, '1655910818', 0),
-(9, 5, 8, 15, 20, 37, 774, 59, 857.00, '1655910818', 0),
-(10, 5, 5, 11, 20, 221, 914, 44, 957.00, '1655910818', 0),
-(11, 0, 9, 15, 20, 965, 688, 36, 239.00, '1655910824', 0),
-(12, 0, 8, 15, 20, 37, 774, 59, 857.00, '1655910824', 0),
-(13, 0, 5, 11, 20, 221, 914, 44, 957.00, '1655910824', 0),
-(14, 0, 9, 15, 20, 965, 688, 36, 239.00, '1655910835', 0),
-(15, 0, 8, 15, 20, 37, 774, 59, 857.00, '1655910835', 0),
-(16, 0, 5, 11, 20, 221, 914, 44, 957.00, '1655910835', 0),
-(17, 0, 9, 15, 20, 965, 688, 36, 239.00, '1655910994', 0),
-(18, 0, 8, 15, 20, 37, 774, 59, 857.00, '1655910994', 0),
-(19, 0, 5, 11, 20, 221, 914, 44, 957.00, '1655910994', 0),
-(20, 0, 9, 15, 20, 965, 688, 36, 239.00, '1655911028', 0),
-(21, 0, 8, 15, 20, 37, 774, 59, 857.00, '1655911028', 0),
-(22, 0, 5, 11, 20, 221, 914, 44, 957.00, '1655911028', 0),
-(23, 0, 9, 15, 20, 965, 688, 36, 239.00, '1655911042', 0),
-(24, 0, 8, 15, 20, 37, 774, 59, 857.00, '1655911042', 0),
-(25, 0, 5, 11, 20, 221, 914, 44, 957.00, '1655911042', 0);
+INSERT INTO `tbl_order` (`id`, `owner_id`, `cus_id`, `mes_id`, `cloth_id`, `buying_price`, `selling_price`, `charge`, `discount`, `quantity`, `slip_no`, `soft_delete`) VALUES
+(1, 4, 9, 15, 20, 965, 688, 36, 0, 239.00, '1655912424', 0),
+(2, 4, 8, 15, 20, 37, 774, 59, 0, 857.00, '1655912424', 0),
+(3, 4, 5, 11, 20, 221, 914, 44, 0, 957.00, '1655912424', 0),
+(4, 6, 9, 15, 20, 965, 688, 36, 0, 239.00, '1655912465', 0),
+(5, 6, 8, 15, 20, 37, 774, 59, 0, 857.00, '1655912465', 0),
+(6, 6, 5, 11, 20, 221, 914, 44, 0, 957.00, '1655912465', 0),
+(7, 6, 9, 15, 20, 965, 688, 36, 0, 239.00, '1655912503', 0),
+(8, 6, 8, 15, 20, 37, 774, 59, 0, 857.00, '1655912503', 0),
+(9, 6, 5, 11, 20, 221, 914, 44, 0, 957.00, '1655912503', 0),
+(10, 5, 9, 15, 20, 965, 688, 36, 0, 239.00, '1655912640', 0),
+(11, 5, 8, 15, 20, 37, 774, 59, 0, 857.00, '1655912640', 0),
+(12, 5, 5, 11, 20, 221, 914, 44, 0, 957.00, '1655912640', 0),
+(13, 4, 4, 8, 17, 355, 500, 123, 15, 1.12, '1661536255', 0);
 
 -- --------------------------------------------------------
 
@@ -258,12 +248,11 @@ CREATE TABLE `tbl_slip` (
 --
 
 INSERT INTO `tbl_slip` (`id`, `slip_no`, `customer_id`, `order_at`, `delivery_at`, `status`, `soft_delete`) VALUES
-(1, 1655910818, 5, '06-22-2022', '', 0, 0),
-(2, 1655910824, 0, '06-22-2022', '', 0, 0),
-(3, 1655910835, 0, '06-22-2022', '', 0, 0),
-(4, 1655910994, 0, '06-22-2022', '', 0, 0),
-(5, 1655911028, 0, '06-22-2022', '', 0, 0),
-(6, 1655911042, 0, '06-22-2022', '', 0, 0);
+(1, 1655912424, 4, '2022-06-22', '2022-06-30', 0, 0),
+(2, 1655912465, 6, '2022-06-22', '2022-06-23', 0, 0),
+(3, 1655912503, 6, '2022-06-22', '2022-06-24', 0, 0),
+(4, 1655912640, 5, '2022-06-22', '2022-07-02', 0, 0),
+(5, 1661536255, 4, '2022-08-26', '2022-09-09', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -331,13 +320,13 @@ ALTER TABLE `cloth_type`
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_cloth`
@@ -355,19 +344,19 @@ ALTER TABLE `tbl_customer`
 -- AUTO_INCREMENT for table `tbl_measurement`
 --
 ALTER TABLE `tbl_measurement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_slip`
 --
 ALTER TABLE `tbl_slip`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
