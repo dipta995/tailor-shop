@@ -106,7 +106,8 @@ class CartClass extends DB
     public function viewSlip(){  
         $query = "SELECT * FROM tbl_slip
         LEFT JOIN tbl_customer ON tbl_slip.customer_id = tbl_customer.cus_id
-        WHERE tbl_slip.soft_delete=0";    
+        LEFT JOIN tbl_order ON tbl_slip.slip_no = tbl_order.slip_no
+        WHERE tbl_slip.soft_delete=0 order by tbl_order.soft_delete asc";    
         $result = $this->conn->query($query);
         return $result;
     }    
@@ -115,7 +116,8 @@ class CartClass extends DB
         $str = mysqli_real_escape_string($this->conn, $search);
         $query = "SELECT * FROM tbl_slip
         LEFT JOIN tbl_customer ON tbl_slip.customer_id = tbl_customer.cus_id
-        WHERE tbl_slip.soft_delete=0 AND tbl_slip.slip_no LIKE '%$str%'";   
+        LEFT JOIN tbl_order ON tbl_slip.slip_no = tbl_order.slip_no
+        WHERE tbl_slip.soft_delete=0 AND tbl_slip.slip_no LIKE '%$str%' order by tbl_order.soft_delete asc";   
         $result = $this->conn->query($query);
         return $result;
     }
