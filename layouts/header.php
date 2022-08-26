@@ -1,33 +1,31 @@
 <?php 
-session_start();
+  session_start();
   if ($_SESSION['loginauth']!='admin') {
     header("Location:login.php");
-    }else{
-       
-    }
+  }
+
   if (isset($_GET['logout'])=='action') {
     session_destroy();
     header("Location:login.php");
   }
 
-include 'Classes/CustomerClass.php';
-$customer = new CustomerClass();
-include 'Classes/ClothClass.php';
-$cloth = new ClothClass();
-include 'Classes/MeasurementClass.php';
-$measure = new MeasurementClass();
-include 'Classes/CartClass.php';
-$cart = new CartClass();
-include 'Classes/EmployeeClass.php';
-$emp = new EmployeeClass();
-include 'Classes/ContactClass.php';
-$cont = new ContactClass();
-include 'Classes/LoginClass.php';
-$create = new LoginClass();
-include 'Classes/FormatClass.php';
-$fm = new Format();
-// $role = $_SESSION['role'];
-// $id = $_SESSION['id'];
+  include 'Classes/CustomerClass.php';
+  $customer = new CustomerClass();
+  include 'Classes/ClothClass.php';
+  $cloth = new ClothClass();
+  include 'Classes/MeasurementClass.php';
+  $measure = new MeasurementClass();
+  include 'Classes/CartClass.php';
+  $cart = new CartClass();
+  include 'Classes/EmployeeClass.php';
+  $emp = new EmployeeClass();;
+  include 'Classes/LoginClass.php';
+  $create = new LoginClass();
+  include 'Classes/FormatClass.php';
+  $fm = new Format();
+  
+  $role = $_SESSION['role'];
+  $id = $_SESSION['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,10 +34,10 @@ $fm = new Format();
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="This project is an educational project.">
+  <meta name="author" content="Tailor Management System">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Tailor - Admin</title>
+  <title>TAILOR</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet"> 
@@ -70,13 +68,15 @@ $fm = new Format();
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
           aria-controls="collapseTable">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa-solid fa-user"></i>
           <span>Admin</span>
         </a>
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Admin </h6>
-              <a class="collapse-item" href="adduser.php"> Create Admin </a>
+            <?php if($role==0) { ?>
+              <a class="collapse-item" href="adduser.php"> Create Admin </a> 
+            <?php } ?>
               <a class="collapse-item" href="users.php">Admin Details</a>
           </div>
         </div>
@@ -85,15 +85,17 @@ $fm = new Format();
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable1" aria-expanded="true"
           aria-controls="collapseTable">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fa fa-users"></i>
           <span>Employee</span>
         </a>
         <div id="collapseTable1" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Employee </h6>
-              <a class="collapse-item" href="create_employee.php"> Employee Create </a>
-              <a class="collapse-item" href="employee_list.php">Employee list</a>
+            <?php if(($role==0) || ($role==1)) { ?>
+              <a class="collapse-item" href="create_employee.php">Create Employee</a> 
+              <a class="collapse-item" href="employee_list.php">Employee List</a>
               <a class="collapse-item" href="salary_list.php">Salary</a>
+            <?php } ?> 
           </div>
         </div>
       </li>
@@ -101,7 +103,7 @@ $fm = new Format();
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable2" aria-expanded="true"
           aria-controls="collapseTable">
-          <i class="fas fa-fw fa-table"></i>
+          <i class="fas fal fa-user-tie"></i>
           <span>Customer</span>
         </a>
         <div id="collapseTable2" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
@@ -116,7 +118,7 @@ $fm = new Format();
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
           aria-controls="collapseForm">
-          <i class="fab fa-fw fa-wpforms"></i>
+          <i class="fas fa-tshirt"></i>
           <span>Cloth Type</span>
         </a>
         <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
@@ -133,7 +135,7 @@ $fm = new Format();
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm1" aria-expanded="true"
           aria-controls="collapseForm">
-          <i class="fab fa-fw fa-wpforms"></i>
+          <i class="fas fa-file-alt"></i>
           <span>Cloth Details</span>
         </a>
         <div id="collapseForm1" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
@@ -150,7 +152,7 @@ $fm = new Format();
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm2" aria-expanded="true"
           aria-controls="collapseForm">
-          <i class="fab fa-fw fa-wpforms"></i>
+          <i class="fas fa-cut"></i>
           <span>Measurement</span>
         </a>
         <div id="collapseForm2" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
@@ -166,17 +168,18 @@ $fm = new Format();
 
       <li class="nav-item">
         <a class="nav-link" href="cart.php">
-          <i class="fas fa-fw fa-chart-area"></i>
+          <i class="fas fa-shopping-cart"></i>
           <span>Cart</span>
         </a>
       </li>
       
       <li class="nav-item">
         <a class="nav-link" href="order.php">
-          <i class="fas fa-fw fa-chart-area"></i>
+          <i class="fas fa-shopping-bag"></i>
           <span>Order</span>
         </a>
       </li>
+<<<<<<< HEAD
 
       <!-- <li class="nav-item">
         <a class="nav-link" href="images.php">
@@ -191,53 +194,9 @@ $fm = new Format();
           <span>Contact</span>
         </a>
       </li> -->
+=======
+>>>>>>> cdb4b2e256810c43b4a84624c20790e51790276d
      
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
-          aria-controls="collapseTable">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span>
-        </a>
-        <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Tables</h6>
-            <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
-            <a class="collapse-item" href="datatables.html">DataTables</a>
-          </div>
-        </div>
-      </li> -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="ui-colors.html">
-          <i class="fas fa-fw fa-palette"></i>
-          <span>UI Colors</span>
-        </a>
-      </li>
-      <hr class="sidebar-divider">
-      <div class="sidebar-heading">
-        Examples
-      </div>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
-          aria-controls="collapsePage">
-          <i class="fas fa-fw fa-columns"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Example Pages</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span>
-        </a>
-      </li> -->
       <hr class="sidebar-divider">
       <div class="version" id="version-ruangadmin"></div>
     </ul>
@@ -261,11 +220,11 @@ $fm = new Format();
                       header('Location:index.php');
                   }
                 ?>
-                <span class="ml-2 d-none d-lg-inline text-white small"><?php echo  $_SESSION['email']; ?></span>
+                <span class="ml-2 d-none d-lg-inline text-white small"><?php echo $_SESSION['email']; ?></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="up_password.php">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                <a class="dropdown-item" href="profile.php">
+                  <i class="fas fa-solid fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   User Profile
                 </a>
 

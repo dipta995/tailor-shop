@@ -1,7 +1,7 @@
 <?php include 'layouts/header.php';
   if (!isset($_GET['salid']) || empty($_GET['salid'])) {
       echo "<script> window.location= 'employee_list.php';</script>";
-  }else{
+  } else {
     $salid = $_GET['salid'];
   }
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {

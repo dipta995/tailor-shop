@@ -24,12 +24,12 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Salary List</h6>
                 </div>
-                <div class="table-responsive">
-                    <table class="table align-items-center table-flush">
+                <div class="table-responsive p-3">
+                    <table class="table align-items-center table-flush" id="dataTable">
                         <thead class="thead-light">
                             <tr>
                                 <th>SL No.</th>
-                                <th>Employee Name</th>
+                                <th>Name</th>
                                 <th>Phone</th>
                                 <th>Position</th>
                                 <th>Salary</th>

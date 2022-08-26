@@ -34,8 +34,8 @@
           <form method="POST" enctype="multipart/form-data">
           
           <div class="form-group">
-            <label>Customer ID</label><br>
-            <select id="select" name="cus_id">
+            <label>Customer Name</label><br>
+            <select id="select" name="cus_id" class="form-control">
               <option>Select Customer</option>
               <?php
                 $query = "select * from tbl_customer where soft_delete=0";

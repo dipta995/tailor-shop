@@ -19,20 +19,19 @@ if(isset($_GET['deltype'])){
     </div>
 
     <div class="row">
-        <div class="col-lg-12 mb-4">
+        <div class="col-lg-10 mb-4">
             <!-- Simple Tables -->
             <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">All Cloth Type</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Cloth Type List</h6>
                 </div>
-                <div class="table-responsive">
-                    <table class="table align-items-center table-flush">
+                <div class="table-responsive p-3">
+                    <table class="table align-items-center table-flush" id="dataTable">
                         <thead class="thead-light">
                             <tr>
-                                <th width="5%">#</th>
-                                <th width="15%">Cloth Type</th>
-                                <th width="20%">Action</th>
-                                <th></th>
+                                <th>SL No.</th>
+                                <th>Cloth Type</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                     

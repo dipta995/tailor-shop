@@ -25,23 +25,17 @@ if(isset($_GET['deluser'])){
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Admin Details</h6>
                 </div>
-                <div class="table-responsive">
-                    <div>
-                        <?php 
-                            if(isset($delete)){
-                                echo $delete;
-                            }
-                        ?>
-                    </div>
-                    <table class="table align-items-center table-flush">
+                <div class="table-responsive p-3">
+                    <table class="table align-items-center table-flush" id="dataTable">
                         <thead class="thead-light">
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
+                                <th>SL No.</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Email</th> 
                                 <th>Phone</th>
                                 <th>Role</th>  
-                                <th width="20%">Action</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                    
@@ -53,7 +47,8 @@ if(isset($_GET['deluser'])){
                             ?>
                             <tr>
                                 <td><?php echo $i+=1; ?></td>
-                                <td><?php echo $value['name']; ?></td>
+                                <td><?php echo $value['first_name']; ?></td>
+                                <td><?php echo $value['last_name']; ?></td>
                                 <td><?php echo $value['email']; ?></td>
                                 <td><?php echo $value['phone']; ?></td>
                                 <td>
@@ -69,11 +64,18 @@ if(isset($_GET['deluser'])){
                                     }
                                 ?>
                                 </td>
-                                
                                 <td>
-                                    <a href="viewuser.php?userid=<?php echo $value['id'] ;?>" class="btn btn-sm btn-info">View</a>
+                                <a href="viewuser.php?viewid=<?php echo $value['id'] ;?>" class="btn btn-sm btn-info">View</a>
+                                
+                                <?php if ($role==0 || $id==$value['id']) { ?>                               
+                                    <a href="update_user.php?userid=<?php echo $value['id'] ;?>" class="btn btn-sm btn-success">Update</a>
+
+                                <?php if ($role==0){ ?>                      
                                     <a onclick="return confirm('Are you sure to Delete?');" href="?deluser=<?php echo $value['id'] ;?>" class="btn btn-sm btn-danger">Delete</a>
+                                <?php } ?>
+                                
                                 </td>
+                               <?php } ?>
                             </tr>
                             <?php } ?>
                         </tbody>

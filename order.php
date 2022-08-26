@@ -1,4 +1,12 @@
-<?php include 'layouts/header.php'; ?>
+<?php 
+include 'layouts/header.php'; 
+
+if(isset($_GET['delorder'])){
+    $delorder = $_GET['delorder'];
+    $delete = $cart->deleteOrder($delorder);
+	echo $delete;	
+}
+?>
 
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
@@ -10,8 +18,8 @@
     </ol>
     </div>
     <div class="row">
-        <div class="col-lg-6 mb-4">
-            <div class="table-responsive">
+        <div class="col-lg-12 mb-4">
+            <div class="table-responsive p-3">
                 <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                     <tr>
@@ -42,6 +50,14 @@
         </div>
     </div>
 
+    <!-- Search box. -->
+    <form action="order.php" method="GET">
+        <input type="text" name="search" required>
+        <input type="submit" value="Search">
+    </form>
+
+
+<hr>
     <div class="row">
       <div class="col-lg-12 mb-4">
         <!-- Simple Tables -->
@@ -50,12 +66,18 @@
                 <h6 class="m-0 font-weight-bold text-primary">Order List</h6>
             </div>
 
-            <div class="table-responsive">
-                <table class="table align-items-center table-flush">
-                    
+            <div class="table-responsive p-3">
+                <table class="table align-items-center table-flush" id="dataTable">                
                     <?php
                         $i = 0;
-                        $view = $cart->viewSlip();
+                        if(isset($_GET['search'])){
+                            $view = $cart->searchSlipResult($_GET['search']);
+                            
+                        }else{
+
+                            $view = $cart->viewSlip();
+                        }
+
                         if($view->num_rows > 0){
                             foreach($view as $value){
                             $i++;
@@ -77,13 +99,22 @@
                             <td><strong>Order at: </strong><?php echo $value['order_at']; ?></td>
                             <td><strong>Delivery at: </strong><?php echo $value['delivery_at']; ?></td>
                             <td><strong>Total Payment: </strong><?= $total_price; ?> BDT</td>
+                            <?php
+                            $s = $cart->orderCheck($value['slip_no']);
+                            if ($s>0) { echo "<td><p style='color:green;'>Confirmed</p></td>"; } else{
+                            ?>
+                            
+                            <td>
+                                <a href="?delorder=<?php echo $value['slip_no'] ;?>" class="btn btn-sm btn-danger">Confirm</a>
+                            </td> 
+                            <?php } ?>
                         </tr>    
                         
                     </thead>
 
                     <tbody id="panel<?php echo $i; ?>">
                         <tr>
-                            <th width="5%">Order No.</th>
+                            <th width="10%">Order No.</th>
                             <th width="20%">Customer Name</th>
                             <th width="20%">Measurement Details</th>
                             <th width="20%">Cloth Name</th>  

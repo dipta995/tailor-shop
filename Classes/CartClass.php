@@ -8,6 +8,7 @@ class CartClass extends DB
         $conn = $this->connect();
     }
 
+    // Insert Cart
     public function insertCart($data){
         $cus_id        = mysqli_real_escape_string($this->conn, $data['cus_id']);
         $mes_id        = mysqli_real_escape_string($this->conn, $data['mes_id']);
@@ -51,6 +52,7 @@ class CartClass extends DB
         }
     }
 
+    // Insert Order
     public function insertOrder($data){
         $customer_id = mysqli_real_escape_string($this->conn, $data['cus_id']); 
         $delivery_at = mysqli_real_escape_string($this->conn, $data['delivery_at']); 
@@ -91,6 +93,7 @@ class CartClass extends DB
         }
     }
 
+    // View Cart
     public function viewCart(){  
         $query = "SELECT tbl_cart.*, tbl_customer.*, tbl_measurement.*, tbl_cloth.*, tbl_cart.buying_price AS buying_price, tbl_cart.selling_price AS selling_price, tbl_cart.id AS cartid FROM tbl_cart 
         LEFT JOIN tbl_customer ON tbl_cart.cus_id = tbl_customer.cus_id
@@ -107,6 +110,15 @@ class CartClass extends DB
         $result = $this->conn->query($query);
         return $result;
     }    
+
+    public function searchSlipResult($search){
+        $str = mysqli_real_escape_string($this->conn, $search);
+        $query = "SELECT * FROM tbl_slip
+        LEFT JOIN tbl_customer ON tbl_slip.customer_id = tbl_customer.cus_id
+        WHERE tbl_slip.soft_delete=0 AND tbl_slip.slip_no LIKE '%$str%'";   
+        $result = $this->conn->query($query);
+        return $result;
+    }
 
     public function slipOrder($slip_no){
         $query = "SELECT tbl_order.*, tbl_customer.*, tbl_measurement.*, tbl_cloth.*, tbl_order.id AS orderid, tbl_order.selling_price AS sellingprice FROM tbl_order 
@@ -170,5 +182,21 @@ class CartClass extends DB
         return $result;
     }
     
+    public function deleteOrder($id){        
+        $query = "UPDATE tbl_order
+                SET
+                soft_delete      = '1'
+                WHERE slip_no    = $id";
+        $result = $this->conn->query($query);
+        if($result === TRUE){
+            $txt = "<div class='alert alert-success'>Delivery Successful !</div>";
+            return $txt;
+        }
+    }
+
+    public function orderCheck($slip_no){
+        $result = $this->conn->query("SELECT * FROM tbl_order WHERE slip_no = '$slip_no' && soft_delete = 1");
+        return mysqli_num_rows($result);
+    }
             
 }

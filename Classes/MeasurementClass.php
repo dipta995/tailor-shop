@@ -8,6 +8,7 @@ class MeasurementClass extends DB
         $conn = $this->connect();
     }
     
+    // Add Measurement
     public function addMeasurement($data){
         $cus_id                = mysqli_real_escape_string($this->conn, $data['cus_id']);
         $measurement_for       = mysqli_real_escape_string($this->conn, $data['measurement_for']);
@@ -36,6 +37,7 @@ class MeasurementClass extends DB
 		}
 	}
 
+    // View Measurement
     public function viewMeasurement(){
         $query  = "SELECT tbl_measurement.*, tbl_customer.cus_name FROM tbl_measurement INNER JOIN tbl_customer ON 
         tbl_measurement.cus_id = tbl_customer.cus_id WHERE tbl_measurement.soft_delete = 0 ORDER By tbl_measurement.id";
@@ -43,6 +45,7 @@ class MeasurementClass extends DB
         return $result;
     }
 
+    // Update Measurement
     public function updateMeasurement($data, $mesid){
         $cus_id                = mysqli_real_escape_string($this->conn, $data['cus_id']);
         $measurement_for       = mysqli_real_escape_string($this->conn, $data['measurement_for']);
@@ -66,12 +69,14 @@ class MeasurementClass extends DB
         }        
     }
 
+    // View Single Measurement
     public function viewSingleMeasurement($mesid){
         $query  = "SELECT * FROM tbl_measurement WHERE id='$mesid'";
         $result = $this->conn->query($query);
         return $result;
     }
 
+    // Delete Measurement
     public function deleteMeasurement($id){        
         $query = "UPDATE tbl_measurement
                 SET

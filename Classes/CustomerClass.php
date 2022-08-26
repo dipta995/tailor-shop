@@ -8,6 +8,7 @@ class CustomerClass extends DB
         $conn = $this->connect();
     }
     
+    // Create Customer
     public function insertCustomer($data){
         $cus_name      = mysqli_real_escape_string($this->conn, $data['cus_name']);
         $cus_email     = mysqli_real_escape_string($this->conn, $data['cus_email']);
@@ -44,12 +45,14 @@ class CustomerClass extends DB
         }
     }
 
+    // View Customer
     public function viewCustomer(){
         $qry = "SELECT * FROM tbl_customer where soft_delete = 0";
         $result = $this->conn->query($qry);
         return $result;
     }
 
+    // Update Customer
     public function updateCustomer($data, $customerid){
         $cus_name      = mysqli_real_escape_string($this->conn, $data['cus_name']);
         $cus_email     = mysqli_real_escape_string($this->conn, $data['cus_email']);
@@ -89,12 +92,14 @@ class CustomerClass extends DB
         }        
     }
 
+    // view Single Customer
     public function viewSingleCustomer($customerid){
         $query  = "SELECT * FROM tbl_customer WHERE cus_id='$customerid'";
         $result = $this->conn->query($query);
         return $result;
     }
 
+    // Delete Customer
     public function deleteCustomer($id){        
         $query = "UPDATE tbl_customer
                 SET
