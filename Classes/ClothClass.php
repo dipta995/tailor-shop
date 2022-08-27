@@ -237,4 +237,3 @@ class ClothClass extends DB
         }
     }    
 }
-?>

@@ -1,4 +1,4 @@
-<?php include 'layouts/header.php';?>
+<?php include 'layouts/header.php'; ?>
 
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
@@ -19,4 +19,4 @@
 </div>
 <!---Container Fluid-->
 </div>
-<?php include 'layouts/footer.php';?>
+<?php include 'layouts/footer.php'; ?>

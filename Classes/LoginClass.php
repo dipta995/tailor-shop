@@ -174,4 +174,3 @@ class LoginClass extends DB
 		}
 	}
 }
-?>

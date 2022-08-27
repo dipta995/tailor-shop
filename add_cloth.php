@@ -1,8 +1,8 @@
 <?php include 'layouts/header.php';
 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $addCloth = $cloth->insertCloth($_POST);
-  }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $addCloth = $cloth->insertCloth($_POST);
+}
 
 ?>
 
@@ -25,10 +25,10 @@
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Add New Cloth</h6>
         </div>
-        <?php 
-          if (isset($addCloth)){
-              echo $addCloth;
-          }  
+        <?php
+        if (isset($addCloth)) {
+          echo $addCloth;
+        }
         ?>
         <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
@@ -43,13 +43,14 @@
               <select id="select" name="type" class="form-control">
                 <option>Select Type</option>
                 <?php
-                  $query = "select * from cloth_type where soft_delete=0";
-                  $type = $cloth -> select($query);
-                  if($type){
-                      while($result = $type->fetch_assoc()){                             
+                $query = "select * from cloth_type where soft_delete=0";
+                $type = $cloth->select($query);
+                if ($type) {
+                  while ($result = $type->fetch_assoc()) {
                 ?>
-                <option value="<?php echo $result['id'];?>"><?php echo $result['name'];?></option>
-                <?php } } ?>
+                    <option value="<?php echo $result['id']; ?>"><?php echo $result['name']; ?></option>
+                <?php }
+                } ?>
               </select>
             </div>
 
@@ -94,9 +95,9 @@
               <label>Discount (%)</label>
               <input name="discount" type="number" min="0" step="1" value="0" class="form-control" placeholder="Enter discount">
             </div>
-          
+
             <button type="submit" class="btn btn-primary">Submit</button>
-            
+
           </form>
         </div>
       </div>
@@ -104,4 +105,4 @@
   </div>
 </div>
 
-<?php include 'layouts/footer.php';?>
+<?php include 'layouts/footer.php'; ?>

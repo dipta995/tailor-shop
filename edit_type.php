@@ -1,14 +1,14 @@
 <?php include 'layouts/header.php';
- 
-  $typeid = "";
-  if($_GET['typeid']==NULL || !isset($_GET['typeid'])){
-    "<script>window.location = 'typelist.php'; </script>"; 
-  }else{
-    $typeid = $_GET['typeid'];
-  }
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $updateType = $cloth->updateType($_POST, $typeid);
-  }
+
+$typeid = "";
+if ($_GET['typeid'] == NULL || !isset($_GET['typeid'])) {
+  "<script>window.location = 'typelist.php'; </script>";
+} else {
+  $typeid = $_GET['typeid'];
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $updateType = $cloth->updateType($_POST, $typeid);
+}
 ?>
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
@@ -30,24 +30,25 @@
           <h6 class="m-0 font-weight-bold text-primary">Update Cloth Type</h6>
         </div>
         <?php
-          if(isset($updateType)){
-              echo $updateType;
-          }
+        if (isset($updateType)) {
+          echo $updateType;
+        }
         ?>
         <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
-            <?php 
-                $view = $cloth->viewSingleType($typeid);
-                if($view){
-                    while($value = $view->fetch_assoc()){
+            <?php
+            $view = $cloth->viewSingleType($typeid);
+            if ($view) {
+              while ($value = $view->fetch_assoc()) {
             ?>
-            <div class="form-group">
-              <label>Cloth Type</label>
-              <input name="name" type="text" class="form-control" value="<?php echo $value['name'];?>">
-            </div>
- 
-            <?php } } ?>
-            
+                <div class="form-group">
+                  <label>Cloth Type</label>
+                  <input name="name" type="text" class="form-control" value="<?php echo $value['name']; ?>">
+                </div>
+
+            <?php }
+            } ?>
+
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
@@ -56,4 +57,4 @@
   </div>
 </div>
 <!---Container Fluid-->
-<?php include 'layouts/footer.php';?>
+<?php include 'layouts/footer.php'; ?>

@@ -1,8 +1,8 @@
 <?php include 'layouts/header.php';
- 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $createPackage = $emp->createnewEmployee($_POST,$_FILES);
-  }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $createPackage = $emp->createnewEmployee($_POST, $_FILES);
+}
 ?>
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
@@ -23,21 +23,21 @@
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Add New Employee</h6>
         </div>
-        <?php 
-          if (isset($createPackage)){
-            echo $createPackage;
-          }  
+        <?php
+        if (isset($createPackage)) {
+          echo $createPackage;
+        }
         ?>
-        <div class="card-body" >
+        <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label>Name</label>
-              <input name="emp_name" type="text" class="form-control" >
+              <input name="emp_name" type="text" class="form-control">
             </div>
 
             <div class="form-group">
               <label>Email</label>
-              <input name="emp_email" type="email" class="form-control" placeholder="Enter email" >
+              <input name="emp_email" type="email" class="form-control" placeholder="Enter email">
             </div>
 
             <div class="input-group mb-3">
@@ -50,9 +50,9 @@
             <div class="form-group">
               <label>Job Status</label>
               <select name="emp_job_status" class="form-control">
-                  <option value="Tailor">Tailor</option>
-                  <option value="Manager">Manager</option>
-                  <option value="Cleaner">Cleaner</option>
+                <option value="Tailor">Tailor</option>
+                <option value="Manager">Manager</option>
+                <option value="Cleaner">Cleaner</option>
               </select>
             </div>
 
@@ -68,7 +68,7 @@
 
             <div class="form-group">
               <label>Address</label>
-              <textarea class="ckeditor form-control"  name="emp_address" cols="" rows="3"></textarea>
+              <textarea class="ckeditor form-control" name="emp_address" cols="" rows="3"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -91,4 +91,4 @@
 //]]>
 </script> -->
 <!---Container Fluid-->
-<?php include 'layouts/footer.php';?>
+<?php include 'layouts/footer.php'; ?>

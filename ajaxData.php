@@ -15,8 +15,3 @@
     } else {
         echo '<option value="">Measurement not available</option>';
     }
-?>
-
-    
-
-

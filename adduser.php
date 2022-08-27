@@ -1,8 +1,8 @@
 <?php include 'layouts/header.php';
- 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $adduser = $create->insertAdmin($_POST);
-  }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $adduser = $create->insertAdmin($_POST);
+}
 
 ?>
 <!-- Container Fluid-->
@@ -24,10 +24,10 @@
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Create Admin</h6>
         </div>
-        <?php 
-          if (isset($adduser)){
-              echo $adduser;
-          }  
+        <?php
+        if (isset($adduser)) {
+          echo $adduser;
+        }
         ?>
         <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
@@ -36,7 +36,7 @@
               <label>First Name</label>
               <input name="first_name" type="text" class="form-control" placeholder="Enter first name">
             </div>
-            
+
             <div class="form-group">
               <label>Last Name</label>
               <input name="last_name" type="text" class="form-control" placeholder="Enter last name">
@@ -44,19 +44,19 @@
 
             <div class="form-group">
               <label>Email</label>
-              <input name="email" type="email" class="form-control" placeholder="Enter email address" >
+              <input name="email" type="email" class="form-control" placeholder="Enter email address">
             </div>
 
             <div class="form-group">
               <label>Password</label>
-              <input name="password" type="text" class="form-control" placeholder="Enter password" >
+              <input name="password" type="text" class="form-control" placeholder="Enter password">
             </div>
 
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
+              <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">+8801</span>
-                </div>
-                <input type="number" min=0 class="form-control" placeholder="" name="phone" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <input type="number" min=0 class="form-control" placeholder="" name="phone" aria-label="Username" aria-describedby="basic-addon1">
             </div>
 
             <div class="form-group">
@@ -68,9 +68,9 @@
                 <option value="2">Employee</option>
               </select>
             </div>
-          
+
             <button type="submit" class="btn btn-primary">Submit</button>
-            
+
           </form>
         </div>
       </div>
@@ -78,4 +78,4 @@
   </div>
 </div>
 
-<?php include 'layouts/footer.php';?>
+<?php include 'layouts/footer.php'; ?>

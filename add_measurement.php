@@ -1,8 +1,8 @@
 <?php include 'layouts/header.php';
- 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $addMeasurement = $measure->addMeasurement($_POST);
-  }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $addMeasurement = $measure->addMeasurement($_POST);
+}
 
 ?>
 
@@ -25,41 +25,42 @@
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Add Customer Measurement</h6>
         </div>
-        <?php 
-          if (isset($addMeasurement)){
-              echo $addMeasurement;
-          }  
+        <?php
+        if (isset($addMeasurement)) {
+          echo $addMeasurement;
+        }
         ?>
         <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
-          
-          <div class="form-group">
-            <label>Customer Name</label><br>
-            <select id="select" name="cus_id" class="form-control">
-              <option>Select Customer</option>
-              <?php
+
+            <div class="form-group">
+              <label>Customer Name</label><br>
+              <select id="select" name="cus_id" class="form-control">
+                <option>Select Customer</option>
+                <?php
                 $query = "select * from tbl_customer where soft_delete=0";
-                $cusid = $cloth -> select($query);
-                if($cusid){
-                    while($result = $cusid->fetch_assoc()){                             
-              ?>
-              <option value="<?php echo $result['cus_id'];?>"><?php echo $result['cus_name'];?></option>
-              <?php } } ?>
-            </select>
-          </div>
+                $cusid = $cloth->select($query);
+                if ($cusid) {
+                  while ($result = $cusid->fetch_assoc()) {
+                ?>
+                    <option value="<?php echo $result['cus_id']; ?>"><?php echo $result['cus_name']; ?></option>
+                <?php }
+                } ?>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <label>Measurement For</label>
-            <input name="measurement_for" type="text" class="form-control" placeholder="">
-          </div>
+            <div class="form-group">
+              <label>Measurement For</label>
+              <input name="measurement_for" type="text" class="form-control" placeholder="">
+            </div>
 
-          <div class="form-group">
-            <label>Measurement Details</label>
-            <textarea class="ckeditor form-control" id="myEditor" name="measurement_details" cols="" rows="3" placeholder="Enter Measurement Details"></textarea>
-          </div> 
-        
-          <button type="submit" class="btn btn-primary">Submit</button>
-          
+            <div class="form-group">
+              <label>Measurement Details</label>
+              <textarea class="ckeditor form-control" id="myEditor" name="measurement_details" cols="" rows="3" placeholder="Enter Measurement Details"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
           </form>
         </div>
       </div>
@@ -67,4 +68,4 @@
   </div>
 </div>
 
-<?php include 'layouts/footer.php';?>
+<?php include 'layouts/footer.php'; ?>

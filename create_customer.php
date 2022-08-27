@@ -1,8 +1,8 @@
 <?php include 'layouts/header.php';
- 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $addCustomer = $customer->insertCustomer($_POST);
-  }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $addCustomer = $customer->insertCustomer($_POST);
+}
 ?>
 <!-- Container Fluid-->
 <div class="container-fluid" id="container-wrapper">
@@ -23,41 +23,41 @@
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Add New Customer</h6>
         </div>
-        <?php 
-          if (isset($addCustomer)){
-              echo $addCustomer;
-          }  
+        <?php
+        if (isset($addCustomer)) {
+          echo $addCustomer;
+        }
         ?>
         <div class="card-body">
           <form method="POST" enctype="multipart/form-data">
-              <div class="form-group">
-                <label>Name</label>
-                <input name="cus_name" type="text" class="form-control" placeholder="Enter name" >
-              </div>
+            <div class="form-group">
+              <label>Name</label>
+              <input name="cus_name" type="text" class="form-control" placeholder="Enter name">
+            </div>
 
-              <div class="form-group">
-                <label>Email</label>
-                <input name="cus_email" type="email" class="form-control" placeholder="Enter email" >
-              </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input name="cus_email" type="email" class="form-control" placeholder="Enter email">
+            </div>
 
-              <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">+8801</span>
-                  </div>
-                  <input type="number" min=0 class="form-control" placeholder="" name="cus_phone" aria-label="Username" aria-describedby="basic-addon1">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">+8801</span>
               </div>
-              
-              <div class="form-group">
-                <label>Address</label>
-                <textarea class="ckeditor form-control"  name="cus_address" cols="" rows="3"></textarea>
-              </div>
-              
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+              <input type="number" min=0 class="form-control" placeholder="" name="cus_phone" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="form-group">
+              <label>Address</label>
+              <textarea class="ckeditor form-control" name="cus_address" cols="" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<?php include 'layouts/footer.php';?>
+<?php include 'layouts/footer.php'; ?>
