@@ -157,7 +157,6 @@ if (isset($_GET['delCart'])) {
               if ($view->num_rows > 0) {
                 foreach ($view as $value) {
                   $subtotal = ($value['selling_price'] * $value['quantity']) + $value['charge'];
-                  $discount = ($value['discount'] / 100 * $subtotal);
               ?>
                   <tr>
                     <td><?php echo $i += 1; ?></td>
@@ -166,7 +165,7 @@ if (isset($_GET['delCart'])) {
                     <td><?php echo $value['cloth_name']; ?></td>
                     <td><?php echo $value['selling_price']; ?> BDT</td>
                     <td><?php echo $value['charge']; ?> BDT</td>
-                    <td><?php echo $discount = ($value['discount'] / 100 * $subtotal); ?> BDT</td>
+                    <td><?php echo $discount = ($value['discount'] / 100) * $value['selling_price']; ?> BDT</td>
                     <td><?php echo $value['quantity']; ?></td>
                     <td><?php echo $subtotal - $discount; ?> BDT</td>
                     </td>
