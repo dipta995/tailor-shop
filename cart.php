@@ -156,7 +156,7 @@ if (isset($_GET['delCart'])) {
               $view = $cart->viewCart();
               if ($view->num_rows > 0) {
                 foreach ($view as $value) {
-                  $subtotal = ($value['selling_price'] * $value['quantity']) + $value['charge'];
+                  $subtotal = ($value['selling_price'] * $value['quantity']);
                   $discount = ($value['discount'] * $subtotal)/ 100;
               ?>
                   <tr>
@@ -168,7 +168,7 @@ if (isset($_GET['delCart'])) {
                     <td><?php echo $value['charge']; ?> BDT</td>
                     <td><?php echo $discount; ?> BDT</td>
                     <td><?php echo $value['quantity']; ?></td>
-                    <td><?php echo $subtotal - $discount; ?> BDT</td>
+                    <td><?php echo ($subtotal - $discount) + $value['charge']; ?> BDT</td>
                     </td>
                     <td>
                       <a onclick="return confirm('Are you sure to Delete?');" href="?delCart=<?php echo $value['cartid']; ?>" class="btn btn-sm btn-danger">Delete</a>
