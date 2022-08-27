@@ -22,7 +22,7 @@ class EmployeeClass extends DB
         $res = $this->conn->query($query);
 
         if (empty($emp_name) || empty($emp_job_status) || empty($emp_email) || empty($emp_phone) || empty($emp_salary) || empty($emp_address)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
         } elseif (!preg_match("/^[a-zA-z ]*$/", $emp_name)) {
             $txt = "<div class='alert alert-danger'>Only alphabets and whitespace are allowed for first name!</div>";
@@ -31,7 +31,7 @@ class EmployeeClass extends DB
             $txt = "<div class='alert alert-danger'>This Email has already been Registered!</div>";
             return $txt;
         } elseif (strlen($emp_phone) != 9) {
-            $txt = "<div class='alert alert-danger'>Mobile must have 9 digits.</div>";
+            $txt = "<div class='alert alert-danger'>Mobile must have 9 digits!</div>";
             return $txt;
         } elseif (strlen($emp_address) > 200) {
             $txt = "<div class='alert alert-danger'>200 Digit limitation!</div>";
@@ -64,7 +64,7 @@ class EmployeeClass extends DB
                     $qry = "INSERT into admin_table(admin_email,admin_password,admin_status) values('$emp_email','12','1')";
                     $result = $this->conn->query($qry);
                 } elseif ($result) {
-                    $txt = "<div class='alert alert-success'>Employee Created Successfully!</div>";
+                    $txt = "<div class='alert alert-success'>Employee Created Successfully.</div>";
                     return $txt;
                 }
             }
@@ -95,7 +95,7 @@ class EmployeeClass extends DB
 
 
         if (empty($emp_name) || empty($emp_job_status) || empty($emp_email) || empty($emp_phone) || empty($emp_salary) || empty($emp_address)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty !!</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
         } elseif (!preg_match("/^[a-zA-z ]*$/", $emp_name)) {
             $txt = "<div class='alert alert-danger'>Only alphabets and whitespace are allowed for first name!</div>";
@@ -127,7 +127,7 @@ class EmployeeClass extends DB
                 WHERE emp_id           = '$empid'";
                 $result = $this->conn->query($qry);
                 if ($result) {
-                    $txt = "<div class='alert alert-success'>Updated Successfully!</div>";
+                    $txt = "<div class='alert alert-success'>Updated Successfully.</div>";
                     return $txt;
                 }
             }
@@ -143,7 +143,7 @@ class EmployeeClass extends DB
             WHERE emp_id           = '$empid'";
             $result = $this->conn->query($qry);
             if ($result) {
-                $txt = "<div class='alert alert-success'>Updated Successfully!</div>";
+                $txt = "<div class='alert alert-success'>Updated Successfully.</div>";
                 return $txt;
             }
         }
@@ -252,7 +252,7 @@ class EmployeeClass extends DB
         $qry = "DELETE  FROM employee_table WHERE emp_id=$id";
         $result = $this->conn->query($qry);
         if ($result) {
-            $txt = "<div class='alert alert-success'>Employee Removed Successfully!</div>";
+            $txt = "<div class='alert alert-success'>Employee Removed Successfully.</div>";
             return $txt;
         } else {
             $txt = "<div class='alert alert-danger'>Something went wrong!</div>";

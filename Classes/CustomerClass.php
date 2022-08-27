@@ -22,7 +22,7 @@ class CustomerClass extends DB
         $res = $this->conn->query($query);
 
         if (empty($cus_name) || empty($cus_email) || empty($cus_phone) || empty($cus_address)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
         } elseif (!preg_match("/^[a-zA-z ]*$/", $cus_name)) {
             $txt = "<div class='alert alert-danger'>Only alphabets and whitespace are allowed for First name!</div>";
@@ -31,7 +31,7 @@ class CustomerClass extends DB
             $txt = "<div class='alert alert-danger'>This Email has already been Registered!</div>";
             return $txt;
         } elseif (strlen($cus_phone) != 9) {
-            $txt = "<div class='alert alert-danger'>Mobile must have 9 digits.</div>";
+            $txt = "<div class='alert alert-danger'>Mobile must have 9 digits!</div>";
             return $txt;
         } elseif (strlen($cus_address) > 200) {
             $txt = "<div class='alert alert-danger'>200 Digit limitation!</div>";
@@ -40,7 +40,7 @@ class CustomerClass extends DB
             $query = "INSERT into tbl_customer(cus_name, cus_email, cus_phone, cus_address) values('$cus_name', '$cus_email', '$mobileno', '$cus_address')";
             $result = $this->conn->query($query);
             if ($result) {
-                $txt = "<div class='alert alert-success'>Successfully Inserted!</div>";
+                $txt = "<div class='alert alert-success'>Successfully Inserted.</div>";
                 return $txt;
             }
         }
@@ -68,10 +68,10 @@ class CustomerClass extends DB
         $res = $this->conn->query($query);
 
         if (empty($cus_name) || empty($cus_phone) || empty($cus_address)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
         } elseif (!preg_match("/^[a-zA-Z ]*$/", $cus_name)) {
-            $txt = "<div class='alert alert-danger'>Only alphabets and whitespace are allowed For First name!</div>";
+            $txt = "<div class='alert alert-danger'>Only alphabets and whitespace are allowed for first name!</div>";
             return $txt;
         } elseif (strlen($cus_phone) != 9) {
             $txt = "<div class='alert alert-danger'>Mobile must have 9 digits!</div>";
@@ -89,7 +89,7 @@ class CustomerClass extends DB
 
             $result = $this->conn->query($query);
             if ($result) {
-                $txt = "<div class='alert alert-success'>Successfully updated!</div>";
+                $txt = "<div class='alert alert-success'>Successfully updated.</div>";
                 return $txt;
             }
         }
@@ -112,7 +112,7 @@ class CustomerClass extends DB
                 WHERE cus_id = $id";
         $result = $this->conn->query($query);
         if ($result === TRUE) {
-            $txt = "<div class='alert alert-success'>Successfully Deleted!</div>";
+            $txt = "<div class='alert alert-success'>Successfully Deleted.</div>";
             return $txt;
         }
     }

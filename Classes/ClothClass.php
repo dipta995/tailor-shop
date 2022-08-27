@@ -45,7 +45,7 @@ class ClothClass extends DB
             $query = "INSERT into tbl_cloth(cloth_name, type, details, image, stock, color, brand, buying_price, selling_price, discount) values('$cloth_name', '$type', '$details', '$uploaded_image', '$stock', '$color', '$brand', '$buying_price', '$selling_price', '$discount')";
             $result = $this->conn->query($query);
             if($result){
-                $txt = "<div class='alert alert-success'>Successfully Inserted!</div>";
+                $txt = "<div class='alert alert-success'>Successfully Inserted.</div>";
                 return $txt;
             }
         }
@@ -74,7 +74,7 @@ class ClothClass extends DB
                 WHERE id     = $id";
         $result = $this->conn->query($query);
         if($result === TRUE){
-            $txt = "<div class='alert alert-success'>Successfully Deleted!</div>";
+            $txt = "<div class='alert alert-success'>Successfully Deleted.</div>";
             return $txt;
         }
     }
@@ -100,7 +100,7 @@ class ClothClass extends DB
 
             $result = $this->conn->query($query);
             if ($result) {
-                $txt = "<div class='alert alert-success'>Successfully updated!</div>";
+                $txt = "<div class='alert alert-success'>Successfully updated.</div>";
                 return $txt;
             }
         }
@@ -162,7 +162,7 @@ class ClothClass extends DB
 
                     $result = $this->conn->query($query);
                     if ($result) {
-                        $txt = "<div class='alert alert-success'>Successfully updated!</div>";
+                        $txt = "<div class='alert alert-success'>Successfully updated.</div>";
                         return $txt;
                     }
                 }
@@ -181,7 +181,7 @@ class ClothClass extends DB
                 WHERE id        = '$clothid' ";
                 $result = $this->conn->query($query);
                 if ($result) {
-                    $txt = "<div class='alert alert-success'>Successfully updated!</div>";
+                    $txt = "<div class='alert alert-success'>Successfully updated.</div>";
                     return $txt;
                 }
             }
@@ -219,7 +219,7 @@ class ClothClass extends DB
             $query = "INSERT into cloth_type(name) values('$name')";
             $result = $this->conn->query($query);
             if($result){
-                $txt = "<div class='alert alert-success'>Successfully Inserted!</div>";
+                $txt = "<div class='alert alert-success'>Successfully Inserted.</div>";
                 return $txt;
             }
         }
@@ -233,7 +233,7 @@ class ClothClass extends DB
                 WHERE id     = $id";
         $result = $this->conn->query($query);
         if($result === TRUE){
-            echo $txt = "<div class='alert alert-success'>Successfully Deleted!</div>";
+            echo $txt = "<div class='alert alert-success'>Successfully Deleted.</div>";
         }
     }    
 }

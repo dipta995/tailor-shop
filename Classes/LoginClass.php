@@ -23,7 +23,7 @@ class LoginClass extends DB
             echo "<script> window.location = 'index.php';</script>";
             }
             else{
-            $txt ="<div class='alert alert-danger'>Incorrect email and password...!</div>";  
+            $txt ="<div class='alert alert-danger'>Incorrect email and password!</div>";  
             return $txt;
         }
     }
@@ -65,7 +65,7 @@ class LoginClass extends DB
             $txt = "<div class='alert alert-danger'>This mobile no. has already been Registered!</div>";
             return $txt;
         }elseif ( strlen ($phone) != 9) {  
-            $txt = "<div class='alert alert-danger'>Mobile must have 9 digits.</div>";  
+            $txt = "<div class='alert alert-danger'>Mobile must have 9 digits!</div>";  
             return $txt;
         }elseif ( strlen ($password) < 6) {  
             $txt = "<div class='alert alert-danger'>Password must have 6 digits.</div>";  
@@ -75,7 +75,7 @@ class LoginClass extends DB
             $result = $this->conn->query($qry);
             
             if($result){
-                $txt = "<div class='alert alert-success'>Registered Successfully!</div>";
+                $txt = "<div class='alert alert-success'>Registered Successfully.</div>";
                 return $txt;
             }
         }           
@@ -90,7 +90,7 @@ class LoginClass extends DB
         $mobileno = $def.$phone;
 
         if (empty($first_name) || empty($last_name) || empty($phone)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
         }elseif (!preg_match ("/^[a-zA-z]*$/", $first_name) ){
             $txt = "<div class='alert alert-danger'>Only alphabets and whitespace are allowed for first name!</div>";
@@ -99,7 +99,7 @@ class LoginClass extends DB
             $txt = "<div class='alert alert-danger'>Only alphabets and whitespace are allowed for last name!</div>";
             return $txt;
         }elseif ( strlen ($phone) != 9) {  
-            $txt = "<div class='alert alert-danger'>Mobile must have 9 digits.</div>";
+            $txt = "<div class='alert alert-danger'>Mobile must have 9 digits!</div>";
             return $txt;                
         }else{  
             $query = "UPDATE tbl_admin
@@ -110,7 +110,7 @@ class LoginClass extends DB
             WHERE id        = '$userid'";
             $result = $this->conn->query($query);
             if($result){
-                $txt = "<div class='alert alert-success'>Updated Successfully!</div>";
+                $txt = "<div class='alert alert-success'>Updated Successfully.</div>";
                 return $txt;
             }
         }
@@ -159,7 +159,7 @@ class LoginClass extends DB
                 WHERE id     = $id";
         $result = $this->conn->query($query);
         if($result === TRUE){
-            $txt = "<div class='alert alert-success'>Successfully Deleted</div>";
+            $txt = "<div class='alert alert-success'>Successfully Deleted.</div>";
             return $txt;
         }
     }

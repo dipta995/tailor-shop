@@ -42,7 +42,7 @@ class CartClass extends DB
             $this->conn->query($updatQquery);
 
             if ($result) {
-                $txt = "<div class='alert alert-success'>Data Inserted Successfully!</div>";
+                $txt = "<div class='alert alert-success'>Data Inserted Successfully.</div>";
                 return $txt;
             }
         }
@@ -60,7 +60,7 @@ class CartClass extends DB
         $result = $this->conn->query($query);
 
         if (empty($customer_id) || empty($delivery_at)) {
-            $txt = "<div class='alert alert-danger'>Field must not be empty</div>";
+            $txt = "<div class='alert alert-danger'>Field must not be empty!</div>";
             return $txt;
         } else {
             foreach ($result as $value) {
@@ -84,7 +84,7 @@ class CartClass extends DB
             $delque = "DELETE FROM tbl_cart ";
             $delete = $this->conn->query($delque);
             if ($delete) {
-                $txt = "<div class='alert alert-success'>Data Deleted Successfully!</div>";
+                $txt = "<div class='alert alert-success'>Data Deleted Successfully.</div>";
                 return $txt;
             }
         }
@@ -178,7 +178,7 @@ class CartClass extends DB
         $this->conn->query($updatQquery);
 
         if ($updatQquery === TRUE) {
-            $txt = "<div class='alert alert-success'>Successfully Deleted</div>";
+            $txt = "<div class='alert alert-success'>Successfully Deleted.</div>";
             return $txt;
         }
     }
@@ -198,7 +198,7 @@ class CartClass extends DB
                 WHERE slip_no    = $id";
         $result = $this->conn->query($query);
         if ($result === TRUE) {
-            $txt = "<div class='alert alert-success'>Delivery Successful !</div>";
+            $txt = "<div class='alert alert-success'>Delivery Successful.</div>";
             return $txt;
         }
     }
