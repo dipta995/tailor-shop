@@ -85,12 +85,13 @@ class CartClass extends DB
             $delque = "DELETE FROM tbl_cart ";
             $delete = $this->conn->query($delque);
             if ($delete) {
-                $query = "SELECT * FROM tbl_slip WHERE slip_no = $time";
+                $query = "SELECT * FROM tbl_slip LEFT JOIN tbl_customer ON tbl_slip.customer_id = tbl_customer.cus_id WHERE slip_no = $time";
                 $result = $this->conn->query($query);
                 if($result) {
+                    $valuedata = mysqli_fetch_array($result);
                     $txt = "<div class='alert alert-success'>Order Successful!
-                    Your Slip no is : $time
-                    </div>";
+                    Name:". $valuedata['cus_name'] ."Your Slip no is :". $time
+                ."</div>";
                     return $txt;
                     
                 }
