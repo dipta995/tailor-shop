@@ -19,33 +19,36 @@ if (isset($_GET['delorder'])) {
     </div>
     <div class="row">
         <div class="col-lg-12 mb-4">
-            <div class="table-responsive p-3">
-                <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Buying Price</th>
-                            <th>Selling Price</th>
-                            <th>Charge</th>
-                            <th>Total Profit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $i = 0;
-                        $view = $cart->viewProfit();
-                        foreach ($view as $value) {
-
-                        ?>
+            <div class="card">
+                <div class="table-responsive p-3">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
                             <tr>
-                                <td><?php echo $value['sum_buyingprice']; ?> BDT</td>
-                                <td><?php echo $value['sum_sellingprice']; ?> BDT</td>
-                                <td><?php echo $value['sum_charge']; ?> BDT</td>
-                                <td><?php echo (($value['sum_sellingprice'] + $value['sum_charge'])) -  $value['sum_buyingprice'] ?> BDT
-                                </td>
+                                <th>Buying Price</th>
+                                <th>Selling Price</th>
+                                <th>Discount</th>
+                                <th>Charge</th>
+                                <th>Total Profit</th>
                             </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $i = 0;
+                            $view = $cart->viewProfit();
+                            foreach ($view as $value) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $value['sum_buyingprice']; ?> BDT</td>
+                                    <td><?php echo $value['sum_sellingprice']; ?> BDT</td>
+                                    <td><?php echo $discount = $value['sum_discount'] / 100 *  $value['sum_sellingprice']; ?> BDT</td>
+                                    <td><?php echo $value['sum_charge']; ?> BDT</td>
+                                    <td><?php echo (($value['sum_sellingprice'] + $value['sum_charge'])) - ($value['sum_buyingprice'] + $discount); ?> BDT
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -55,9 +58,8 @@ if (isset($_GET['delorder'])) {
         <input type="text" name="search" required>
         <input type="submit" value="Search">
     </form>
-
-
     <hr>
+
     <div class="row">
         <div class="col-lg-12 mb-4">
             <!-- Simple Tables -->
@@ -95,6 +97,7 @@ if (isset($_GET['delorder'])) {
                                     <tr>
                                         <td><?php echo $i; ?></td>
                                         <td><strong>Slip No: <?php echo $slip_no; ?></strong></td>
+                                        <td><strong>Customer Name: <?php echo $value['cus_name']; ?></strong></td>
                                         <td><strong>Order at: </strong><?php echo $value['order_at']; ?></td>
                                         <td><strong>Delivery at: </strong><?php echo $value['delivery_at']; ?></td>
                                         <td><strong>Total Payment: </strong><?= $total_price; ?> BDT</td>
@@ -104,7 +107,6 @@ if (isset($_GET['delorder'])) {
                                             echo "<td><p style='color:green;'>Confirmed</p></td>";
                                         } else {
                                         ?>
-
                                             <td>
                                                 <a href="?delorder=<?php echo $value['slip_no']; ?>" class="btn btn-sm btn-danger">Confirm</a>
                                             </td>
@@ -115,17 +117,19 @@ if (isset($_GET['delorder'])) {
 
                                 <tbody id="panel<?php echo $i; ?>">
                                     <tr>
-                                        <th width="10%">Order No.</th>
-                                        <th width="20%">Customer Name</th>
-                                        <th width="20%">Measurement Details</th>
-                                        <th width="20%">Cloth Name</th>
-                                        <th width="20%">Quantity</th>
+                                        <th></th>
+                                        <th>Order No.</th>
+                                        <th>Order Name</th>
+                                        <th>Measurement Details</th>
+                                        <th>Cloth Name</th>
+                                        <th>Quantity</th>
                                     </tr>
                                     <?php
                                     $orders = $cart->slipOrder($slip_no);
                                     foreach ($orders as $order) {
                                     ?>
                                         <tr>
+                                            <td></td>
                                             <td><?php echo $order['orderid']; ?></td>
                                             <td><?php echo $order['cus_name']; ?></td>
                                             <td><?php echo $order['measurement_details']; ?></td>
@@ -147,7 +151,6 @@ if (isset($_GET['delorder'])) {
                                     });
                                 </script>
                                 <!-- jQuery Library -->
-
                         <?php }
                         } ?>
                     </table>

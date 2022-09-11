@@ -42,7 +42,7 @@ class CartClass extends DB
             $this->conn->query($updatQquery);
 
             if ($result) {
-                $txt = "<div class='alert alert-success'>Data Inserted Successfully.</div>";
+                $txt = "<div class='alert alert-success'>Data Inserted Successfully</div>";
                 return $txt;
             }
         }
@@ -80,12 +80,20 @@ class CartClass extends DB
 
         $query = "INSERT into tbl_slip(slip_no, customer_id, order_at, delivery_at) values('$time','$customer_id', '$order_at', '$delivery_at')";
         $result = $this->conn->query($query);
+
         if ($result) {
             $delque = "DELETE FROM tbl_cart ";
             $delete = $this->conn->query($delque);
             if ($delete) {
-                $txt = "<div class='alert alert-success'>Data Deleted Successfully.</div>";
-                return $txt;
+                $query = "SELECT * FROM tbl_slip WHERE slip_no = $time";
+                $result = $this->conn->query($query);
+                if($result) {
+                    $txt = "<div class='alert alert-success'>Order Successful!
+                    Your Slip no is : $time
+                    </div>";
+                    return $txt;
+                    
+                }
             }
         }
     }
@@ -104,9 +112,8 @@ class CartClass extends DB
     public function viewSlip()
     {
         $query = "SELECT * FROM tbl_slip
-        LEFT JOIN tbl_customer ON tbl_slip.customer_id = tbl_customer.cus_id
-        LEFT JOIN tbl_order ON tbl_slip.slip_no = tbl_order.slip_no
-        WHERE tbl_slip.soft_delete=0 order by tbl_order.soft_delete asc";
+        LEFT JOIN tbl_customer ON tbl_slip.customer_id = tbl_customer.cus_id 
+        WHERE tbl_slip.soft_delete=0 order by tbl_slip.soft_delete asc";
         $result = $this->conn->query($query);
         return $result;
     }
@@ -124,8 +131,9 @@ class CartClass extends DB
 
     public function slipOrder($slip_no)
     {
-        $query = "SELECT tbl_order.*, tbl_customer.*, tbl_measurement.*, tbl_cloth.*, tbl_order.id AS orderid, tbl_order.selling_price AS sellingprice FROM tbl_order 
-        LEFT JOIN tbl_customer ON tbl_order.cus_id = tbl_customer.cus_id
+        $query = "SELECT tbl_order.*, tbl_customer.*, tbl_measurement.*, tbl_cloth.*, tbl_order.id 
+        AS orderid, tbl_order.selling_price AS sellingprice, tbl_order.discount AS discount FROM tbl_order 
+        LEFT JOIN tbl_customer ON tbl_order.cus_id = tbl_customer.cus_id 
         LEFT JOIN tbl_measurement ON tbl_order.mes_id = tbl_measurement.id
         LEFT JOIN tbl_cloth ON tbl_order.cloth_id = tbl_cloth.id
         WHERE slip_no = $slip_no";
@@ -133,9 +141,17 @@ class CartClass extends DB
         return $result;
     }
 
+    public function totalPayment()
+    {
+        $query = "SELECT * FROM tbl_order";
+        $result = $this->conn->query($query);
+        return $result;
+    }
+
     public function viewProfit()
     {
-        $query = "SELECT SUM(buying_price) AS sum_buyingprice, SUM(selling_price) AS sum_sellingprice, SUM(charge) AS sum_charge FROM tbl_order order by tbl_order.id desc";
+        $query = "SELECT SUM(buying_price) AS sum_buyingprice, SUM(selling_price) AS sum_sellingprice, 
+        SUM(discount) AS sum_discount, SUM(charge) AS sum_charge FROM tbl_order order by tbl_order.id desc";
         $result = $this->conn->query($query);
         return $result;
     }
@@ -173,19 +189,19 @@ class CartClass extends DB
         $cartdata = $this->conn->query($query);
         $updatQquery = "UPDATE tbl_cloth
         SET
-        stock  = $stock+$quantity
+        stock        = $stock + $quantity
         WHERE id     = $cloth_id";
         $this->conn->query($updatQquery);
 
         if ($updatQquery === TRUE) {
-            $txt = "<div class='alert alert-success'>Successfully Deleted.</div>";
+            $txt = "<div class='alert alert-success'>Successfully Deleted</div>";
             return $txt;
         }
     }
 
     public function selectAllMeasurement($id)
     {
-        $query = "SELECT * FROM tbl_measurement WHERE cus_id = '$id'";
+        $query = "SELECT * FROM tbl_measurement WHERE cus_id = '$id' and soft_delete = 0";
         $result = $this->conn->query($query);
         return $result;
     }
@@ -198,7 +214,7 @@ class CartClass extends DB
                 WHERE slip_no    = $id";
         $result = $this->conn->query($query);
         if ($result === TRUE) {
-            $txt = "<div class='alert alert-success'>Delivery Successful.</div>";
+            $txt = "<div class='alert alert-success'>Delivery Successful</div>";
             return $txt;
         }
     }
