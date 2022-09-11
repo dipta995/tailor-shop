@@ -118,7 +118,7 @@ if (isset($_GET['delCart'])) {
           </div>
           <div class="form-group">
             <label>Quantity</label>
-            <input name="quantity" type="text" class="form-control" placeholder="Enter Quantity">
+            <input name="quantity" type="number" step="0.1" min="0" class="form-control" placeholder="Enter Quantity">
           </div>
 
           <button name="add_to_cart" type="submit" class="btn btn-primary">Submit</button>

@@ -165,8 +165,8 @@ class CartClass extends DB
         $value = mysqli_fetch_array($cartdata);
         $cloth_id = $value['cloth_id'];
         $quantity = $value['quantity'];
-        $cartQuery  = "SELECT * FROM tbl_cloth WHERE id = $cloth_id";
-        $cartdata = $this->conn->query($cartQuery);
+        $clothQuery  = "SELECT * FROM tbl_cloth WHERE id = $cloth_id";
+        $cartdata = $this->conn->query($clothQuery);
         $valueCloth = mysqli_fetch_array($cartdata);
         $stock = $valueCloth['stock'];
         $query = "Delete from tbl_cart  WHERE id = $id";
