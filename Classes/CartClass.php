@@ -90,7 +90,7 @@ class CartClass extends DB
                 if($result) {
                     $valuedata = mysqli_fetch_array($result);
                     $txt = "<div class='alert alert-success'>Order Successful!
-                    Name:". $valuedata['cus_name'] ."Your Slip no is :". $time
+                    Name: ". $valuedata['cus_name'] ." Slip no: ". $time
                 ."</div>";
                     return $txt;
                     
@@ -133,7 +133,7 @@ class CartClass extends DB
     public function slipOrder($slip_no)
     {
         $query = "SELECT tbl_order.*, tbl_customer.*, tbl_measurement.*, tbl_cloth.*, tbl_order.id 
-        AS orderid, tbl_order.selling_price AS sellingprice, tbl_order.discount AS discount FROM tbl_order 
+        AS orderid, tbl_order.selling_price AS sellingprice FROM tbl_order 
         LEFT JOIN tbl_customer ON tbl_order.cus_id = tbl_customer.cus_id 
         LEFT JOIN tbl_measurement ON tbl_order.mes_id = tbl_measurement.id
         LEFT JOIN tbl_cloth ON tbl_order.cloth_id = tbl_cloth.id
@@ -151,8 +151,7 @@ class CartClass extends DB
 
     public function viewProfit()
     {
-        $query = "SELECT SUM(buying_price) AS sum_buyingprice, SUM(selling_price) AS sum_sellingprice, 
-        SUM(discount) AS sum_discount, SUM(charge) AS sum_charge FROM tbl_order order by tbl_order.id desc";
+        $query = "SELECT * FROM tbl_order order by tbl_order.id desc";
         $result = $this->conn->query($query);
         return $result;
     }
@@ -222,7 +221,8 @@ class CartClass extends DB
 
     public function orderCheck($slip_no)
     {
-        $result = $this->conn->query("SELECT * FROM tbl_order WHERE slip_no = '$slip_no' && soft_delete = 1");
+        $query = "SELECT * FROM tbl_order WHERE slip_no = '$slip_no' AND soft_delete = 1";
+        $result = $this->conn->query($query);
         return mysqli_num_rows($result);
     }
 }

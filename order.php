@@ -20,13 +20,16 @@ if (isset($_GET['delorder'])) {
     <div class="row">
         <div class="col-lg-12 mb-4">
             <div class="card">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Total Profit</h6>
+                </div>
+
                 <div class="table-responsive p-3">
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
                                 <th>Buying Price</th>
                                 <th>Selling Price</th>
-                                <th>Discount</th>
                                 <th>Charge</th>
                                 <th>Total Profit</th>
                             </tr>
@@ -34,31 +37,33 @@ if (isset($_GET['delorder'])) {
                         <tbody>
                             <?php
                             $i = 0;
+                            $buying_price = 0;
+                            $selling_price = 0;
+                            $charge = 0;
+
                             $view = $cart->viewProfit();
                             foreach ($view as $value) {
-                            ?>
-                                <tr>
-                                    <td><?php echo $value['sum_buyingprice']; ?> BDT</td>
-                                    <td><?php echo $value['sum_sellingprice']; ?> BDT</td>
-                                    <td><?php echo $discount = $value['sum_discount'] / 100 *  $value['sum_sellingprice']; ?> BDT</td>
-                                    <td><?php echo $value['sum_charge']; ?> BDT</td>
-                                    <td><?php echo (($value['sum_sellingprice'] + $value['sum_charge'])) - ($value['sum_buyingprice'] + $discount); ?> BDT
-                                    </td>
-                                </tr>
+                                $buying_price += $value['buying_price']*$value['quantity'];
+                                $selling_price += ($value['selling_price'] - ($value['discount'] / 100 * $value['selling_price'])) * $value['quantity'];
+                                $charge += $value['charge'];
+                                 
+                                ?>
+   
                             <?php } ?>
+                            <tr>
+                                <td><?php echo $buying_price; ?> BDT</td>
+                                <td><?php echo $selling_price; ?> BDT</td>
+                                <td><?php echo $charge; ?> BDT</td>
+                                <td><?php echo $total = $selling_price + $charge - $buying_price; ?> BDT</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>
 
-    <!-- Search box. -->
-    <form action="order.php" method="GET">
-        <input type="text" name="search" required>
-        <input type="submit" value="Search">
-    </form>
-    <hr>
 
     <div class="row">
         <div class="col-lg-12 mb-4">
@@ -66,6 +71,13 @@ if (isset($_GET['delorder'])) {
             <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Order List</h6>
+                </div>
+                <!-- Search box. -->
+                <div class="form-control">
+                    <form action="order.php" method="GET">
+                        <input type="text" name="search" required>
+                        <input type="submit" value="Search">
+                    </form>
                 </div>
 
                 <div class="table-responsive p-3">
@@ -87,7 +99,7 @@ if (isset($_GET['delorder'])) {
                                 $selling_price = 0;
                                 $charge = 0;
                                 foreach ($calculate as $data) {
-                                    $selling_price += $data['sellingprice'];
+                                    $selling_price += ($data['sellingprice'] - ($data['discount'] / 100 * $data['sellingprice'])) * $data['quantity'];
                                     $charge += $data['charge'];
                                 }
                                 $total_price = $selling_price + $charge;
