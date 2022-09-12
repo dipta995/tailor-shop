@@ -206,7 +206,7 @@ class CartClass extends DB
         return $result;
     }
 
-    public function deleteOrder($id)
+    public function ConfirmOrder($id)
     {
         $query = "UPDATE tbl_order
                 SET
@@ -225,6 +225,14 @@ class CartClass extends DB
         $result = $this->conn->query($query);
         return mysqli_num_rows($result);
     }
-}
 
-?>
+      // View Single Order
+      public function viewSingleOrder($printid){
+        $query  = "SELECT * FROM tbl_slip  
+        LEFT JOIN tbl_customer ON tbl_slip.customer_id = tbl_customer.cus_id 
+        WHERE tbl_slip.id='$printid'";
+        $result = $this->conn->query($query);
+        return $result;
+    }
+
+}

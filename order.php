@@ -1,9 +1,9 @@
 <?php
 include 'layouts/header.php';
 
-if (isset($_GET['delorder'])) {
-    $delorder = $_GET['delorder'];
-    $delete = $cart->deleteOrder($delorder);
+if (isset($_GET['confirm'])) {
+    $confirm = $_GET['confirm'];
+    $delete = $cart->ConfirmOrder($confirm);
     echo $delete;
 }
 ?>
@@ -43,12 +43,12 @@ if (isset($_GET['delorder'])) {
 
                             $view = $cart->viewProfit();
                             foreach ($view as $value) {
-                                $buying_price += $value['buying_price']*$value['quantity'];
+                                $buying_price += $value['buying_price'] * $value['quantity'];
                                 $selling_price += ($value['selling_price'] - ($value['discount'] / 100 * $value['selling_price'])) * $value['quantity'];
                                 $charge += $value['charge'];
-                                 
-                                ?>
-   
+
+                            ?>
+
                             <?php } ?>
                             <tr>
                                 <td><?php echo $buying_price; ?> BDT</td>
@@ -63,7 +63,6 @@ if (isset($_GET['delorder'])) {
             </div>
         </div>
     </div>
-
 
     <div class="row">
         <div class="col-lg-12 mb-4">
@@ -113,6 +112,10 @@ if (isset($_GET['delorder'])) {
                                         <td><strong>Order at: </strong><?php echo $value['order_at']; ?></td>
                                         <td><strong>Delivery at: </strong><?php echo $value['delivery_at']; ?></td>
                                         <td><strong>Total Payment: </strong><?= $total_price; ?> BDT</td>
+                                        <td>
+                                            <a href="print.php?printid=<?php echo $value['id']; ?>" class="btn btn-sm btn-primary">Print</a>
+                                        </td>
+
                                         <?php
                                         $s = $cart->orderCheck($value['slip_no']);
                                         if ($s > 0) {
@@ -120,11 +123,10 @@ if (isset($_GET['delorder'])) {
                                         } else {
                                         ?>
                                             <td>
-                                                <a href="?delorder=<?php echo $value['slip_no']; ?>" class="btn btn-sm btn-danger">Confirm</a>
+                                                <a href="?confirm=<?php echo $value['slip_no']; ?>" class="btn btn-sm btn-danger">Confirm</a>
                                             </td>
                                         <?php } ?>
                                     </tr>
-
                                 </thead>
 
                                 <tbody id="panel<?php echo $i; ?>">
