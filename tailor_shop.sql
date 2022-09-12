@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2022 at 07:53 AM
+-- Generation Time: Sep 12, 2022 at 08:57 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -124,7 +124,7 @@ CREATE TABLE `tbl_admin` (
 INSERT INTO `tbl_admin` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `role`, `created_at`, `soft_delete`) VALUES
 (6, 'Supty', 'Ahmed', 'supty@gmail.com', '+8801300813663', '123456', 0, '2022-06-26 16:21:37', 0),
 (7, 'Dipta', 'Dey', 'dipta@gmail.com', '+8801236587987', '123456', 1, '2022-06-26 16:27:45', 0),
-(8, 'Ayesha', 'Snigdha', 'snigdha@gmail.com', '+8801704576898', '123456', 2, '2022-06-26 20:51:30', 1);
+(8, 'Ayesha', 'Snigdha', 'snigdha@gmail.com', '+8801704576898', '123456', 0, '2022-06-26 20:51:30', 1);
 
 -- --------------------------------------------------------
 
@@ -144,14 +144,6 @@ CREATE TABLE `tbl_cart` (
   `quantity` float(10,2) NOT NULL,
   `soft_delete` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_cart`
---
-
-INSERT INTO `tbl_cart` (`id`, `cus_id`, `mes_id`, `cloth_id`, `buying_price`, `selling_price`, `charge`, `discount`, `quantity`, `soft_delete`) VALUES
-(25, 4, 8, 17, 355, 500, 400, 15, 1.00, 0),
-(26, 7, 15, 18, 331, 850, 500, 10, 2.50, 0);
 
 -- --------------------------------------------------------
 
@@ -181,10 +173,10 @@ CREATE TABLE `tbl_cloth` (
 
 INSERT INTO `tbl_cloth` (`id`, `cloth_name`, `type`, `details`, `image`, `stock`, `color`, `brand`, `buying_price`, `selling_price`, `discount`, `created_at`, `soft_delete`) VALUES
 (16, 'Dacey Reyes', 3, 'Enim cupiditate ad e', 'upload/383b714895.jpg', '100', 'Nihil est pariatur ', 'Cupiditate molestiae', 289, 924, 10, '2022-06-19 13:16:04', 1),
-(17, 'Zephr Wilder', 6, 'Et officiis non recu', 'upload/f4864369fa.jpg', '117.88', 'Ut enim voluptatem ', 'Expedita aliquid lab', 355, 500, 15, '2022-06-19 13:19:43', 0),
-(18, 'Melvin Ellis', 4, 'Magna sit ut nisi fa', 'upload/e9755f27c2.jpg', '97.50', 'Dolorum a iure recus', 'Molestias aut odio e', 331, 850, 10, '2022-06-19 13:19:55', 0),
-(20, 'Xenos Nunez', 3, 'Sed mollitia unde su', 'upload/dde4857335.jpg', '110', 'Veniam voluptas exc', 'Fugiat aperiam reic', 829, 1000, 5, '2022-06-19 13:20:26', 0),
-(21, 'Julie Sanders', 2, 'Laboriosam ad in qu', 'upload/4bf22a3c41.jpg', '0', 'Non duis et a saepe', 'Ullamco magna commod', 300, 452, 10, '2022-06-19 14:20:03', 0);
+(17, 'Australian Chiffon', 6, 'High quality australian chiffon fabric', 'upload/f4864369fa.jpg', '43.88', '#a46a6a', 'Zaraa', 355, 500, 10, '2022-06-19 13:19:43', 0),
+(18, 'Denim Jeans', 4, 'High quality denim fabric', 'upload/e9755f27c2.jpg', '29.10', '#3e5ca3', 'Amber', 330, 500, 10, '2022-06-19 13:19:55', 0),
+(20, 'China Cotton', 3, 'Soft cotton fabric', 'upload/dde4857335.jpg', '87.50', '#decece', 'Deshi', 800, 1000, 5, '2022-06-19 13:20:26', 0),
+(21, 'China Crepe', 2, 'Soft China Crepe', 'upload/4bf22a3c41.jpg', '91.5', '#d3a7a7', 'H&M', 300, 500, 10, '2022-06-19 14:20:03', 0);
 
 -- --------------------------------------------------------
 
@@ -207,15 +199,11 @@ CREATE TABLE `tbl_customer` (
 --
 
 INSERT INTO `tbl_customer` (`cus_id`, `cus_name`, `cus_email`, `cus_phone`, `cus_address`, `created_at`, `soft_delete`) VALUES
-(1, 'Lilah Reeves', 'loxeq@mailinator.com', '+8801935667898', 'Ea animi perspiciat', '2022-06-19 11:25:26', 1),
-(2, 'Echo Farrell', 'fesiv@mailinator.com', '+8801503487987', 'Elit qui est repreh', '2022-06-19 12:20:30', 1),
-(3, 'Gavin Velazquez', 'dehos@mailinator.com', '+8801204587964', 'Itaque laborum excep', '2022-06-19 13:00:25', 1),
-(4, 'Rina Kramer', 'rygaci@mailinator.com', '+8801456787945', 'Sit voluptate do ne', '2022-06-19 13:00:35', 0),
-(5, 'Simon Houston', 'nipumatifi@mailinator.com', '+8801857687367', 'Animi omnis accusan', '2022-06-19 13:00:47', 0),
-(6, 'Sloane Avery', 'hicaced@mailinator.com', '+8801245879876', 'Aut occaecat non non', '2022-06-19 13:18:33', 0),
-(7, 'Yardley Levy', 'suvygamiw@mailinator.com', '+8801945769876', 'Sed id velit eos si', '2022-06-19 13:18:44', 0),
-(8, 'Marsden Davenport', 'weme@mailinator.com', '+8801605634598', 'Laudantium consequu', '2022-06-19 13:18:55', 1),
-(9, 'Colette Byrd', 'rutily@mailinator.com', '+8801696787667', 'Quidem in sit persp', '2022-06-19 14:05:53', 0);
+(4, 'Rina', 'rina@gmail.com', '+8801456787945', 'Dhaka', '2022-06-19 13:00:35', 0),
+(5, 'Kamal', 'kamal@gmail.com', '+8801857687367', 'Narayanganj', '2022-06-19 13:00:47', 0),
+(6, 'Mukta', 'mukta@gmail.com', '+8801245879876', 'Demra, Dhaka', '2022-06-19 13:18:33', 0),
+(7, 'Rabby', 'rabby@gmail.com', '+8801945769876', '1234 NW Bobcat Lane', '2022-06-19 13:18:44', 0),
+(9, 'Ruby', 'ruby@gmail.com', '+8801696787667', '90210 Broadway Blvd.\r\nNashville, TN 37011-5678', '2022-06-19 14:05:53', 0);
 
 -- --------------------------------------------------------
 
@@ -239,12 +227,12 @@ INSERT INTO `tbl_measurement` (`id`, `cus_id`, `measurement_for`, `measurement_d
 (8, 4, 'Facilis vel mollit v', 'Obcaecati mollit des', 1),
 (9, 6, 'Et nostrud sit ipsa', 'Ut iusto quis in eni', 1),
 (10, 9, 'Qui aspernatur lauda', 'Atque laudantium do', 1),
-(11, 6, 'Officia voluptate ', 'Adipisci aut earum v', 0),
+(11, 6, 'Kamiz', 'body 34 height 44', 0),
 (12, 8, 'Quasi alias nihil vo', 'Quibusdam et quidem ', 1),
 (13, 8, 'Ab fugiat corrupti ', 'Laudantium distinct', 0),
-(14, 6, 'Ea et accusamus aspe', 'Consectetur architec', 0),
-(15, 7, 'Dolor velit porro a', 'Aute nulla exercitat', 0),
-(16, 6, 'Pant', 'long:32 ft ', 0);
+(14, 6, 'Salwar', 'height 38', 0),
+(15, 7, 'Shirt', 'full sleeve, 44 long', 0),
+(16, 5, 'Pant', 'long 32  ', 0);
 
 -- --------------------------------------------------------
 
@@ -272,19 +260,14 @@ CREATE TABLE `tbl_order` (
 --
 
 INSERT INTO `tbl_order` (`id`, `owner_id`, `cus_id`, `mes_id`, `cloth_id`, `buying_price`, `selling_price`, `charge`, `discount`, `quantity`, `slip_no`, `soft_delete`) VALUES
-(1, 4, 9, 15, 20, 965, 688, 36, 0, 239.00, '1655912424', 1),
-(2, 4, 8, 15, 20, 37, 774, 59, 0, 857.00, '1655912424', 1),
-(3, 4, 5, 11, 20, 221, 914, 44, 0, 957.00, '1655912424', 1),
-(4, 6, 9, 15, 20, 965, 688, 36, 0, 239.00, '1655912465', 0),
-(5, 6, 8, 15, 20, 37, 774, 59, 0, 857.00, '1655912465', 0),
-(6, 6, 5, 11, 20, 221, 914, 44, 0, 957.00, '1655912465', 0),
-(7, 6, 9, 15, 20, 965, 688, 36, 0, 239.00, '1655912503', 0),
-(8, 6, 8, 15, 20, 37, 774, 59, 0, 857.00, '1655912503', 0),
-(9, 6, 5, 11, 20, 221, 914, 44, 0, 957.00, '1655912503', 0),
-(10, 5, 9, 15, 20, 965, 688, 36, 0, 239.00, '1655912640', 0),
-(11, 5, 8, 15, 20, 37, 774, 59, 0, 857.00, '1655912640', 0),
-(12, 5, 5, 11, 20, 221, 914, 44, 0, 957.00, '1655912640', 0),
-(13, 4, 4, 8, 17, 355, 500, 123, 15, 1.12, '1661536255', 0);
+(63, 5, 5, 16, 18, 330, 500, 200, 10, 1.50, '1662921655', 0),
+(64, 5, 6, 11, 20, 800, 1000, 150, 5, 2.50, '1662921655', 0),
+(65, 5, 6, 14, 21, 300, 500, 150, 10, 3.50, '1662921655', 0),
+(66, 7, 7, 15, 17, 355, 500, 200, 10, 2.50, '1662922019', 0),
+(67, 6, 6, 11, 20, 800, 1000, 300, 5, 3.50, '1662922179', 0),
+(68, 6, 6, 14, 21, 300, 500, 250, 10, 2.50, '1662922179', 0),
+(69, 7, 7, 15, 20, 800, 1000, 200, 5, 3.00, '1662925195', 0),
+(70, 6, 6, 11, 20, 800, 1000, 300, 5, 3.00, '1662925400', 0);
 
 -- --------------------------------------------------------
 
@@ -307,11 +290,11 @@ CREATE TABLE `tbl_slip` (
 --
 
 INSERT INTO `tbl_slip` (`id`, `slip_no`, `customer_id`, `order_at`, `delivery_at`, `status`, `soft_delete`) VALUES
-(1, 1655912424, 4, '2022-06-22', '2022-06-30', 0, 0),
-(2, 1655912465, 6, '2022-06-22', '2022-06-23', 0, 0),
-(3, 1655912503, 6, '2022-06-22', '2022-06-24', 0, 0),
-(4, 1655912640, 5, '2022-06-22', '2022-07-02', 0, 0),
-(5, 1661536255, 4, '2022-08-26', '2022-09-09', 0, 0);
+(42, 1662921655, 5, '2022-09-11', '2022-09-19', 0, 0),
+(43, 1662922019, 7, '2022-09-11', '2022-09-20', 0, 0),
+(44, 1662922179, 6, '2022-09-11', '2022-09-22', 0, 0),
+(45, 1662925195, 7, '2022-09-11', '2022-09-15', 0, 0),
+(46, 1662925400, 6, '2022-09-11', '2022-09-27', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -409,7 +392,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `tbl_cloth`
@@ -433,13 +416,13 @@ ALTER TABLE `tbl_measurement`
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `tbl_slip`
 --
 ALTER TABLE `tbl_slip`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
