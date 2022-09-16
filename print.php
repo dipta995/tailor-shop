@@ -45,10 +45,14 @@
                                         $calculate = $cart->slipOrder($slip_no);
                                         $selling_price = 0;
                                         $charge = 0;
+                                        $discount = 0;
+                                        $total_discount = 0;
                                         foreach ($calculate as $data) {
+                                            $discount += ($data['discount'] / 100) * ($data['selling_price'] * $data['quantity']);
                                             $selling_price += ($data['sellingprice'] - ($data['discount'] / 100 * $data['sellingprice'])) * $data['quantity'];
                                             $charge += $data['charge'];
                                         }
+                                        $total_discount += $discount;
                                         $total_price = $selling_price + $charge;
                                 ?>
                                         <tr>
@@ -59,6 +63,8 @@
                                             <p>Order at: <?php echo $value['order_at']; ?></p>
 
                                             <p>Delivery at: <?php echo $value['delivery_at']; ?></p>
+
+                                            <p>Total Discount: <?php echo $total_discount; ?> BDT</p>
 
                                             <p>Total Payment: <?php echo $total_price; ?> BDT</p>
                                         </tr>
