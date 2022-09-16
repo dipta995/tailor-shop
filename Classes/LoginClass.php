@@ -61,6 +61,9 @@ class LoginClass extends DB
         }elseif (mysqli_num_rows($res)>0){
             $txt = "<div class='alert alert-danger'>This Email has already been Registered!</div>";
             return $txt;
+        }elseif (!preg_match("/^[a-zA-Z0-9]{0,}([.]?[a-zA-Z0-9]{1,})[@](gmail.com|hotmail.com|yahoo.com)/", $email)) {
+            $txt = "<div class='alert alert-danger'>Invalid email address!!</div>";
+            return $txt;
         }elseif (mysqli_num_rows($res)>0){
             $txt = "<div class='alert alert-danger'>This mobile no. has already been Registered!</div>";
             return $txt;

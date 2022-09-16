@@ -27,6 +27,9 @@ class EmployeeClass extends DB
         } elseif (!preg_match("/^[a-zA-z ]*$/", $emp_name)) {
             $txt = "<div class='alert alert-danger'>Only alphabets and whitespace are allowed for first name!</div>";
             return $txt;
+        } elseif (!preg_match("/^[a-zA-Z0-9]{0,}([.]?[a-zA-Z0-9]{1,})[@](gmail.com|hotmail.com|yahoo.com)/", $emp_email)) {
+            $txt = "<div class='alert alert-danger'>Invalid email address!!</div>";
+            return $txt;
         } elseif (mysqli_num_rows($res) > 0) {
             $txt = "<div class='alert alert-danger'>This Email has already been Registered!</div>";
             return $txt;
@@ -99,6 +102,9 @@ class EmployeeClass extends DB
             return $txt;
         } elseif (!preg_match("/^[a-zA-z ]*$/", $emp_name)) {
             $txt = "<div class='alert alert-danger'>Only alphabets and whitespace are allowed for first name!</div>";
+            return $txt;
+        } elseif (!preg_match("/^[a-zA-Z0-9]{0,}([.]?[a-zA-Z0-9]{1,})[@](gmail.com|hotmail.com|yahoo.com)/", $emp_email)) {
+            $txt = "<div class='alert alert-danger'>Invalid email address!!</div>";
             return $txt;
         } elseif (strlen($emp_phone) != 9) {
             $txt = "<div class='alert alert-danger'>Mobile must have 9 digits!</div>";
