@@ -50,7 +50,7 @@
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon">
-          <img src="img/logo/logo2.png">
+          <img src="img/logo/logo.jpg">
         </div>
         <div class="sidebar-brand-text mx-3">TAILOR</div>
       </a>
@@ -75,7 +75,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Admin </h6>
             <?php if($role==0) { ?>
-              <a class="collapse-item" href="adduser.php"> Create Admin </a> 
+              <a class="collapse-item" href="adduser.php"> Create Sub Admin </a> 
             <?php } ?>
               <a class="collapse-item" href="users.php">Admin Details</a>
           </div>
