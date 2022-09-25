@@ -125,7 +125,7 @@ class CartClass extends DB
         $query = "SELECT * FROM tbl_slip
         LEFT JOIN tbl_customer ON tbl_slip.customer_id = tbl_customer.cus_id
         LEFT JOIN tbl_order ON tbl_slip.slip_no = tbl_order.slip_no
-        WHERE tbl_slip.soft_delete=0 AND tbl_slip.slip_no LIKE '%$str%' order by tbl_order.soft_delete asc";
+        WHERE tbl_slip.soft_delete=0 AND tbl_slip.slip_no LIKE '%$str%' OR tbl_customer.cus_phone LIKE '%$str%' order by tbl_order.soft_delete asc";
         $result = $this->conn->query($query);
         return $result;
     }
