@@ -122,11 +122,12 @@ class CartClass extends DB
     public function searchSlipResult($search)
     {
         $str = mysqli_real_escape_string($this->conn, $search);
-        $query = "SELECT * FROM tbl_slip
+        $query = "SELECT tbl_slip.*, tbl_customer.* FROM tbl_slip
         LEFT JOIN tbl_customer ON tbl_slip.customer_id = tbl_customer.cus_id
         LEFT JOIN tbl_order ON tbl_slip.slip_no = tbl_order.slip_no
-        WHERE tbl_slip.soft_delete=0 AND tbl_slip.slip_no GROUP BY `tbl_slip`.`slip_no`  LIKE '%$str%' OR tbl_customer.cus_phone LIKE '%$str%'  order by tbl_order.soft_delete asc";
+        WHERE  tbl_slip.slip_no  LIKE '%$str%' OR tbl_customer.cus_phone LIKE '%$str%'  GROUP BY `tbl_slip`.`slip_no`  order by tbl_order.soft_delete asc";
         $result = $this->conn->query($query);
+       
         return $result;
     }
 

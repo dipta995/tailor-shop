@@ -89,7 +89,6 @@ if (isset($_GET['confirm'])) {
 
                             $view = $cart->viewSlip();
                         }
-
                         if ($view->num_rows > 0) {
                             foreach ($view as $value) {
                                 $i++;
