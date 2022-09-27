@@ -64,8 +64,8 @@ class EmployeeClass extends DB
                 $qry = "INSERT into employee_table(emp_name,emp_job_status,emp_email,emp_phone,emp_image,emp_salary,emp_address) values('$emp_name','$emp_job_status','$emp_email','$mobileno','$uploaded_image','$emp_salary','$emp_address')";
                 $result = $this->conn->query($qry);
                 if ($emp_job_status == 'Manager') {
-                    $qry = "INSERT into admin_table(admin_email,admin_password,admin_status) values('$emp_email','12','1')";
-                    $result = $this->conn->query($qry);
+                    // $qry = "INSERT into admin_table(admin_email,admin_password,admin_status) values('$emp_email','12','1')";
+                    // $result = $this->conn->query($qry);
                 } elseif ($result) {
                     $txt = "<div class='alert alert-success'>Employee Created Successfully.</div>";
                     return $txt;
